@@ -22,20 +22,24 @@ app.use(express.static("public"));
 app.use(require('cookie-parser')());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
 
-
 dotenv.load()
 
 app.use(passport.initialize())
 app.use(passport.session())
 
+
+function search(origin){
+  return knex('listings').where({origin: origin}).innerJoin('users', 'listings.userID', '=', 'users.userID')
+}
+
 app.get('/', function(req, res){
   res.render('main', { layout: '_layout' })
 })
 
-app.get('/currentListings', function(req, res){
-  knex('listings').where({origin: 'Kaeo'}).innerJoin('users', 'listings.userID', '=', 'users.userID')
+app.get('/currentListings/:origin', function(req, res){
+  search(req.params.origin)
   .then(function(data){
-    res.render('currentListings', { layout: '_layout', listing: data })
+    res.render('./currentListings/currentListings', {listing: data})
   })
 })
 
@@ -43,7 +47,29 @@ app.get('/signup', function (req, res) {
   res.render('login')
 })
 
-//////Authorisation Code /////////
+
+//=============== POST Routes ================
+
+
+app.post('/currentListings', function(req, res) {
+  var fromMain = req.body.origin
+  console.log("fromMain:", fromMain)
+  search(req.body.origin)
+  .then(function(data) {
+    res.redirect('/currentListings/'+fromMain)
+  })
+})
+
+
+app.post('/moreCurrentListings', function(req, res) {
+  search(req.body.origin)
+  .then(function(data) {
+    res.json(data)
+  })
+})
+
+
+//===================Authorisation Code===================
 
 app.post('/signup', function (req, res) {
 var hash = bcrypt.hashSync( req.body.password)
@@ -73,7 +99,7 @@ app.post ('/login', function(req,res) {
     })
 })
 
-///OAuth///
+//============== OAuth =====================
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 
@@ -99,7 +125,9 @@ passport.use(new FacebookStrategy ({
           facebookID: profile.id,
           name: profile.displayName
         }
-// set user in session
+
+//============== set user in session
+
         knex('users').insert(user).then(function (resp) {
           callback(null, user)
         })
@@ -110,7 +138,6 @@ passport.use(new FacebookStrategy ({
   }
  ))
 
-
 passport.serializeUser(function(user, callback) {
     callback(null, user)
 })
@@ -120,6 +147,7 @@ passport.deserializeUser(function(obj, callback) {
 
 
 /////Auth Ends ///////
+
 
 app.listen(3000, function () {
   console.log('catching a lift on 3000!');

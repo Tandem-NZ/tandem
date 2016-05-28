@@ -1,6 +1,23 @@
-  <h6>Enter your origin and destination</h6>
-  <form action='/login' method='POST'>
-    <input type='text' placeholder="origin" name='origin' autofocus class='formField' ></input>
-    <input type='text' placeholder="destination" name='destination' class='formField'></input>
-    <input type='submit' value='find' class='findButton'></input>
-  </form>
+<link type="text/css" rel="stylesheet" href="../styles/index.css">
+<html>
+
+ <head>
+   <meta charset="utf-8">
+   <title>Tandem</title>
+  <link type="text/css" rel="stylesheet" href="../styles/index.css">
+ </head>
+
+ </body>
+  <h3>Enter your origin and destination</h3>
+<div>
+  <form action="/currentListings/" method="post" class=search id="locations">
+    <input type="text" name="origin" id="origin" placeholder="origin">
+    <input type="text" name="destiation" id="destination" placeholder="destination">
+    <button name="findButton" id="findButton">Find</button>
+    <!-- <a href="/currentListing"> -->
+    </form>
+</div>
+<script src="../javascript/bundle.js"></script>
+
+</body>
+</html>

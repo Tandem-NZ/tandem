@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tandem</title>
+    <link type="text/css" rel="stylesheet" href="../styles/index.css">
+  </head>
+  <body>
+    <div>
+      <section class=search id="locations">
+        <input type="text" name="origin" id="origin" placeholder="origin">
+        <input type="text" name="destiation" id="destination" placeholder="destination">
+        <button name="searchButton" id="searchButton">Find</button>
+      </section>
+    </div>
+
+    <section id="newRides">
+
+      <div class="numberOfRides">
+        <h2>{{numberOfRides}} rides from {{origin}} to {{destination}}</h2>
+      </div>
+
+      <div class="container">
+        {{#each listing}}
+          <div class="listing">
+            <h3><i>(date and time field)</i> {{this.dateTime}} - {{this.time}}</h3>
+            <h4>{{this.origin}} - {{this.destination}}</h4>
+            <p>{{this.name}}</p>
+            <br>
+            ---------------------------------
+          </div>
+        {{/each}}
+      </div>
+
+    </section>
+
+<script src="../javascript/bundle.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,15 @@
+<div class="numberOfRides">
+  <h2>{{numberOfRides}} rides from {{origin}} to {{destination}}</h2>
+</div>
+
+<div class="container">
+  {{#each listing}}
+    <div class="listing">
+      <h3><i>(date and time field)</i> {{this.dateTime}} - {{this.time}}</h3>
+      <h4>{{this.origin}} - {{this.destination}}</h4>
+      <p>{{this.name}}</p>
+      <br>
+      ---------------------------------
+    </div>
+  {{/each}}
+</div>
