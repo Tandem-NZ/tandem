@@ -1,3 +1,15 @@
+
+<div id='singleListingPage'>
+<h1 class="singleListHeading">{{userID}}'s listing</h1>
+<div class="detailsContainer">
+  <p id="origin">Origin: {{origin}}</p>
+  <p id="destination">Destination: {{destination}}</p>
+  <p id="date">Date: {{date}}</p>
+</div>
+<div class="description">
+  <h4>Description:</h4>
+  <p>{{description}}</p>
+
 <div class="singleListing">
   {{#each data}}
     <h1 class="singleListHeading">{{this.name}}'s listing</h1>
@@ -31,6 +43,8 @@
     {{{listingComment}}}
   </div>
 </div>
-<div class="requestToBook">
-  <button type="button" id="requestRide" name="requestToBook">Request a Ride</button>
+<!-- <div class="requestToBook"> -->
+<section id="requestRide">
+  <button type="button" id="requestRide" name="requestRide">Request a Ride</button>
+<
 </div>

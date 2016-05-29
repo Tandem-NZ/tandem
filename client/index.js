@@ -3,6 +3,8 @@ var $ = require('jquery')
 var ridesListing = require('../views/currentListings/_ridesListing.hbs')
 var singleListing = require('../views/singleListing.hbs')
 var listingComment = require('../views/listingComment.hbs')
+var liftConfirm = require('../views/liftConfirm.hbs')
+var liftEnjoy = require('../views/liftEnjoy.hbs')
 
 $(document).ready(function(){
 
@@ -24,6 +26,34 @@ $(document).ready(function(){
               $('#newRides').html(ridesListing({ listing: newListing }))
           })
       }
+  })
+
+  $('#requestRide').click(function(e) {
+    e.preventDefault()
+    request
+    .get('/liftConfirm')
+    .send({origin: origin}) //this is getting sent to the server
+    .end(function(err, res) { //res comes back here and this is where you render it to page
+      var data = res.body
+      $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
+            date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
+      })
+  })
+
+  $('.rideConfirm').click(function(e) {
+    e.preventDefault()
+    console.log("hitting listener!")
+    var listingID = e.target.id
+    var description = $('#description').val()
+    console.log("here's the listing ID: ", listingID, "heres description: ", description)
+    request
+      .post('/liftEnjoy')
+      .send({listingID: listingID, description: description })
+      .end(function (err, res) {
+        console.log("error: ", err)
+        console.log("hopefully there's some data in request Ride table!")
+        $('body').html(liftEnjoy())
+      })
   })
 
   $("#commentSubmit").click(function(e){

@@ -12,16 +12,15 @@ var dotenv = require('dotenv')
 
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
-var knex = Knex(knexConfig[env]);
+var knex = Knex(knexConfig[env])
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
-app.use(require('cookie-parser')());
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'hbs')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static("public"))
+app.use(require('cookie-parser')())
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
-
 dotenv.load()
 
 app.use(passport.initialize())
@@ -42,10 +41,6 @@ function search(origin, destination){
   return knex('listings')
   .where({origin: origin, destination: destination})
   .innerJoin('users', 'listings.userID', '=', 'users.userID')
-}
-
-function singleListing(listingID){
-  return knex('listings').where({listingID: listingID}).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
 app.get('/', function(req, res){
@@ -69,10 +64,23 @@ app.get('/signin', function (req, res) {
   res.render('login', {layout: '_layout'})
 })
 
+//============Create a Listing================
 
 app.get('/createListing', function (req, res) {
   res.render('createListing')
 })
+
+
+app.post('/createListing', function (req, res) {
+  res.render('createListing')
+  console.log("this should be data from the form: ", req.body)
+  knex('listings').insert(req.body)
+  .then(function (data) {
+    res.render('listingConfirm')
+    console.log("data: ", data)
+  })
+  .catch(function (error) {
+    console.log("catch error: ", error)
 
 // '2' in knex query will eventually be replaced with something like req.body.listingID..
 app.get('/singleListing', function(req, res){
@@ -86,6 +94,13 @@ app.get('/singleListing', function(req, res){
 //=============== POST Routes ================
 
 
+
+app.post('/currentListings', function(req, res) {
+  var fromMain = req.body.origin
+  console.log("fromMain:", fromMain)
+  search(req.body.origin)
+})
+
 app.post('/main', function(req, res) { //============working here
 
 console.log(req.body)
@@ -94,6 +109,15 @@ console.log(req.body)
   search(originFromMain, destinationFromMain)
   .then(function(data) {
     res.redirect('/currentListings?origin=' + originFromMain + '&destination='  + destinationFromMain)
+  })
+})
+
+
+// '2' in knex query will eventually be replaced with something like req.body.userID..
+app.get('/singleListing', function(req, res){
+  knex('users').where({'users.userID': 2}).select('*').innerJoin('listings', 'users.userID', 'listings.userID')
+  .then(function(data){
+    res.render('singleListing', { userID: data[0].name, origin: data[0].origin, destination: data[0].destination, date: data[0].dateTime, listingID: data[0].listingID, description: data[0].description, layout: '_layout' })
   })
 })
 
@@ -122,7 +146,31 @@ app.post('/moreCurrentListings', function(req, res) {
   })
 })
 
-app.post('/commentOnListing', function(req, res){
+
+//===================Ride Confirmation====================
+
+app.get('/liftConfirm', function (req, res){
+  // console.log("req: ", req, "res: ", res)
+  knex.select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').from('listings')
+    .then (function(data) {
+      res.json(data[8]) // need to align this with the listing clicked not hard coded
+    })
+})
+
+app.post('/liftEnjoy', function(req, res) {
+  console.log("req.body: ", req.body)
+  var description = req.body.description
+  var listingID = req.body.listingID
+  knex('ride_requests').insert({listingID: listingID, description: description})
+  knex('listings').where({listingID: listingID}).update({ride_requested: true})
+    .then (function(data){
+      res.json(data)
+    })
+})
+
+//===================Authorisation Code===================
+
+app.post('/singleListing', function(req, res){
   var comment = req.body.comment
   var listingID = req.body.listingID
   console.log('req.body.listingID', req.body.listingID)
@@ -133,8 +181,13 @@ app.post('/commentOnListing', function(req, res){
 })
 
 
-//===================Authorisation Code===================
+// commenterID comes from session? params?
+// { commenterID: req.body.commenterID }
 
+// knex.select('comment', 'listingID').from('comments')
+// will this re-render whole page? with all data from 'get /singleListing' route?
+
+//===================Authorisation Code===================
 
 app.post('/signup', function (req, res) {
 var hash = bcrypt.hashSync( req.body.password)
@@ -164,7 +217,7 @@ app.post ('/login', function(req,res) {
     })
 })
 
-//============== OAuth =====================
+// //============== OAuth =====================
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 
