@@ -5,6 +5,7 @@ var singleListing = require('../views/singleListing.hbs')
 var listingComment = require('../views/listingComment.hbs')
 var liftConfirm = require('../views/liftConfirm.hbs')
 var liftEnjoy = require('../views/liftEnjoy.hbs')
+var main = require('../views/main.hbs')
 
 $(document).ready(function(){
 
@@ -47,8 +48,14 @@ $(document).ready(function(){
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        $('body').html(liftEnjoy())
+        console.log("hopefully there's some data in request Ride table!")
+        $('body').html(liftEnjoy({name: "lizzie"}))
       })
+  })
+
+  $("#newSearch").click(function(e) {
+    e.preventDefault()
+    $('body').html(main)
   })
 
   $("#commentSubmit").click(function(e){
