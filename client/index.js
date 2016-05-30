@@ -71,16 +71,14 @@ $(document).ready(function(){
       })
   })
 
-
   $(".seeMore").click(function(e){
     e.preventDefault()
     var listingID = e.target.id
     request
-    .post('/singleListing' )
-      .send({ listingID: listingID })
-      .end(function(err, res){
-        var listingIDfromServer = res.body
-        $('#newRides').html(singleListing({ data : listingIDfromServer }))
+    .get('/singleListing?listingID=' + listingID )
+    .end(function(err, res){
+      var listingIDfromServer = res.body
+      $('#newRides').html(singleListing({ data : listingIDfromServer }))
     })
   })
 }) // close doc ready

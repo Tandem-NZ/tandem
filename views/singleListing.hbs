@@ -11,22 +11,22 @@
     <p>I've held my driver's licence for {{this.driverLicenceDuration}} years</p>
     <br><br>
     <h3>Description.....</h3>
-    <p>{{this.description}}
+    <p>{{this.description}}</p>
 
-  {{/each}}
+
 
 </div>
 
 
 <div class="commentContainer">
   <div id="appendedComments"></div>
-
+    <p>{{this.comment}}</p>
   <form action="/commentOnListing" class="" method="post">
     <textarea id="commentReply" name="comment" rows="8" cols="40"></textarea>
     <input id="listingID" type="hidden" name="listingID" value="{{listingID}}">
     <input type="submit" name="name" value="comment" id="commentSubmit">
   </form>
-
+  {{/each}}
   <div class="">
     {{{listingComment}}}
   </div>
