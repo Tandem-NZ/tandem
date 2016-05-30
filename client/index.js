@@ -48,7 +48,6 @@ $(document).ready(function(){
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        console.log("hopefully there's some data in request Ride table!")
         $('body').html(liftEnjoy({name: "lizzie"}))
       })
   })
