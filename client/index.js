@@ -1,6 +1,6 @@
 var request = require('superagent')
 var $ = require('jquery')
-var toTitleCase = require('to-title-case') //changes
+var toTitleCase = require('to-title-case')
 var moment = require('moment')
 moment().format();
 
@@ -12,11 +12,11 @@ var liftEnjoy = require('../views/liftEnjoy.hbs')
 var profile = require('../views/profile.hbs')
 
 $(document).ready(function(){
-//changes
+
   $("#searchButton").click(function(e) {
     e.preventDefault()
-    var rawOrigin = $("#origin").val()//changes//changes
-    var rawDestination = $("#destination").val()//changes
+    var rawOrigin = $("#origin").val()
+    var rawDestination = $("#destination").val()
     var origin = toTitleCase(rawOrigin)
     var destination = toTitleCase(rawDestination)
     if (origin == null || origin == "") {
@@ -106,10 +106,10 @@ $(document).ready(function(){
 
 //// working on profile alert
 
-  $('#updateProfile').click(function(e) {
-    e.preventDefault()
-    console.log('I have been clicked')
-    })
+  // $('#updateProfile').click(function(e) {
+  //   e.preventDefault()
+  //   console.log('I have been clicked')
+  // })
 
 
 }) // close doc ready

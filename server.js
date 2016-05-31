@@ -9,7 +9,7 @@ var FacebookStrategy = require('passport-facebook').Strategy
 var cookie =require('cookie-parser')
 var port = process.env.PORT || 3000
 var dotenv = require('dotenv')
-var toTitleCase = require('to-title-case')//changes
+var toTitleCase = require('to-title-case')
 var moment = require('moment')
 moment().format();
 
@@ -124,26 +124,24 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile=====================
 
 app.get('/profile', function(req, res){
-     knex('users'). where({userID:'1'})
-     .then(function(data){
+  var testUserID = 1
+  knex('users'). where({userID: testUserID})
+  .then(function(data){
     res.render('profile', {layout: '_layout'})
      })
 })
 
 
-app.post('/profile', function (req, res) { // Ive been working here (Heidi)
+app.post('/profile', function (req, res) {
   var profile = req.body
- knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
- . then (function(data){
-   res.render('profile',{layout: '_layout'})
-  //  res.json(data)
-
+  knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+    .then (function(data){
+      res.render('profile',{layout: '_layout'})
  })
 })
 
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
-  console.log('listingID: ', listingID)
   displayListingUserCommentData(listingID)
   .then(function(data) {
     // console.log('data from db: ', data)
