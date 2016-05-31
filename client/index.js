@@ -52,7 +52,6 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
-        // console.log('data: ', data)
         $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })
@@ -77,7 +76,7 @@ $(document).ready(function(){
 
   // server
   // respond with the comment we just inserted
-  
+
   $('#requestRide').click(function(e) {
     console.log('Hi! Im request ride')
     e.preventDefault()
