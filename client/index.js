@@ -1,17 +1,24 @@
 var request = require('superagent')
 var $ = require('jquery')
+var toTitleCase = require('to-title-case')
+var moment = require('moment')
+moment().format();
+
 var ridesListing = require('../views/currentListings/_ridesListing.hbs')
 var singleListing = require('../views/singleListing.hbs')
 var listingComment = require('../views/listingComment.hbs')
 var liftConfirm = require('../views/liftConfirm.hbs')
 var liftEnjoy = require('../views/liftEnjoy.hbs')
+var profile = require('../views/profile.hbs')
 
 $(document).ready(function(){
 
   $("#searchButton").click(function(e) {
     e.preventDefault()
-    var origin = $("#origin").val()
-    var destination = $("#destination").val()
+    var rawOrigin = $("#origin").val()
+    var rawDestination = $("#destination").val()
+    var origin = toTitleCase(rawOrigin)
+    var destination = toTitleCase(rawDestination)
     if (origin == null || origin == "") {
       var message = "Ooops...please enter a start point"
         document.getElementById("alert").innerHTML = message;
@@ -27,8 +34,10 @@ $(document).ready(function(){
       }
   })
 
+
   $(".seeMore").click(function(e){
     e.preventDefault()
+    console.log("guess who was clicked")
     var listingID = e.target.id
     request
     .get('/singleListing?listingID=' + listingID )
@@ -95,5 +104,13 @@ $(document).ready(function(){
         $('body').html(liftEnjoy())
       })
   })
+
+//// working on profile alert
+
+  $('#updateProfile').click(function(e) {
+    e.preventDefault()
+    console.log('I have been clicked')
+  })
+
 
 }) // close doc ready
