@@ -105,12 +105,4 @@ $(document).ready(function(){
       })
   })
 
-//// working on profile alert
-
-  $('#updateProfile').click(function(e) {
-    e.preventDefault()
-    console.log('I have been clicked')
-  })
-
-
 }) // close doc ready
