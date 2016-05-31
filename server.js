@@ -105,7 +105,6 @@ app.get('/singleListing', function(req, res) {
 })
 
 app.post('/listings/:id/comment', function(req, res){
-  console.log("comments route being hit!")
   var comment = req.body.comment
   var listingID = req.params.id
   knex('comments')
