@@ -115,6 +115,32 @@ app.get('/singleListing', function(req, res) {
   })
 })
 
+app.post('/listings/:id/comment', function(req, res){
+  var comment = req.body.comment
+  var listingID = req.params.id
+  knex('comments')
+    .insert({comment: comment, listingID: listingID })
+    .then(function(){
+      return displayListingUserCommentData(listingID)
+    })
+    .then(function(data){
+      res.send(data)
+    })
+})
+
+// app.post('/listings/:id/comment', function(req, res){
+//   var comment = req.body.comment
+//   var listingID = req.params.id
+//   knex('comments')
+//     .insert({comment: comment, listingID: listingID })
+//     .then(function(){
+//       return knex.select('*').from('comments').where('listingID', listingID)
+//     })
+//     .then(function(data){
+//       res.send(data)
+//     })
+// })
+
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
   var destination = toTitleCase(req.body.destination)
@@ -155,19 +181,6 @@ app.post('/createListing', function (req, res) {
   .catch(function (error) {
     console.log("error", error)
   })
-})
-
-app.post('/listings/:id/comment', function(req, res){
-  var comment = req.body.comment
-  var listingID = req.params.id
-  knex('comments')
-    .insert({comment: comment, listingID: listingID })
-    .then(function(){
-      return knex.select('*').from('comments').where('listingID', listingID)
-    })
-    .then(function(data){
-      res.send(data)
-    })
 })
 
 //===================Ride Confirmation====================
