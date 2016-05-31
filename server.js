@@ -130,13 +130,15 @@ app.get('/profile', function(req, res){
      })
 })
 
-app.post('/profile', function (req, res) {
- knex('users').where({userID:'10'}).update({})
- //update
 
- . then
-  res.render('profile',{layout: '_layout'})
+app.post('/profile', function (req, res) { // Ive been working here (Heidi)
+  var profile = req.body
+ knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+ . then (function(data){
+   res.render('profile',{layout: '_layout'})
+  //  res.json(data)
 
+ })
 })
 
 app.get('/singleListing', function(req, res) {

@@ -9,6 +9,7 @@ var singleListing = require('../views/singleListing.hbs')
 var listingComment = require('../views/listingComment.hbs')
 var liftConfirm = require('../views/liftConfirm.hbs')
 var liftEnjoy = require('../views/liftEnjoy.hbs')
+var profile = require('../views/profile.hbs')
 
 $(document).ready(function(){
 //changes
@@ -102,5 +103,13 @@ $(document).ready(function(){
         $('body').html(liftEnjoy())
       })
   })
+
+//// working on profile alert
+
+  $('#updateProfile').click(function(e) {
+    e.preventDefault()
+    console.log('I have been clicked')
+    })
+
 
 }) // close doc ready
