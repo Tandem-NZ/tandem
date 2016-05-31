@@ -1,0 +1,32 @@
+<h1>Update your profile</h1>
+
+
+<div class="container">
+<h3>Your details</h3>
+  {{#each listing}}
+    <div class="listing">
+      <h3>Hi {{this.name}} (name)</p>
+    </div>
+  {{/each}}
+</div>
+<div>
+
+  <form action="/profile" method="post">
+      <p>How long have you had your drivers licence :
+     <input type="driverLicenceDuration" placeholder="enter years" name='driverLicenceDuration'></input></p>
+
+     <p>Please enter your age:
+     <input type="age" placeholder="enter age" name='age'></input>
+     </p>
+
+     <p>Enter your gender :
+     <input type="gender" placeholder="gender" name='gender'></input>
+     </p>
+
+     <p>Tell us a little about yourself:
+     <input type='aboutMe' placeholder="about me" name='aboutMe'></input>
+     </p>
+
+      <input type='submit' value='submit'></input><br>
+  </form>
+</div>

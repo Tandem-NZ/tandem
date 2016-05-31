@@ -32,12 +32,14 @@
     "hbsfy": "^2.7.0",
     "jquery": "^2.2.4",
     "knex": "^0.11.4",
+    "moment": "^2.13.0",
     "nodemon": "^1.9.2",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "pg": "^4.5.5",
     "sqlite3": "^3.1.4",
-    "superagent": "^2.0.0-alpha.3"
+    "superagent": "^2.0.0-alpha.3",
+    "to-title-case": "^1.0.0"
   },
   "devDependencies": {
     "watchify": "^3.7.0"

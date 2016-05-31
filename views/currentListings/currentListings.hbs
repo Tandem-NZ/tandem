@@ -1,7 +1,7 @@
 <div>
   <form class=search id="locations" name="searchForm" onsubmit="return validateForm()">
     <input type="text" name="origin" id="origin" placeholder="origin">
-    <input type="text" name="destiation" id="destination" placeholder="destination">
+    <input type="text" name="destination" id="destination" placeholder="destination">
     <button name="searchButton" id="searchButton">Find</button>
     <p id="alert"></p>
   </form>
@@ -10,15 +10,16 @@
 <section id="newRides">
 
   <div class="numberOfRides">
-    <h2>{{numberOfRides}} rides from {{origin}} to {{destination}}</h2>
   </div>
 
   <div class="container">
     {{#each listing}}
       <div class="listing">
-        <h3>{{this.dateTime}} - {{this.time}}</h3>
+        <h3>departure date: {{this.departureDate}}<p id=date></p>
+          departure time: {{this.departureTime}}</h3>
         <h4>{{this.origin}} - {{this.destination}}</h4>
         <p>{{this.name}}</p>
+        <image src ='{{this.urlImage}}' height='100'> urlImage
         <a href="#" id="{{this.listingID}}" class="seeMore">See more</a>
         </div>
     {{/each}}

@@ -1,5 +1,9 @@
 var request = require('superagent')
 var $ = require('jquery')
+var toTitleCase = require('to-title-case') //changes
+var moment = require('moment')
+moment().format();
+
 var ridesListing = require('../views/currentListings/_ridesListing.hbs')
 var singleListing = require('../views/singleListing.hbs')
 var listingComment = require('../views/listingComment.hbs')
@@ -7,11 +11,13 @@ var liftConfirm = require('../views/liftConfirm.hbs')
 var liftEnjoy = require('../views/liftEnjoy.hbs')
 
 $(document).ready(function(){
-
+//changes
   $("#searchButton").click(function(e) {
     e.preventDefault()
-    var origin = $("#origin").val()
-    var destination = $("#destination").val()
+    var rawOrigin = $("#origin").val()//changes//changes
+    var rawDestination = $("#destination").val()//changes
+    var origin = toTitleCase(rawOrigin)
+    var destination = toTitleCase(rawDestination)
     if (origin == null || origin == "") {
       var message = "Ooops...please enter a start point"
         document.getElementById("alert").innerHTML = message;
@@ -26,6 +32,7 @@ $(document).ready(function(){
           })
       }
   })
+
 
   $('#requestRide').click(function(e) {
     e.preventDefault()

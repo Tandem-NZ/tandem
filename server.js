@@ -9,6 +9,9 @@ var FacebookStrategy = require('passport-facebook').Strategy
 var cookie =require('cookie-parser')
 var port = process.env.PORT || 3000
 var dotenv = require('dotenv')
+var toTitleCase = require('to-title-case')//changes
+var moment = require('moment')
+moment().format();
 
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
@@ -26,14 +29,6 @@ dotenv.load()
 app.use(passport.initialize())
 app.use(passport.session())
 
-function validateForm() {
-    var x = document.forms["searchForm"]["origin"].value;
-    if (x == null || x == "") {
-      var message = "Ooops...please enter a start point"
-        document.getElementById("alert").innerHTML = message;
-        return false
-    }
-}
 
 function search(origin, destination){
   var searchObject = {origin: origin}
@@ -43,48 +38,62 @@ function search(origin, destination){
   return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
-// function profile(profile){
-//   return knex('users').where('userID', '=', 'users.userID')
-//
-// }
-
 function singleListing(listingID){
   return knex('listings').where({listingID: listingID}).innerJoin('users', 'listings.userID', '=', 'users.userID')
+}
+
+function pretifyDates(array) {
+  return array.map(function(listing){
+    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
+    return listing
+  })
 }
 
 app.get('/', function(req, res){
   res.render('main', { layout: '_layout' })
 })
 
-app.get('/currentListings', function(req, res){
-  search(req.query.origin, req.query.destination)
-  .then(function(data){
-    res.render('./currentListings/currentListings', {layout: '_layout' , listing: data})
+app.get('/howItWorks', function(req,res){ //changes
+  res.render('howItWorks', {layout: '_layout'})
+
+})
+
+app.get('/currentListings', function(req, res){// working here (Heidi)
+  var origin = toTitleCase(req.query.origin)
+  var destination = toTitleCase(req.query.destination)
+  search(origin, destination)
+  .then(function(listings){
+    res.render('./currentListings/currentListings', {layout: '_layout' , listing: pretifyDates(listings)})
   })
 })
 
 app.get('/signup', function (req, res) {
-  res.render('login')
+  res.render('register', {layout: '_layout'})
+})
+
+app.get('/signin', function (req, res) {
+  res.render('login', {layout: '_layout'})
 })
 
 
 //============Create a Listing================
-
+//
 app.get('/createListing', function (req, res) {
-  res.render('createListing')
-})
 
+  res.render('createListing', {layout: '_layout'})
+})
 
 app.post('/createListing', function (req, res) {
-  res.render('createListing')
-  knex('listings').insert(req.body)
+
+  knex('listings').insert()
   .then(function (data) {
     res.render('listingConfirm')
-  })
-  .catch(function (error) {
-    console.log("catch error: ", error)
+    .catch(function (error) {
+      console.log("error", error)
+    })
   })
 })
+/// ========================================= ///
 
 app.get('/singleListing', function(req, res){
   knex('users').where({'users.userID': 2}).select('*').innerJoin('listings', 'users.userID', 'listings.userID').innerJoin('comments', 'listings.listingID', 'comments.commentID')
@@ -92,6 +101,7 @@ app.get('/singleListing', function(req, res){
     res.render('singleListing',{ data: data })
   })
 })
+
 
 //=============== POST Routes ================
 
@@ -104,22 +114,6 @@ app.post('/main', function(req, res) {
   })
 })
 
-app.get('/singleListing', function(req, res){
-  knex('users').where({'users.userID': 2}).select('*').innerJoin('listings', 'users.userID', 'listings.userID')
-  .then(function(data){
-    res.render('singleListing', { userID: data[0].name, origin: data[0].origin, destination: data[0].destination, date: data[0].dateTime, listingID: data[0].listingID, description: data[0].description, layout: '_layout' })
-  })
-})
-
-app.post('/createListing', function (req, res) {
-  res.render('createListing')
-    knex('listings').insert(req.body)
-  .then(function (data) {
-  })
-  .catch(function (error) {
-  })
-})
-
 app.post('/singleListing', function(req, res) {
   singleListing(req.body.listingID)
   .then(function(data) {
@@ -129,14 +123,33 @@ app.post('/singleListing', function(req, res) {
 
 app.post('/moreCurrentListings', function(req, res) {
   search(req.body.origin, req.body.destination)
-  .then(function(data) {
-    res.json(data)
+  .then(function(data) {//changes
+    var origin = toTitleCase(req.body.origin)//changes
+    var destination = toTitleCase(req.body.destination)//changes
+      var day = moment(data[0].departureDate).format('dddd, Do MMMM YYYY')
+        res.json("data", data)
   })
 })
 
-// app.post('/profile', function(req, res)
-//   profile
-// )
+// ====================================================
+// ====================================================
+// ===============Create a profile=====================
+
+app.get('/profile', function(req, res){
+     knex('users'). where({userID:'1'})
+     .then(function(data){
+    res.render('profile', {layout: '_layout'})
+     })
+})
+
+app.post('/profile', function (req, res) {
+ knex('users').where({userID:'10'}).update({})
+ //update
+
+ . then
+  res.render('profile',{layout: '_layout'})
+
+})
 
 //===================Ride Confirmation====================
 
@@ -174,13 +187,10 @@ app.post('/signup', function (req, res) {
 var hash = bcrypt.hashSync( req.body.password)
  knex('users').insert({ email: req.body.email, hashedPassword: hash })
     .then(function(data){
-        //create sessions
-        // req.session.userId = data[0]
         res.redirect('currentListings')
     })
     .catch(function(error){
        console.log("error:", error)
-        // req.session.userId = 0
         res.redirect('/')
     })
 })
@@ -206,7 +216,6 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function (req, res) {
     console.log('req.user', req.user)
-    // req.session.user = req.user
     res.render('currentListings')
 })
 
