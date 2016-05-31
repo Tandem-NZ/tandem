@@ -29,22 +29,18 @@ $(document).ready(function(){
 
   $(".seeMore").click(function(e){
     e.preventDefault()
-    // console.log('e.target: ', e.target)
     var listingID = e.target.id
     console.log('listingID: ', listingID)
     request
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      console.log('listingUserAndCommentArray', listingUserAndCommentArray)
       $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
     })
   })
 
 
   $("body").on("click", "#commentSubmit", function(e){
-    console.log('e.target: ', e.target.id)
-    console.log("comments client route being hit!")
     var comment = $('#commentReply').val()
     var listingID = $(this).attr('data-listingID')
     request
