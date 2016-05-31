@@ -1,12 +1,12 @@
 @import "variables";
 @import "mobile";
-@import "desktop";
 @import "mobilemenu";
+@import "desktop";
 
 
 body {
 	font-family: $body;
-	background: $primary-color;
+	background: $background-color;
 	color: $body-text-color;
 }
 
@@ -14,26 +14,47 @@ body {
 
 /* Main Landing
    ========================================================================== */
+#arrow-main-page {
+	color: $reverse;
+	font-size: 1.2em;
+}
+
 .main-landing {
 	h1, h5, h6 {
 		color: $reverse;
 	}
 	h1 {
 		font-family: $bold;
+		margin-bottom: 0px;
 	}
 	h5 {
 		font-family: $medium;
 	}
 
 }
-body {
-	background: $secondary-color;
-	// background: url(../images/bg004.jpg) no-repeat center center fixed; 
- //  -webkit-background-size: cover;
- //  -moz-background-size: cover;
- //  -o-background-size: cover;
- //  background-size: cover;
- //  height: 100%;
+.main-wrapper {
+	// background: $secondary-color;
+	background: url(../images/bg004.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+
+	#footer {
+		color: $reverse;
+		font-size: 10px;
+		text-align: center;
+
+		clear: both;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+	}
+
 }
 
 // .full-image-backgroud {
@@ -45,9 +66,12 @@ body {
 //   height: 100%;
 // }
 
+
+
 /* Sign in
    ========================================================================== */
 .sign-in {
+		width: 100%;
 	h5, p {
 		color: $reverse;
 		margin-bottom: 5px;
@@ -58,7 +82,15 @@ body {
 	a {
 		text-decoration: none;
 	}
+	
 }
+.signInContainer {
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: $primary-radius;
+	padding: 20px;
+	margin: 0 auto;
+	display: inline-block;
+	}
 
 /* Sign up
    ========================================================================== */
@@ -74,7 +106,7 @@ body {
    ========================================================================== */
 .current-listings-container {
 	background: $background-color;
-	// height: 100%;
+	height: 100%;
 }
 
 
@@ -89,9 +121,6 @@ body {
 		font-family: $medium;
 		color: #23355b;
 	}
-}
-.search-bar {
-	// background: green;
 }
 
 .listing {
@@ -111,13 +140,34 @@ body {
 		color: $reverse;
 	}
 }
+.listing:last-child {
+	border-bottom: none;
+}
 
 /* Single listings
    ========================================================================== */
 .single-listing-container {
+
+	h3 {
+		font-family: $medium;
+	}
+
 	h5 {
 		margin-top: 20px;
 		font-family: $medium;
+		margin-bottom: 10px;
+	}
+		.commentContainer {
+		margin-top: 20px;	
+			#commentReply {
+				width: 90%;
+			}
+		}
+
+	.singleListHeading {
+		margin-bottom: 20px;
 	}
 }
+
+
 

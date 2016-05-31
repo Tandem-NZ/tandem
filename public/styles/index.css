@@ -51,6 +51,10 @@
   border: none;
   color: #fff; }
 
+form#locations.search {
+  margin-bottom: 0px;
+  padding-bottom: 0px; }
+
 /* utilities
    ========================================================================== */
 .center-content {
@@ -62,6 +66,12 @@
 .destination {
   color: green; }
 
+#testing {
+  background: red; }
+
+#testing-two {
+  background: green; }
+
 html {
   -webkit-text-size-adjust: none; }
 
@@ -69,6 +79,9 @@ html {
   -moz-border-box: box-sizing;
   -webkit-border-box: box-sizing;
   border-box: box-sizing; }
+
+.main-landing h1 {
+  margin-top: 10px; }
 
 nav {
   background: rgba(35, 53, 91, 0.7);
@@ -84,50 +97,6 @@ header #logo {
 header #logo a {
   text-decoration: none;
   color: #fff; }
-
-@media only screen and (min-width: 24em) {
-  /* Buttons on primary nav
-========================================================================== */
-  .primary-nav a {
-    text-align: center; }
-  .primary-nav a#signup-btn-nav {
-    border: 1px solid #fff;
-    border-radius: 25px;
-    line-height: 0px;
-    margin-top: 20px;
-    padding: 17px;
-    -webkit-transition: background-color 0.5s ease;
-    -moz-transition: background-color 0.5s ease;
-    -o-transition: background-color 0.5s ease;
-    transition: background-color 0.5s ease; }
-  .primary-nav a#signup-btn-nav:hover {
-    text-decoration: none;
-    font-family: Gotham_thin, sans-serif;
-    background: #314a80; }
-  header, nav, main {
-    width: 100%;
-    margin: auto; }
-  header #logo {
-    margin-left: 3%; }
-  header #logo a {
-    line-height: 75px; }
-  nav ul {
-    float: right;
-    width: auto;
-    margin-right: 3%; }
-  nav ul li {
-    float: left;
-    list-style-type: none;
-    line-height: 75px;
-    margin-left: 35px; }
-  nav ul li a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    font-family: Gotham_thin, sans-serif;
-    cursor: pointer; }
-  nav ul li a:hover {
-    font-family: Gotham_medium, sans-serif; } }
 
 .nav-button {
   display: none; }
@@ -242,36 +211,115 @@ header #logo a {
     border-top: 0 none; } }
 
 /* End Mobile Styles */
+@media only screen and (min-width: 400px) {
+  /* Buttons on primary nav
+========================================================================== */
+  .main-landing h1 {
+    margin-top: 55px; }
+  .primary-nav a {
+    text-align: center; }
+  .primary-nav a#signup-btn-nav {
+    border: 1px solid #fff;
+    border-radius: 25px;
+    line-height: 0px;
+    margin-top: 20px;
+    padding: 17px;
+    -webkit-transition: background-color 0.5s ease;
+    -moz-transition: background-color 0.5s ease;
+    -o-transition: background-color 0.5s ease;
+    transition: background-color 0.5s ease; }
+  .primary-nav a#signup-btn-nav:hover {
+    text-decoration: none;
+    font-family: Gotham_thin, sans-serif;
+    background: #314a80; }
+  header, nav, main {
+    width: 100%;
+    margin: auto; }
+  header #logo {
+    margin-left: 3%; }
+  header #logo a {
+    line-height: 75px; }
+  nav ul {
+    float: right;
+    width: auto;
+    margin-right: 3%; }
+  nav ul li {
+    float: left;
+    list-style-type: none;
+    line-height: 75px;
+    margin-left: 35px; }
+  nav ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    font-family: Gotham_thin, sans-serif;
+    cursor: pointer; }
+  nav ul li a:hover {
+    font-family: Gotham_medium, sans-serif; } }
+
+ul {
+  margin-bottom: 0px; }
+  ul li {
+    margin: 0px; }
+
 body {
   font-family: Gotham_thin, sans-serif;
-  background: rgba(35, 53, 91, 0.7);
+  background: #f1f1f1;
   color: #141823; }
 
 /* Main Landing
    ========================================================================== */
+#arrow-main-page {
+  color: #fff;
+  font-size: 1.2em; }
+
 .main-landing h1, .main-landing h5, .main-landing h6 {
   color: #fff; }
 
 .main-landing h1 {
-  font-family: Gotham_black, sans-serif; }
+  font-family: Gotham_black, sans-serif;
+  margin-bottom: 0px; }
 
 .main-landing h5 {
   font-family: Gotham_medium, sans-serif; }
 
-body {
-  background: #2a406d; }
+.main-wrapper {
+  background: url(../images/bg004.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%; }
+  .main-wrapper #footer {
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+    clear: both;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%; }
 
 /* Sign in
    ========================================================================== */
-.sign-in h5, .sign-in p {
-  color: #fff;
-  margin-bottom: 5px; }
+.sign-in {
+  width: 100%; }
+  .sign-in h5, .sign-in p {
+    color: #fff;
+    margin-bottom: 5px; }
+  .sign-in #no-account-footer {
+    margin-top: 10px; }
+  .sign-in a {
+    text-decoration: none; }
 
-.sign-in #no-account-footer {
-  margin-top: 10px; }
-
-.sign-in a {
-  text-decoration: none; }
+.signInContainer {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 20px;
+  margin: 0 auto;
+  display: inline-block; }
 
 /* Sign up
    ========================================================================== */
@@ -282,7 +330,8 @@ body {
 /* Current Listings
    ========================================================================== */
 .current-listings-container {
-  background: #f1f1f1; }
+  background: #f1f1f1;
+  height: 100%; }
 
 #newRides {
   padding: 4%; }
@@ -297,15 +346,30 @@ body {
   padding: 3%;
   border-bottom: 1px solid #bdbdbd; }
   .listing button {
-    background: rgba(35, 53, 91, 0.7);
+    background: #23355b;
     border: none;
     margin-top: 10px; }
   .listing a {
     text-decoration: none;
     color: #fff; }
 
+.listing:last-child {
+  border-bottom: none; }
+
 /* Single listings
    ========================================================================== */
+.single-listing-container h3 {
+  font-family: Gotham_medium, sans-serif; }
+
 .single-listing-container h5 {
   margin-top: 20px;
-  font-family: Gotham_medium, sans-serif; }
+  font-family: Gotham_medium, sans-serif;
+  margin-bottom: 10px; }
+
+.single-listing-container .commentContainer {
+  margin-top: 20px; }
+  .single-listing-container .commentContainer #commentReply {
+    width: 90%; }
+
+.single-listing-container .singleListHeading {
+  margin-bottom: 20px; }

@@ -6,7 +6,7 @@
 			<h6>Enter your origin and destination</h6>
 			<form action="/main/" method="post" class=search id="locations" name="searchForm" onsubmit="return validateForm()">
 				<input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin">
-				<input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
+				<i id="arrow-main-page" class="fa fa-long-arrow-right" aria-hidden="true"></i><input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
 				<button name="findButton" id="findButton">Find</button>
 				<!-- <a href="/currentListing"> -->
 				<p id="alert"></p>
@@ -14,5 +14,8 @@
 		</div>
 		<script src="../javascript/formValidation.js"></script>
 	</div> 
+  <footer id=footer>
+  	<p>Copyright © 2016 Kotare EDA. Image courtesy of Freddie Marriage</p>
+	</footer> <!-- end of footer -->
 </div>
 

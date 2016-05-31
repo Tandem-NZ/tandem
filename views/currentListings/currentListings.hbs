@@ -1,14 +1,16 @@
  <div class="current-listings-container">
-  <div class="container u-cf">
 
-    <div class="search-bar center-content">
-      <form class=search id="locations" name="searchForm" onsubmit="return validateForm()">
-        <input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin">
-        <input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
-        <button name="searchButton" id="searchButton">Find</button>
-        <p id="alert"></p>
-      </form>
-    </div>
+<div class="search-bar center-content container u-cf" id="testing-two">
+  <form class=search id="locations" name="searchForm" onsubmit="return validateForm()">
+  <input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin"></input>
+  <input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination"></input>
+  <button name="searchButton" id="searchButton">Find</button>
+  <p id="alert"></p>
+  </form>
+</div>
+
+
+  <div class="container u-cf" id="testing">
     <section id="newRides">
       <div class="numberOfRides">
         <h4>{{numberOfRides}} rides from {{origin}} to {{destination}}</h4>
@@ -29,3 +31,4 @@
     <script src="/javascript/bundle.js"></script>
   </div>
 </div> <!-- end of current-listings-container -->
+

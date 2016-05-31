@@ -8,40 +8,38 @@
   <link rel="stylesheet" type="text/css"  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body>
-  <div class="u-full-width">
-    <header>
-      <div id="logo">
-        <a href="/">tandem.</a>
-      </div>
-      <nav class="primary-nav">
-        <ul>
-          <li class="active"><a href="#">How it works</a></li>
-          <li class="active"><a href="#">Create Listing</a></li>
-          <li><a href="/signin">Sign in</a></li>
-          <li><a id="signup-btn-nav" href="/signup">Sign up</a></li>
-        </ul>
-        <!-- phone nav button -->
-        <button class="nav-button">toggle menu</button>
-      </nav>
-    </header> <!-- end of header -->
+  <div class="main-wrapper">
+    <div class="u-full-width">
+      <header>
+        <div id="logo">
+          <a href="/">tandem.</a>
+        </div>
+        <nav class="primary-nav">
+          <ul>
+            <li class="active"><a href="#">How it works</a></li>
+            <li class="active"><a href="#">Create Listing</a></li>
+            <li><a href="/signin">Sign in</a></li>
+            <li><a id="signup-btn-nav" href="/signup">Sign up</a></li>
+          </ul>
+          <!-- phone nav button -->
+          <button class="nav-button">toggle menu</button>
+        </nav>
+      </header> <!-- end of header -->
 
-    {{{body}}}
-    
-  </div>
-  <footer id=footer>
-    <p>Copyright © 2016 Kotare
-    </p>
-  </footer> <!-- end of footer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
-  <script>
-    $(document).ready(function(){
-      $(".nav-button").click(function () {
-        $(".nav-button,.primary-nav").toggleClass("open");
-      });    
-    });
-  </script>
-  <script src="/javascript/bundle.js"></script>
-  <script src="/javascript/formValidation.js"></script>
+      {{{body}}}
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $(".nav-button").click(function () {
+          $(".nav-button,.primary-nav").toggleClass("open");
+        });    
+      });
+    </script>
+    <script src="/javascript/bundle.js"></script>
+    <script src="/javascript/formValidation.js"></script>
+  </div>  
 </body>
 </html>
 
