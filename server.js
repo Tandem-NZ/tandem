@@ -121,15 +121,15 @@ app.post('/singleListing', function(req, res) {
   })
 })
 
-app.post('/moreCurrentListings', function(req, res) {
-  search(req.body.origin, req.body.destination)
-  .then(function(data) {//changes
-    var origin = toTitleCase(req.body.origin)//changes
-    var destination = toTitleCase(req.body.destination)//changes
-      var day = moment(data[0].departureDate).format('dddd, Do MMMM YYYY')
-        res.json("data", data)
+app.post('/moreCurrentListings', function(req, res) { // working here (Heidi)
+  var origin = toTitleCase(req.body.origin)//changes
+  var destination = toTitleCase(req.body.destination)//changes
+  search(origin, destination)
+  .then(function(listings) {
+    res.json("data", pretifyDates(listings))
   })
 })
+
 
 // ====================================================
 // ====================================================
