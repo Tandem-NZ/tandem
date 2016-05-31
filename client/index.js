@@ -91,10 +91,11 @@ $(document).ready(function(){
   //     $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
   //     })
   // })
-
   $("body").on("click", "#requestRide", function(e){
-     console.log('hitting listener')
+     e.preventDefault()
+     console.log('hitting request a ride listener')
      var listingID = e.target
+     console.log('This is eeeeeeee', e)
      e.preventDefault()
      request
      .get('/liftConfirm')
