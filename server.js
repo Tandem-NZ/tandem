@@ -110,10 +110,10 @@ app.get('/singleListing', function(req, res) {
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
+    // console.log('data: (inside singleListing route)', data)
     res.json(data, pretifyDates(data))
   })
 })
-
 
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
@@ -154,17 +154,6 @@ app.post('/createListing', function (req, res) {
   })
   .catch(function (error) {
     console.log("error", error)
-  })
-})
-
-
-app.get('/singleListing', function(req, res) {
-  var listingID = req.query.listingID
-  displayListingUserCommentData(listingID)
-  .then(function(data) {
-    // console.log('data from db: ', data)
-    data[0].listingID = listingID
-    res.json(data)
   })
 })
 
