@@ -29,26 +29,27 @@ $(document).ready(function(){
   })
 
   $('#requestRide').click(function(e) {
+    console.log('hitting listener')
     e.preventDefault()
     request
     .get('/liftConfirm')
     .send({origin: origin})
     .end(function(err, res) {
       var data = res.body
-      $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
-            date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
+      $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
       })
   })
 
   $('.rideConfirm').click(function(e) {
     e.preventDefault()
     var listingID = e.target.id
+    // console.log("listingID", listingID)
     var description = $('#description').val()
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        console.log("hopefully there's some data in request Ride table!")
+        // console.log("hopefully there's some data in request Ride table!")
         $('body').html(liftEnjoy({name: "lizzie"}))
       })
   })
