@@ -41,11 +41,7 @@ $(document).ready(function(){
     })
   })
 
-  // $('#commentSubmit').click(function(e){
-  //   console.log('here!! hi!')
-  // })
-console.log('im about to listen')
-// console.log(document.body)
+
   $("body").on("click", "#commentSubmit", function(e){
     console.log('e.target: ', e.target.id)
     console.log("comments client route being hit!")
@@ -61,7 +57,7 @@ console.log('im about to listen')
         $('#commentReply').val('')
       })
   })
-console.log('oh how i wish I had listened!')
+
   // 1. pure serverside rendering - nice and simple
     // take out ajax
     // res.render hbs
@@ -81,6 +77,7 @@ console.log('oh how i wish I had listened!')
 
   // server
   // respond with the comment we just inserted
+  
   $('#requestRide').click(function(e) {
     console.log('Hi! Im request ride')
     e.preventDefault()
