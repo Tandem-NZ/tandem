@@ -1,28 +1,31 @@
-<div>
-  <form class=search id="locations" name="searchForm" onsubmit="return validateForm()">
-    <input type="text" name="origin" id="origin" placeholder="origin">
-    <input type="text" name="destination" id="destination" placeholder="destination">
-    <button name="searchButton" id="searchButton">Find</button>
-    <p id="alert"></p>
-  </form>
-</div>
+ <div class="current-listings-container">
+  <div class="container u-cf">
 
-<section id="newRides">
-
-  <div class="numberOfRides">
-    <h2>{{numberOfRides}} rides from {{origin}} to {{destination}}</h2>
-  </div>
-
-  <div class="container">
-    {{#each listing}}
-      <div class="listing">
-        <h3>{{this.dateTime}} - {{this.time}}</h3>
-        <h4>{{this.origin}} - {{this.destination}}</h4>
-        <p>{{this.name}}</p>
-        <a href="#" id="{{this.listingID}}" class="seeMore">See more</a>
+    <div class="search-bar center-content">
+      <form class=search id="locations" name="searchForm" onsubmit="return validateForm()">
+        <input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin">
+        <input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
+        <button name="searchButton" id="searchButton">Find</button>
+        <p id="alert"></p>
+      </form>
+    </div>
+    <section id="newRides">
+      <div class="numberOfRides">
+        <h4>{{numberOfRides}} rides from {{origin}} to {{destination}}</h4>
       </div>
-    {{/each}}
+
+      <div>
+        {{#each listing}}
+        <div class="listing">
+          <h6>{{this.dateTime}} - {{this.time}}</h6>
+          <h4>{{this.origin}} - {{this.destination}}</h4>
+          <p>{{this.name}}</p>
+          <button class="listing-button"><a href="#" id="{{this.listingID}}" class="seeMore">See more</a></button>
+        </div>
+        {{/each}}
+      </div>
+    </section>
+    <script src="/javascript/formValidation.js"></script>
+    <script src="/javascript/bundle.js"></script>
   </div>
-</section>
-<script src="/javascript/formValidation.js"></script>
-<script src="/javascript/bundle.js"></script>
+</div> <!-- end of current-listings-container -->

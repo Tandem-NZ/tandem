@@ -1,19 +1,20 @@
-<div class="centerContent container u-cf">
-
+<div class="sign-in center-content container u-cf">
 	<div class="signInContainer">
+
 		<h5>Sign in with email</h5>
 		<form action='/login' method='POST'>
-		    <input class="inputFullWidth" type='text' placeholder="email" name='email' autofocus></input>
-		    <br>
-		    <input class="inputFullWidth" type='password' placeholder="password" name='password'></input>
-		    <br>
-		    <input class="inputFullWidth" id="signUpButton" type='submit' value='sign in'></input>
+			<input class="inputFullWidth" type='text' placeholder="email" name='email' autofocus></input>
+			<br>
+			<input class="inputFullWidth" type='password' placeholder="password" name='password'></input>
+			<br>
+			<input class="inputFullWidth sign-up-button" type='submit' value='sign in'></input>
 		</form>
 
 		<h5>Sign in with facebook</h5>
 		<div id="facebookButton">
-		<a href="/auth/facebook"><i class="fa fa-facebook" aria-hidden="true"></i> continue with Facebook</a>
+			<a href="/auth/facebook"><p><i class="fa fa-facebook" aria-hidden="true"></i> continue with Facebook</p></a>
 		</div>
-		<div id="signUp">Don't have an account yet? <a href='#'>Sign Up</a></div>
+		<div id="no-account-footer"><p>Don't have an account yet? <a href='#'>Sign Up</a></p></div>
+
 	</div>
 </div>

@@ -1,0 +1,37 @@
+// prevents iPhone from resizing in landscape mode
+
+html { -webkit-text-size-adjust: none}
+
+* {
+	-moz-border-box: box-sizing;
+	-webkit-border-box: box-sizing;
+	border-box: box-sizing;
+}
+
+nav {
+	// position: absolute;
+	// top: 0;
+	// left: 0;
+	background: $primary-color;
+	height: 75px;
+	width: 100%;
+}
+
+header {
+	// padding: 1em 2% .5em 2%;
+
+	#logo {
+		float: left;
+		font-family: $bold;
+		font-size: 2em;
+		color: #fff;
+	}
+	#logo a {
+		text-decoration: none;
+		color: #fff;
+	}
+
+
+
+} // end of header
+

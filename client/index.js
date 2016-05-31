@@ -28,6 +28,51 @@ $(document).ready(function(){
       }
   })
 
+  $(".seeMore").click(function(e){
+    e.preventDefault()
+    var listingID = e.target.id
+    request
+    .get('/singleListing?listingID=' + listingID )
+    .end(function(err, res){
+      var listingUserAndCommentArray = res.body
+      console.log('listingUserAndCommentArray', listingUserAndCommentArray)
+      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
+    })
+  })
+
+  $("body").on("click", "#commentSubmit", function(e){
+    var comment = $('#commentReply').val()
+    var listingID = $(this).attr('data-listingID')
+    request
+      .post('/listings/' + listingID + '/comment')
+      .send({ comment: comment, listingID: listingID })
+      .end(function(err, res){
+        var data = res.body
+        // console.log('data: ', data)
+        $('#appendedComments').append(listingComment({data: data}))
+        $('#commentReply').val('')
+      })
+  })
+
+  // 1. pure serverside rendering - nice and simple
+    // take out ajax
+    // res.render hbs
+
+  // 2. initial render serverside
+    // POST Listing/id/comment
+      // respond with all comments associetd with listing id
+      // respond with specific comment
+      //  sperately trigger a GET listing/id/comments
+    // client side render listing with its comments
+
+  // 3. pure client-side
+
+
+  // its working but is it using form action (html5 forms)?
+  // what's happening with the ajax?
+
+  // server
+  // respond with the comment we just inserted
   $('#requestRide').click(function(e) {
     console.log('hitting listener')
     e.preventDefault()
@@ -54,35 +99,4 @@ $(document).ready(function(){
       })
   })
 
-  $("#newSearch").click(function(e) {
-    e.preventDefault()
-    $('body').html(main)
-  })
-
-  $("#commentSubmit").click(function(e){
-    e.preventDefault()
-    var comment = $('#commentReply').val()
-    var listingID = $('#listingID').val()
-    request
-      .post('/commentOnListing')
-      .send({ comment: comment, listingID: listingID })
-      .end(function(err, res){
-        var data = res.body
-        $('#appendedComments').append(listingComment({comment: data.comment, listingID: data.listingID}))
-        $('#commentReply').val('')
-      })
-  })
-
-
-  $(".seeMore").click(function(e){
-    e.preventDefault()
-    var listingID = e.target.id
-    request
-    .post('/singleListing' )
-      .send({ listingID: listingID })
-      .end(function(err, res){
-        var listingIDfromServer = res.body
-        $('#newRides').html(singleListing({ data : listingIDfromServer }))
-    })
-  })
 }) // close doc ready
