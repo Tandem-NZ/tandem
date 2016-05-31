@@ -50,6 +50,9 @@ function displayListingUserCommentData (listingID){
 function pretifyDates(array) {
   return array.map(function(listing){
     console.log("listing departureTime: ", listing.departureTime)
+    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
+    console.log("listing departureTime: ", listing.departureTime)
+
     listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
     return listing
   })
