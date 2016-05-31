@@ -30,7 +30,7 @@ function search(origin, destination){
   if(destination){
     searchObject.destination = destination
   }
-  console.log('this is search object', searchObject)
+  // console.log('this is search object', searchObject)
   return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
@@ -46,7 +46,7 @@ app.get('/', function(req, res){
 })
 
 app.get('/currentListings', function(req, res){
-  console.log('this is req:')
+  // console.log('this is req:')
   search(req.query.origin, req.query.destination)
   .then(function(data){
     res.render('./currentListings/currentListings', {layout: '_layout' , listing: data})
@@ -60,13 +60,13 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
   res.render('createListing')
 })
-
+//=====Lizzie's dont touch========
 app.post('/createListing', function (req, res) {
   res.render('createListing')
   knex('listings').insert(req.body)
   .then(function (data) {
     res.render('listingConfirm')
-    console.log("data: ", data)
+    // console.log("data: ", data)
     .catch(function(error) {
       console.log("catch error: ", error)
     })
@@ -95,7 +95,7 @@ app.post('/createListing', function (req, res) {
 
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
-  console.log('listingID: ', listingID)
+  // console.log('listingID: ', listingID)
   displayListingUserCommentData(listingID)
   .then(function(data) {
     // console.log('data from db: ', data)
@@ -127,19 +127,30 @@ app.post('/moreCurrentListings', function(req, res) {
 //===================Ride Confirmation====================
 
 app.get('/liftConfirm', function (req, res){
+  // console.log("req: ", req, "res: ", res)
+  // console.log("req.body: ", req.body, "res.body: ", res.body)
+
+
   knex.select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').from('listings')
     .then (function(data) {
-      var listingID = data[2]
+      //console.log("data: ", data)
+      var listingID = listingID
       res.json(listingID)
     })
 })
+
+
+//
+//   knex.select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').from('listings')
+
+// knex('listings').where({listingID: listingID}).select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').
 
 //=====sessions need to be implemented for this to be fully functional======
 
 app.post('/liftEnjoy', function(req, res) {
   var description = req.body.description
   var listingID = req.body.listingID
-  knex('ride_requests').insert({listingID: listingID, description: description})
+  knex('ride_requests').insert({listingID,  description})
   .then (function()  {
     knex('listings').where({listingID: listingID}).update({ride_requested: true})
   })
@@ -160,7 +171,7 @@ app.get('/signin', function (req, res) {
 
 app.post('/signup', function (req, res) {
   var hash = bcrypt.hashSync( req.body.password)
-  console.log('This is signup req.body', req.body)
+  //console.log('This is signup req.body', req.body)
   knex('users').insert({ email: req.body.email, hashedPassword: hash })
   .then(function(data){
     res.redirect('/')

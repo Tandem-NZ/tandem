@@ -9,6 +9,8 @@ var main = require('../views/main.hbs')
 
 $(document).ready(function(){
 
+
+
   $("#searchButton").click(function(e) {
     e.preventDefault()
     var origin = $("#origin").val()
@@ -73,21 +75,42 @@ $(document).ready(function(){
 
   // server
   // respond with the comment we just inserted
+
+  // $("body").on("click", "#requestRide", function(e){
+  //   // console.log("FIRED!")
+  //   e.preventDefault()
+  //   console.log("e", e)
+  //   var listingID = e.target.id
+  //   // console.log("listingID: ", listingID)
+  //   request
+  //   .get('/liftConfirm')
+  //   .send({listingID: listingID })
+  //   .end(function(err, res) {
+  //     // console.log("res.body: ", res.body)
+  //     var data = res.body
+  //     $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
+  //     })
+  // })
+
   $("body").on("click", "#requestRide", function(e){
-    e.preventDefault()
-    request
-    .get('/liftConfirm')
-    .send({origin: origin})
-    .end(function(err, res) {
-      var data = res.body
-      $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
-      })
-  })
+     console.log('hitting listener')
+     var listingID = e.target
+     e.preventDefault()
+     request
+     .get('/liftConfirm')
+     .send({listingID: listingID})
+     .end(function(err, res) {
+       var data = res.body
+       $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
+     })
+   })
+
 
   $("body").on("click", ".rideConfirm", function(e){
     e.preventDefault()
-    var listingID = e.target.id
+    var listingID = e.target.class
     var description = $('#description').val()
+    console.log("e.target.class: ", listingID)
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
