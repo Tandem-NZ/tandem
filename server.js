@@ -23,23 +23,29 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(require('cookie-parser')())
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
-dotenv.load()
-
+app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
-
+dotenv.load()
 
 function search(origin, destination){
   var searchObject = {origin: origin}
   if(destination){
     searchObject.destination = destination
   }
+  console.log('this is search object', searchObject)
   return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
-function singleListing(listingID){
+function singleListing(listingID){ // check if needed
   return knex('listings').where({listingID: listingID}).innerJoin('users', 'listings.userID', '=', 'users.userID')
+}
+
+function displayListingUserCommentData (listingID){
+  return knex('listings').where({'listings.listingID': listingID}).
+    leftOuterJoin('comments', 'comments.listingID', '=', 'listings.listingID').
+    rightOuterJoin('users', 'users.userID', '=', 'listings.userID').
+    select('*')
 }
 
 function pretifyDates(array) {
@@ -53,12 +59,11 @@ app.get('/', function(req, res){
   res.render('main', { layout: '_layout' })
 })
 
-app.get('/howItWorks', function(req,res){ //changes
+app.get('/howItWorks', function(req,res){
   res.render('howItWorks', {layout: '_layout'})
-
 })
 
-app.get('/currentListings', function(req, res){// working here (Heidi)
+app.get('/currentListings', function(req, res){
   var origin = toTitleCase(req.query.origin)
   var destination = toTitleCase(req.query.destination)
   search(origin, destination)
@@ -67,43 +72,25 @@ app.get('/currentListings', function(req, res){// working here (Heidi)
   })
 })
 
-app.get('/signup', function (req, res) {
-  res.render('register', {layout: '_layout'})
-})
-
 app.get('/signin', function (req, res) {
   res.render('login', {layout: '_layout'})
 })
 
-
 //============Create a Listing================
 //
 app.get('/createListing', function (req, res) {
-
   res.render('createListing', {layout: '_layout'})
 })
 
 app.post('/createListing', function (req, res) {
-
   knex('listings').insert()
   .then(function (data) {
     res.render('listingConfirm')
-    .catch(function (error) {
-      console.log("error", error)
-    })
+  })
+  .catch(function (error) {
+    console.log("error", error)
   })
 })
-/// ========================================= ///
-
-app.get('/singleListing', function(req, res){
-  knex('users').where({'users.userID': 2}).select('*').innerJoin('listings', 'users.userID', 'listings.userID').innerJoin('comments', 'listings.listingID', 'comments.commentID')
-  .then(function(data){
-    res.render('singleListing',{ data: data })
-  })
-})
-
-
-//=============== POST Routes ================
 
 app.post('/main', function(req, res) {
   var originFromMain = req.body.origin
@@ -114,16 +101,17 @@ app.post('/main', function(req, res) {
   })
 })
 
-app.post('/singleListing', function(req, res) { // working here (Heidi)
+
+app.post('/singleListing', function(req, res) {
   singleListing(req.body.listingID)
   .then(function(listings) {
     res.json("data", pretifyDates(listings))
   })
 })
 
-app.post('/moreCurrentListings', function(req, res) { // working here (Heidi)
-  var origin = toTitleCase(req.body.origin)//changes
-  var destination = toTitleCase(req.body.destination)//changes
+app.post('/moreCurrentListings', function(req, res) {
+  var origin = toTitleCase(req.body.origin)
+  var destination = toTitleCase(req.body.destination)
   search(origin, destination)
   .then(function(listings) {
     res.json("data", pretifyDates(listings))
@@ -151,13 +139,37 @@ app.post('/profile', function (req, res) {
 
 })
 
+app.get('/singleListing', function(req, res) {
+  var listingID = req.query.listingID
+  console.log('listingID: ', listingID)
+  displayListingUserCommentData(listingID)
+  .then(function(data) {
+    // console.log('data from db: ', data)
+    data[0].listingID = listingID
+    res.json(data)
+  })
+})
+
+app.post('/listings/:id/comment', function(req, res){
+  var comment = req.body.comment
+  var listingID = req.params.id
+  knex('comments')
+    .insert({comment: comment, listingID: listingID })
+    .then(function(){
+      return knex.select('*').from('comments').where('listingID', listingID)
+    })
+    .then(function(data){
+      res.send(data)
+    })
+})
+
 //===================Ride Confirmation====================
 
 app.get('/liftConfirm', function (req, res){
   knex.select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').from('listings')
-    .then (function(data) {
-      res.json(data[8])
-    })
+  .then (function(data) {
+    res.json(data[8])
+  })
 })
 
 app.post('/liftEnjoy', function(req, res) {
@@ -165,47 +177,45 @@ app.post('/liftEnjoy', function(req, res) {
   var listingID = req.body.listingID
   knex('ride_requests').insert({listingID: listingID, description: description})
   knex('listings').where({listingID: listingID}).update({ride_requested: true})
-    .then (function(data){
-      res.json(data)
-    })
-})
-
-//===================Authorisation Code===================
-
-app.post('/singleListing', function(req, res){
-  var comment = req.body.comment
-  var listingID = req.body.listingID
-  knex('comments').insert({comment: req.body.comment, listingID: req.body.listingID })
-  .then(function(data){
-    res.json(req.body)
+  .then (function(data){
+    res.json(data)
   })
 })
 
 //===================Authorisation Code===================
 
+app.get('/signup', function (req, res) {
+  res.render('register', {layout: '_layout'})
+})
+
+app.get('/signin', function (req, res) {
+  res.render('login', {layout: '_layout'})
+})
+
 app.post('/signup', function (req, res) {
-var hash = bcrypt.hashSync( req.body.password)
- knex('users').insert({ email: req.body.email, hashedPassword: hash })
-    .then(function(data){
-        res.redirect('currentListings')
-    })
-    .catch(function(error){
-       console.log("error:", error)
-        res.redirect('/')
-    })
+  var hash = bcrypt.hashSync( req.body.password)
+  knex('users').insert({ email: req.body.email, hashedPassword: hash })
+  .then(function(data){
+    res.redirect('/')
+  })
+  .catch(function(error){
+    console.log("error:", error)
+    res.send('Error, please refresh the page and try again')
+  })
 })
 
 app.post ('/login', function(req,res) {
   knex('users').where({email: req.body.email})
-    .then (function(data){
-      var hashedLogin = data[0].hashedPassword
-      if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
-        res.redirect('/currentListings')
-      }
-    })
-    .catch (function (error) {
-      console.log("error:", error)
-    })
+  .then (function(data){
+    var hashedLogin = data[0].hashedPassword
+    if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
+      res.redirect('/')
+    }
+  })
+  .catch (function (error) {
+    console.log("error:", error)
+    res.sendStatus(403)
+  })
 })
 
 // //============== OAuth =====================
@@ -218,39 +228,38 @@ app.get('/auth/facebook/callback',
     console.log('req.user', req.user)
     res.render('currentListings')
 })
-
 passport.use(new FacebookStrategy ({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
-  function (accessToken, refreshToken, profile, callback) {
-    knex('users').select('*').where({
-      facebookID: profile.id
-    }).then(function (resp) {
-      if (resp.length === 0) {
-        var user = {
-          facebookID: profile.id,
-          name: profile.displayName
-        }
+function (accessToken, refreshToken, profile, callback) {
+  knex('users').select('*').where({
+    facebookID: profile.id
+  }).then(function (resp) {
+    if (resp.length === 0) {
+      var user = {
+        facebookID: profile.id,
+        name: profile.displayName
+      }
 
 // //============== set user in session ===================
-
-        knex('users').insert(user).then(function (resp) {
-          callback(null, user)
-        })
-      } else {
-        callback(null, resp[0])
-      }
-    })
-  }
- ))
+//Set user in session
+knex('users').insert(user).then(function (resp) {
+        callback(null, user)
+      })
+    } else {
+      callback(null, resp[0])
+    }
+  })
+}
+))
 
 passport.serializeUser(function(user, callback) {
-    callback(null, user)
+  callback(null, user)
 })
 passport.deserializeUser(function(obj, callback) {
-    callback(null, obj)
+  callback(null, obj)
 })
 
 //============== Auth Ends ============================
