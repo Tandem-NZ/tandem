@@ -49,10 +49,7 @@ function displayListingUserCommentData (listingID){
 
 function pretifyDates(array) {
   return array.map(function(listing){
-    console.log("listing departureTime: ", listing.departureTime)
     listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
-    console.log("listing departureTime: ", listing.departureTime)
-
     listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
     return listing
   })
@@ -85,7 +82,7 @@ app.post('/createListing', function (req, res) {
   var testingUserID = 13
   knex('listings').insert({
     origin: listing.origin,
-    destination: listing.detsination,
+    destination: listing.destination,
     departureDate: listing.departureDate,
     departureTime: listing.departureTime,
     description: listing.description,
@@ -158,6 +155,7 @@ app.post('/createListing', function (req, res) {
     console.log("error", error)
   })
 })
+
 
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID

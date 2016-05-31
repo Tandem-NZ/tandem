@@ -105,7 +105,4 @@ $(document).ready(function(){
       })
   })
 
-
-
-
 }) // close doc ready
