@@ -76,11 +76,18 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
   res.render('createListing', {layout: '_layout'})
 })
-
 app.post('/createListing', function (req, res) {
-  knex('listings').insert(req.body)
+  var listing = req.body
+  var testingUserID = 13
+  knex('listings').insert({
+    origin: listing.origin,
+    destination: listing.destination,
+    departureDate: listing.departureDate,
+    departureTime: listing.departureTime,
+    description: listing.description,
+    userID: testingUserID})
   .then(function (data) {
-    res.render('listingConfirm')
+    res.render('listingConfirm', {layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
@@ -121,7 +128,7 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile=====================
 
 app.get('/profile', function(req, res){
-  var testUserID = 1
+  var testUserID = 13
   knex('users'). where({userID: testUserID})
   .then(function(data){
     res.render('profile', {layout: '_layout'})
@@ -133,8 +140,19 @@ app.post('/profile', function (req, res) {
   var profile = req.body
   knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
     .then (function(data){
-      res.render('profile',{layout: '_layout'})
+      res.render('profileConfirm', {layout: '_layout'})
  })
+})
+
+
+app.post('/createListing', function (req, res) {
+  knex('listings').insert(req.body)
+  .then(function (data) {
+    res.render('listingConfirm', {layout: '_layout'})
+  })
+  .catch(function (error) {
+    console.log("error", error)
+  })
 })
 
 app.get('/singleListing', function(req, res) {
