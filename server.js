@@ -89,7 +89,8 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    res.render('listingConfirm', {layout: '_layout'})
+    // console.log('listing: ', listing, 'typeof: ', typeof listing)
+    res.render('listingConfirm', {data: listing, layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
@@ -128,19 +129,6 @@ app.post('/listings/:id/comment', function(req, res){
     })
 })
 
-// app.post('/listings/:id/comment', function(req, res){
-//   var comment = req.body.comment
-//   var listingID = req.params.id
-//   knex('comments')
-//     .insert({comment: comment, listingID: listingID })
-//     .then(function(){
-//       return knex.select('*').from('comments').where('listingID', listingID)
-//     })
-//     .then(function(data){
-//       res.send(data)
-//     })
-// })
-
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
   var destination = toTitleCase(req.body.destination)
@@ -149,7 +137,6 @@ app.post('/moreCurrentListings', function(req, res) {
     res.json("data", pretifyDates(listings))
   })
 })
-
 
 // ====================================================
 // ====================================================
