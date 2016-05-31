@@ -17,3 +17,6 @@ $("body").on("click", "#commentSubmit", function(e){
 
 //the html isn't replaced in the #appendedComments div with the
 //listing comment template, but instead the data is inserted //into the {{}} in the #appendedComments div.
+
+//Refactor _layouts.hbs so that user's name appears on nav bar after login/
+//signup
