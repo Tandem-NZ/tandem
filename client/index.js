@@ -60,26 +60,6 @@ $(document).ready(function(){
       })
   })
 
-  // 1. pure serverside rendering - nice and simple
-    // take out ajax
-    // res.render hbs
-
-  // 2. initial render serverside
-    // POST Listing/id/comment
-      // respond with all comments associetd with listing id
-      // respond with specific comment
-      //  sperately trigger a GET listing/id/comments
-    // client side render listing with its comments
-
-  // 3. pure client-side
-
-
-  // its working but is it using form action (html5 forms)?
-  // what's happening with the ajax?
-
-  // server
-  // respond with the comment we just inserted
-
   $('#requestRide').click(function(e) {
     console.log('Hi! Im request ride')
     e.preventDefault()

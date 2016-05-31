@@ -77,6 +77,7 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
   res.render('createListing', {layout: '_layout'})
 })
+
 app.post('/createListing', function (req, res) {
   var listing = req.body
   var testingUserID = 13
