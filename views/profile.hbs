@@ -29,12 +29,14 @@
 
       <input type='submit' value='submit' id='updateProfile'></input><br>
   </form>
-  <!-- <center>
-    <div id="popup_box">
-        <p id="popUp">Whoo whoo, your profile is up to date.</p>            <input type="button" id="goToMain" value="Search for a Listing" action="main"></input>
-    </div>
-  </center> -->
 </div>
+
+<form class=search id="locations" name="updatedProfile" onsubmit="return updatedProfile()">
+  <input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin">
+  <input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
+  <button name="searchButton" id="searchButton">Find</button>
+  <p id="alert"></p>
+</form>
 
 
 <script src="/javascript/bundle.js"></script>
