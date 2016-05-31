@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
 	<ul>
 	{{#each data}}
 		<li>
@@ -6,4 +6,9 @@
 		</li>
 	{{/each}}
 </ul>
-</div>
+</div> -->
+
+{{#each data}}
+	<li>Name: {{this.name}}</li>
+	<li>Comment: {{this.comment}}</li>
+{{/each}}
