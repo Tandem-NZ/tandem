@@ -36,12 +36,12 @@ $(document).ready(function(){
 
   $(".seeMore").click(function(e){
     e.preventDefault()
+    console.log("guess who was clicked")
     var listingID = e.target.id
     request
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      console.log('listingUserAndCommentArray', listingUserAndCommentArray)
       $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
     })
   })
@@ -54,7 +54,6 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
-        // console.log('data: ', data)
         $('#appendedComments').append(listingComment({data: data}))
         $('#commentReply').val('')
       })

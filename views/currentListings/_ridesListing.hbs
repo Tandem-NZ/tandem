@@ -1,16 +1,17 @@
-<div class="numberOfRides">
-  <h2>{{numberOfRides}} rides from {{origin}} to {{destination}}</h2>
-</div>
+<section id="newRides">
+  <div class="container">
+    {{#each listing}}
+      <div class="listing">
+        <h3>departure date: {{this.departureDate}}<br>
+          departure time: {{this.departureTime}}</h3>
+        <h4>{{this.origin}} - {{this.destination}}</h4>
+        <p>{{this.name}}</p>
+        <image src ='{{this.urlImage}}' height='200'>
+      <button class="listing-button"><a href="#" id="{{this.listingID}}" class="seeMore">See more</a></button>
+        _ridesListing.hbs
+      </div>
+    {{/each}}
+  </div>
+</section>
 
-<div class="container">
-  {{#each listing}}
-    <div class="listing">
-      <h3>departure date: {{this.departureDate}}<br>
-        departure time: {{this.departureTime}}</h3>
-      <h4>{{this.origin}} - {{this.destination}}</h4>
-      <p>{{this.name}}</p>
-      <image src ='{{this.urlImage}}' height='100'>
-      <a href="#" id="{{this.listingID}}" class="seeMore">See more</a>
-    </div>
-  {{/each}}
-</div>
+  <script src="/javascript/bundle.js"></script>
