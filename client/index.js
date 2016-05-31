@@ -30,15 +30,13 @@ $(document).ready(function(){
   $(".seeMore").click(function(e){
     e.preventDefault()
     var listingID = e.target.id
-    console.log('listingID: ', listingID)
     request
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
+      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments:          listingUserAndCommentArray })  )
     })
   })
-
 
   $("body").on("click", "#commentSubmit", function(e){
     var comment = $('#commentReply').val()
@@ -82,7 +80,7 @@ $(document).ready(function(){
     .end(function(err, res) {
       var data = res.body
       $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
-            date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
+        date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
       })
   })
 
