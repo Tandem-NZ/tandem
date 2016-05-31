@@ -114,10 +114,10 @@ app.post('/main', function(req, res) {
   })
 })
 
-app.post('/singleListing', function(req, res) {
+app.post('/singleListing', function(req, res) { // working here (Heidi)
   singleListing(req.body.listingID)
-  .then(function(data) {
-    res.json(data)
+  .then(function(listings) {
+    res.json("data", pretifyDates(listings))
   })
 })
 
