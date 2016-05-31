@@ -107,6 +107,9 @@ body {
 .current-listings-container {
 	background: $background-color;
 	height: 100%;
+		form {
+			background: $secondary-color;
+		}
 }
 
 

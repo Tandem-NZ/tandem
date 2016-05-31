@@ -332,6 +332,8 @@ body {
 .current-listings-container {
   background: #f1f1f1;
   height: 100%; }
+  .current-listings-container form {
+    background: #2a406d; }
 
 #newRides {
   padding: 4%; }
