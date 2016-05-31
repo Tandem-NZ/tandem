@@ -49,6 +49,7 @@ function displayListingUserCommentData (listingID){
 
 function pretifyDates(array) {
   return array.map(function(listing){
+    console.log("listing departureTime: ", listing.departureTime)
     listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
     return listing
   })
@@ -81,7 +82,7 @@ app.post('/createListing', function (req, res) {
   var testingUserID = 13
   knex('listings').insert({
     origin: listing.origin,
-    destination: listing.destination,
+    destination: listing.detsination,
     departureDate: listing.departureDate,
     departureTime: listing.departureTime,
     description: listing.description,
