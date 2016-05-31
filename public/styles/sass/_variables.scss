@@ -34,7 +34,7 @@ $primary-radius: 4px;
 .inputFullWidth, 
 #facebookButton{
 	width: 350px;
-	margin: 10px;
+	margin: 20px 5px;
 }
 
 #facebookButton {
@@ -80,6 +80,24 @@ form#locations.search {
 .search-bar {
 	// background: red;
 }
+
+/* footers
+   ========================================================================== */
+
+@mixin main-footer() {
+  color: $reverse;
+	font-size: 10px;
+	text-align: center;
+
+	clear: both;
+  vertical-align: middle;
+  line-height: normal;
+  margin: 0;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
 
 /* utilities
    ========================================================================== */

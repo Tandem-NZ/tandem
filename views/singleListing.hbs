@@ -1,35 +1,37 @@
-<div class="single-listing-container row"> 
+
+<div class="single-listing-container row">
   <div class="eight columns">
     <div class="singleListing">
       <h3 class="singleListHeading">{{data.name}}'s listing</h3>
-      <h4>{{data.origin}} <i class="fa fa-long-arrow-right" aria-hidden="true"></i> <span class="destination">{{data.destination}}</span></h4>
-      <p><span class="bold-text">Date: </span>{{data.departureDate}}</p>
-      <p><span class="bold-text">Time: </span>{{data.departureTime}}</p>
-      <p><span class="bold-text">Driver: </span> {{data.name}}</p>
-      <p><span class="bold-text">Gender: </span>{{data.gender}}</p>
-      <p><span class="bold-text">Age: </span>{{data.age}}</p>
-      <p>I've held my driver's licence for {{data.driverLicenceDuration}} years</p>
+      <h4>{{data.origin}} <i aria-hidden="true" class=
+      "fa fa-long-arrow-right"></i> <span class=
+      "destination">{{data.destination}}</span></h4>
+      <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
+      <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
+      <p><span class="bold-text">Driver:</span> {{data.name}}</p>
+      <p><span class="bold-text">Gender:</span> {{data.gender}}</p>
+      <p><span class="bold-text">Age:</span> {{data.age}}</p>
+      <p>I've held my driver's licence for {{data.driverLicenceDuration}}
+      years</p>
       <h5>Description</h5>
       <p>{{data.description}}</p>
-      <image src ='{{data.urlImage}}' height='200' />
+      <div class="profile-image"><img height='200' src=
+      '{{data.urlImage}}'></div>
     </div>
-    
   </div>
-
   <div class="commentContainer">
-    <textarea id="commentReply" rows="8" cols="40"></textarea>
-    <button data-listingId="{{data.listingID}}" id="commentSubmit">Comment</button>
-    <button type="button" id="requestRide" name="requestRide">Request a Ride</button>
+    <textarea cols="40" id="commentReply" rows="8"></textarea>
+    <button data-listingid="{{data.listingID}}" id=
+    "commentSubmit">Comment</button> <button id="requestRide" name=
+    "requestRide" type="button">Request a Ride</button>
     <div id="appendedComments">
-        <div>
-          <ul>
-           {{#each comments}}
-           <li>
-            Listing ID: {{this.listingID}}: Comment: {{this.comment}}
-          </li>
-          {{/each}}
+      <div>
+        <ul>
+          <li style="list-style: none">{{#each comments}}</li>
+          <li>Listing ID: {{this.listingID}}: Comment: {{this.comment}}</li>
+          <li style="list-style: none">{{/each}}</li>
         </ul>
       </div>
     </div>
   </div>
-</div> <!-- end single list container -->
+</div><!-- end single list container -->
