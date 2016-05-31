@@ -29,7 +29,9 @@ $(document).ready(function(){
 
   $(".seeMore").click(function(e){
     e.preventDefault()
+    // console.log('e.target: ', e.target)
     var listingID = e.target.id
+    console.log('listingID: ', listingID)
     request
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
@@ -39,7 +41,14 @@ $(document).ready(function(){
     })
   })
 
+  // $('#commentSubmit').click(function(e){
+  //   console.log('here!! hi!')
+  // })
+console.log('im about to listen')
+// console.log(document.body)
   $("body").on("click", "#commentSubmit", function(e){
+    console.log('e.target: ', e.target.id)
+    console.log("comments client route being hit!")
     var comment = $('#commentReply').val()
     var listingID = $(this).attr('data-listingID')
     request
@@ -48,11 +57,11 @@ $(document).ready(function(){
       .end(function(err, res){
         var data = res.body
         // console.log('data: ', data)
-        $('#appendedComments').append(listingComment({data: data}))
+        $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })
   })
-
+console.log('oh how i wish I had listened!')
   // 1. pure serverside rendering - nice and simple
     // take out ajax
     // res.render hbs
@@ -73,6 +82,7 @@ $(document).ready(function(){
   // server
   // respond with the comment we just inserted
   $('#requestRide').click(function(e) {
+    console.log('Hi! Im request ride')
     e.preventDefault()
     request
     .get('/liftConfirm')
