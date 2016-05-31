@@ -43,7 +43,7 @@ $(document).ready(function(){
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
+      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments:          listingUserAndCommentArray })  )
     })
   })
 
@@ -55,7 +55,7 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
-        $('#appendedComments').append(listingComment({data: data}))
+        $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })
   })
@@ -81,6 +81,7 @@ $(document).ready(function(){
   // respond with the comment we just inserted
 
   $('#requestRide').click(function(e) {
+    console.log('Hi! Im request ride')
     e.preventDefault()
     request
     .get('/liftConfirm')
@@ -88,7 +89,7 @@ $(document).ready(function(){
     .end(function(err, res) {
       var data = res.body
       $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
-            date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
+        date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
       })
   })
 
