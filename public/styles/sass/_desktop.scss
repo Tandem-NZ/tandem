@@ -1,0 +1,72 @@
+@media only screen and (min-width: 24em) {
+
+/* Buttons on primary nav
+========================================================================== */
+	.primary-nav {
+		a {
+			text-align: center;
+		}
+		a#signup-btn-nav{
+		border: 1px solid $reverse;
+		border-radius: 25px;
+		line-height: 0px;
+		margin-top: 20px;
+		padding: 17px;
+		-webkit-transition: background-color 0.5s ease;
+		-moz-transition: background-color 0.5s ease;
+		-o-transition: background-color 0.5s ease;
+		transition: background-color 0.5s ease;
+		}
+		a#signup-btn-nav:hover{
+		text-decoration: none;
+		font-family: $body;
+		background: $third-color;
+		// border: 1px solid rgba(255,255,255, 0.5);
+		}
+	}
+
+	header, nav, main {
+		width: 100%;
+		margin: auto;
+	}
+
+	header {
+
+		#logo {
+			margin-left: 3%;
+		}
+
+		#logo a {
+			line-height: 75px;
+		}
+	}
+	
+	nav {
+
+		ul {
+			float: right;
+			width: auto;
+			margin-right: 3%;
+		}
+		ul li {
+			float: left;
+			list-style-type: none;
+			line-height: 75px;
+			margin-left: 35px;
+		}
+		
+		ul li a {
+			display: block;
+			color: $menu-text-color;
+			text-decoration: none;
+			font-family: $body;
+			cursor: pointer;
+			
+		}
+		ul li a:hover {
+			font-family: $medium;
+		}
+
+
+	} // end of navigation
+} //end of desktop view

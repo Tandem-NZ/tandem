@@ -1,0 +1,123 @@
+@import "variables";
+@import "mobile";
+@import "desktop";
+@import "mobilemenu";
+
+
+body {
+	font-family: $body;
+	background: $primary-color;
+	color: $body-text-color;
+}
+
+
+
+/* Main Landing
+   ========================================================================== */
+.main-landing {
+	h1, h5, h6 {
+		color: $reverse;
+	}
+	h1 {
+		font-family: $bold;
+	}
+	h5 {
+		font-family: $medium;
+	}
+
+}
+body {
+	background: $secondary-color;
+	// background: url(../images/bg004.jpg) no-repeat center center fixed; 
+ //  -webkit-background-size: cover;
+ //  -moz-background-size: cover;
+ //  -o-background-size: cover;
+ //  background-size: cover;
+ //  height: 100%;
+}
+
+// .full-image-backgroud {
+// 	background: url(../images/bg004.jpg) no-repeat center center fixed; 
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+//   height: 100%;
+// }
+
+/* Sign in
+   ========================================================================== */
+.sign-in {
+	h5, p {
+		color: $reverse;
+		margin-bottom: 5px;
+	}
+	#no-account-footer {
+		margin-top: 10px;
+	}
+	a {
+		text-decoration: none;
+	}
+}
+
+/* Sign up
+   ========================================================================== */
+
+.sign-in {
+	h5, p {
+		color: $reverse;
+		margin-bottom: 5px;
+	}
+}
+
+/* Current Listings
+   ========================================================================== */
+.current-listings-container {
+	background: $background-color;
+	// height: 100%;
+}
+
+
+#newRides {
+	// background: red;
+	padding: 4%;
+
+	h4, h5, h6, p {
+		margin-bottom: 0;
+	}
+	h4 {
+		font-family: $medium;
+		color: #23355b;
+	}
+}
+.search-bar {
+	// background: green;
+}
+
+.listing {
+	background: $background-color;
+	padding: 3%;
+	// margin-bottom: 20px;
+	// border-radius: $primary-radius;
+	border-bottom: 1px solid #bdbdbd;
+
+	button {
+		background: $primary-color;
+		border: none;
+		margin-top: 10px;
+	}
+	a {
+		text-decoration: none;
+		color: $reverse;
+	}
+}
+
+/* Single listings
+   ========================================================================== */
+.single-listing-container {
+	h5 {
+		margin-top: 20px;
+		font-family: $medium;
+	}
+}
+
