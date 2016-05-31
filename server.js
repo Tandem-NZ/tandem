@@ -33,7 +33,6 @@ function search(origin, destination){
   if(destination){
     searchObject.destination = destination
   }
-  console.log('this is search object', searchObject)
   return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
@@ -99,22 +98,13 @@ app.post('/main', function(req, res) {
 
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
-  console.log('listingID: ', listingID)
   displayListingUserCommentData(listingID)
   .then(function(data) {
-    // console.log('data from db: ', data)
     data[0].listingID = listingID
-    res.json(data)
+    res.json(data, pretifyDates(data))
   })
 })
 
-// this is old.. renamed to be a GET, above is replacement ===============================
-// app.post('/singleListing', function(req, res) {
-//   singleListing(req.body.listingID)
-//   .then(function(listings) {
-//     res.json("data", pretifyDates(listings))
-//   })
-// })
 
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
