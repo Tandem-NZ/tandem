@@ -7,7 +7,8 @@
     "start": "node server.js",
     "start-dev": "nodemon server.js",
     "watch": "watchify -t hbsfy ./client/index.js -o ./public/javascript/bundle.js -dv",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-integrations": "nightwatch"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "to-title-case": "^1.0.0"
   },
   "devDependencies": {
+    "nightwatch": "^0.9.1",
     "watchify": "^3.7.0"
   }
 }
