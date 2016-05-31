@@ -127,13 +127,9 @@ app.post('/moreCurrentListings', function(req, res) {
 //===================Ride Confirmation====================
 
 app.get('/liftConfirm', function (req, res){
-  // console.log("res.body: ", res.body, "req.body:", req.body)
   knex.select('origin', 'destination', 'departureDate', 'departureTime', 'listingID').from('listings')
     .then (function(data) {
-      // console.log("data: ", data)
       var listingID = data[2]
-      // console.log("server side listingID:", listingID)
-      // console.log("hi I'm data: ", listingID)
       res.json(listingID)
     })
 })
@@ -141,7 +137,6 @@ app.get('/liftConfirm', function (req, res){
 //=====sessions need to be implemented for this to be fully functional======
 
 app.post('/liftEnjoy', function(req, res) {
-  // console.log("Req: ", req.body)
   var description = req.body.description
   var listingID = req.body.listingID
   knex('ride_requests').insert({listingID: listingID, description: description})

@@ -73,8 +73,7 @@ $(document).ready(function(){
 
   // server
   // respond with the comment we just inserted
-  $('#requestRide').click(function(e) {
-    console.log('hitting listener')
+  $("body").on("click", "#requestRide", function(e){
     e.preventDefault()
     request
     .get('/liftConfirm')
@@ -85,16 +84,14 @@ $(document).ready(function(){
       })
   })
 
-  $('.rideConfirm').click(function(e) {
+  $("body").on("click", ".rideConfirm", function(e){
     e.preventDefault()
     var listingID = e.target.id
-    // console.log("listingID", listingID)
     var description = $('#description').val()
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        // console.log("hopefully there's some data in request Ride table!")
         $('body').html(liftEnjoy({name: "lizzie"}))
       })
   })
