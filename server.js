@@ -72,10 +72,6 @@ app.get('/currentListings', function(req, res){
   })
 })
 
-app.get('/signin', function (req, res) {
-  res.render('login', {layout: '_layout'})
-})
-
 //============Create a Listing================
 //
 app.get('/createListing', function (req, res) {
@@ -83,7 +79,7 @@ app.get('/createListing', function (req, res) {
 })
 
 app.post('/createListing', function (req, res) {
-  knex('listings').insert()
+  knex('listings').insert(req.body)
   .then(function (data) {
     res.render('listingConfirm')
   })
@@ -101,13 +97,24 @@ app.post('/main', function(req, res) {
   })
 })
 
-
-app.post('/singleListing', function(req, res) {
-  singleListing(req.body.listingID)
-  .then(function(listings) {
-    res.json("data", pretifyDates(listings))
+app.get('/singleListing', function(req, res) {
+  var listingID = req.query.listingID
+  console.log('listingID: ', listingID)
+  displayListingUserCommentData(listingID)
+  .then(function(data) {
+    // console.log('data from db: ', data)
+    data[0].listingID = listingID
+    res.json(data)
   })
 })
+
+// this is old.. renamed to be a GET, above is replacement ===============================
+// app.post('/singleListing', function(req, res) {
+//   singleListing(req.body.listingID)
+//   .then(function(listings) {
+//     res.json("data", pretifyDates(listings))
+//   })
+// })
 
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
@@ -224,10 +231,11 @@ app.get('/auth/facebook', passport.authenticate('facebook'))
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function (req, res) {
-    console.log('req.user', req.user)
-    res.render('currentListings')
-})
+    function (req, res) {
+      res.redirect('/')
+    }
+  )
+
 passport.use(new FacebookStrategy ({
   clientID: process.env.FACEBOOK_CLIENT_ID,
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
