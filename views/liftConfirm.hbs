@@ -37,48 +37,27 @@
   </div>
   <div class="container u-cf"> <!-- wrapper -->
   <h3>You've confirmed your trip</h3>
-  <h5>..pack your bags its time to ride with Tandem</h5>
+  <h5>..pack your bags its time to ride with Tandem</h5><br>
+	<div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
+        <div class="row">
+						<div id="liftInfo" >
+							{{#each data}}
+	              <div class="nine columns" style="background: pink" >
+	              <h4>{{this.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{this.destination}}</span></h4>
+	              <p><span class="bold-text">Date:</span> {{this.departureDate}}</p>
+	              <p><span class="bold-text">Time:</span> {{this.departureTime}}</p>
+	              <p><span class="bold-text">Driver:</span> {{this.name}}</p>
+								<hidden id="listingID">{{this.listingID}}</hidden>
+							{{/each}}
+  					</div>
+					</div>
+		</div>
+	</div>
+		<br>
 		<div id="liftInfo">
-			{{#each data}}
-		<ul>
-			<li>Origin: {{this.origin}}</li>
-			<li>Destination: {{this.destination}}</li>
-			<li>Drivers Name: {{this.name}}</li>
-			<li>Drivers email {{this.email}}</li>
-			<li>Date of Departure:{{this.departureDate}}</li>
-			<li>Time of Departure:{{this.departureTime}}</li>
-
-			<hidden id="listingID">{{this.listingID}}</hidden>
-		</ul>
-		{{/each}}
 		<p>Message to driver (optional): </p>
 		<input type="text" id="description" name="description">
 		</div><br>
 		<button id="liftEnjoyButton" class="rideConfirm">Confirm Your Ride</button>
 
-
-
-
-    <h3>Find a passenger to travel with</h3>
-    <h5>Create a Listing below</h5>
-    <div>
-      <form action="/createListing" method="post">
-        <input autofocus="" name='origin' placeholder="origin" type=
-        'text'>
-        <input name='destination' placeholder="destination" type=
-        'text'>
-        <p>When are you leaving?</p>
-        Date: <input name='departureDate' placeholder="departure date" type=
-        "date"><br>
-        Time: <input name='departureTime' placeholder="departure time" type=
-        "time"><br>
-        Description: <br>
-        <textarea name='description' cols="40" id="create-listing-textbox" rows="8" placeholder="description"></textarea>
-        <div>
-          <input id="create-submit" type='submit' value='submit'><br>
-        </div>
-      </form>
-    </div>
-  </div> <!-- end wrapper -->
-</div>
 <script src="/javascript/bundle.js"></script>
