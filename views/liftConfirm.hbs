@@ -1,16 +1,14 @@
 <div id="liftInfo">
-	{{#each data}}
 <ul>
-	<li>Origin: {{this.origin}}</li>
-	<li>Destination: {{this.destination}}</li>
-	<li>Drivers Name: {{this.name}}</li>
-	<li>Drivers email {{this.email}}</li>
-	<li>Date of Departure:{{this.departureDate}}</li>
-	<li>Time of Departure:{{this.departureTime}}</li>
-
-	<hidden id="listingID">{{this.listingID}}</hidden>
+	<li>Origin: {{data.origin}}</li>
+	<li>Destination: {{data.destination}}</li>
+	<li>Drivers Name: {{data.name}}</li>
+	<li>Drivers email {{data.email}}</li>
+	<li>Date of Departure:{{data.departureDate}}</li>
+	<li>Time of Departure:{{data.departureTime}}</li>
+	<input type='hidden' id={{data.listingID}} >
 </ul>
-{{/each}}
+
 <p>Message to driver (optional): </p>
 <input type="text" id="description" name="description">
 </div><br>

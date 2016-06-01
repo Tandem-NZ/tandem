@@ -66,11 +66,11 @@ $("body").on("click", "#requestRide", function(e){
 		 .post('/liftConfirm')
 		 .send({listingID: listingID})
 		 .end(function(err, res) {
-		  	var data = res.body
-				console.log("data", data)
-		   	$('body').html(liftConfirm({data:data})
-				)
-			})
+		  	var data = res.body[0]
+				console.log("data: ", data)
+		   	$('body').html(liftConfirm({ data: data })
+		)
+	})
 })
 
   $("body").on("click", "#liftEnjoyButton", function(e){
