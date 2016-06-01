@@ -217,6 +217,22 @@ button {
 	overflow: hidden;
 }
 
+.comment-list {
+	list-style-type: none;
+}
+
+#commentBorder {
+	background: $reverse;
+	padding: 10px;
+	border-radius: 4px;
+	width: 380px;
+}
+
+.single-listing-bold {
+	font-family: $medium;
+
+}
+
 /* Create Listings 
 ========================================================================== */
 
@@ -274,6 +290,7 @@ section {
 .how-it-works {
 	h1 {
 		text-align: center;
+		font-family: $medium;
 	}
 }
 
