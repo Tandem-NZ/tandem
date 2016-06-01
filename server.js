@@ -290,3 +290,5 @@ passport.deserializeUser(function(obj, callback) {
 app.listen(3000, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
+
+module.exports = app;
