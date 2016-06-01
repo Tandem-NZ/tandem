@@ -30,7 +30,6 @@ $(document).ready(function(){
             .send({ origin: origin, destination: destination })
             .end(function(err, res) {
               var newListing = res.body
-              .get('/currentListings')
               $('#newRides').html(ridesListing({ listing: newListing }))
           })
       }
