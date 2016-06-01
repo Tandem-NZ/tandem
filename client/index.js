@@ -67,6 +67,7 @@ $("body").on("click", "#requestRide", function(e){
 		 .send({listingID: listingID})
 		 .end(function(err, res) {
 		  	var data = res.body
+				console.log("data", data)
 		   	$('body').html(liftConfirm({data:data})
 				)
 			})
