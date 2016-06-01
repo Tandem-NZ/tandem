@@ -191,11 +191,11 @@ app.post('/moreCurrentListings', function(req, res) {
 
 //===================Ride Confirmation====================
 
+
 app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
-	return displayListingUserCommentData (listingID)
-	.then (function(data) {
-		var rideInfo = data
+		return displayListingUserCommentData(listingID)
+		.then(function(rideInfo) {
 		 res.json(pretifyDates(rideInfo))
 	})
 })
