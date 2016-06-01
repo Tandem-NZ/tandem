@@ -504,3 +504,11 @@ body {
 
 section #newRides {
   padding-top: 0px !important; }
+
+/* Create Listings 
+========================================================================== */
+#alert {
+  margin-top: 20px;
+  font-size: 1em;
+  font-family: Gotham_medium, sans-serif;
+  color: #fff; }
