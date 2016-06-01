@@ -84,6 +84,8 @@ app.get('/createListing', function (req, res) {
 })
 //heidi is working here
 app.post('/createListing', function (req, res) {
+	// check out req.session.userId ,
+	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
   var testingUserID = 2
   knex('listings').insert({
@@ -246,6 +248,7 @@ app.post ('/login', function(req,res) {
       res.redirect('/')
     }
   })
+	
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
