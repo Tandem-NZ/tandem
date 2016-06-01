@@ -63,18 +63,18 @@ module.exports = {
   //   .assert.containsText('h4', 'Taumarunui - Te Kuiti')
   //   .end();
   // },
-  //
-  // 'Search bar on currentListings' : function(browser) {
-  //   browser.url('http://localhost:3000/currentListings?origin=Taumarunui&destination=Whanganui')
-  //   .waitForElementVisible('body', 1000)
-  //   .setValue('#origin', 'Kaeo')
-  //   .setValue('#destination', 'Hamilton')
-  //   .click('#searchButton')
-  //   .pause(1000)
-  //   .assert.urlEquals('http://localhost:3000/currentListings?origin=Taumarunui&destination=Whanganui')
-  //   .assert.containsText('h4', 'Kaeo - Hamilton')
-  //   .end();
-  // },
+
+  'Search bar on currentListings' : function(browser) {
+    browser.url('http://localhost:3000/currentListings?origin=Taumarunui&destination=Whanganui')
+    .waitForElementVisible('body', 1000)
+    .setValue('#origin', 'Kaeo')
+    .setValue('#destination', 'Hamilton')
+    .click('#searchButton')
+    .pause(1000)
+    .assert.urlEquals('http://localhost:3000/currentListings?origin=Kaeo&destination=Hamilton&searchButton=')
+    .assert.containsText('h4', 'Kaeo - Hamilton')
+    .end();
+  },
 
   'Create a listing button' : function(browser) {
     browser.url('http://localhost:3000/')

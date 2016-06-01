@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="1">
+            tests="2">
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-    tests="1" time="10.70" timestamp="Wed, 01 Jun 2016 04:29:23 GMT">
+    tests="2" time="16.05" timestamp="Wed, 01 Jun 2016 04:39:20 GMT">
   
-    <testcase name="Create a listing button" time="10.70" assertions="2">
+    <testcase name="Search bar on currentListings" time="7.559" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create a listing button" time="8.487" assertions="2">
 
     
 
