@@ -125,32 +125,46 @@ module.exports = {
   //   .end();
   // },
   //
-  'Profile confirm, return to homepage button' : function(browser) {
-    browser.url('http://localhost:3000/profile')
+  // 'Profile confirm, return to homepage button' : function(browser) {
+  //   browser.url('http://localhost:3000/profile')
+  //   .waitForElementVisible('body', 1000)
+  //   .setValue('#profile-licence', 5)
+  //   .setValue('#profile-age', 26)
+  //   .setValue('#gender', 'F')
+  //   .click('#updateProfile')
+  //   .pause(1000)
+  //   .assert.containsText('h1', 'Your profile has been updated...')
+  //   .click('a[href="/"]')
+  //   .assert.urlEquals('http://localhost:3000/')
+  //   .end();
+  // },
+  //
+  // 'Create a listing > listing confirm page' : function(browser) {
+  //   browser.url('http://localhost:3000/createListing')
+  //   .waitForElementVisible('body', 1000)
+  //   .setValue('#createListingOrigin', 'Gisborne')
+  //   .setValue('#createListingDestination', 'Auckland')
+  //   .setValue('#createListingDepartureDate', '01/06/2016')
+  //   .setValue('#createListingDepartureTime', 09:00am)
+  //   .click('#create-submit')
+  //   .pause(1000)
+  //   .assert.containsText('h1', 'Listing Confirmed')
+  //   // .assert.containsText('li', 'From :Gisborne to Auckland')
+  //   .end();
+  // },
+
+  'Request a ride' : function(browser) {
+    browser.url('http://localhost:3000/currentListings?origin=Taumarunui&destination=Whanganui')
     .waitForElementVisible('body', 1000)
-    .setValue('#profile-licence', 5)
-    .setValue('#profile-age', 26)
-    .setValue('#gender', 'F')
-    .click('#updateProfile')
+    .click('#requestRide')
     .pause(1000)
-    .assert.containsText('h1', 'Your profile has been updated...')
+    .assert.containsText('li', 'Origin: Taumarunui')
+    .click('#liftEnjoyButton')
+    .pause(1000)
+    .assert.containsText('h3', 'Go you good thang! Your trip is confirmed and your driver has been notified of your request. Thanks for using Tandem, have a great trip!')
+    .pause(1000)
     .click('a[href="/"]')
     .assert.urlEquals('http://localhost:3000/')
-    .end();
-  },
-
-  'Create a listing > listing confirm page' : function(browser) {
-    browser.url('http://localhost:3000/createListing')
-    .waitForElementVisible('body', 1000)
-    .setValue('#createListingOrigin', 'Gisborne')
-    .setValue('#createListingDestination', 'Auckland')
-    .setValue('#createListingDepartureDate', '01/06/2016')
-    .setValue('#createListingDepartureTime', 09:00am)
-    .click('#create-submit')
-    .pause(1000)
-    .assert.containsText('h1', 'Listing Confirmed')
-    // .assert.containsText('li', 'From :Gisborne to Auckland')
-    .end();
   }
 
 };
