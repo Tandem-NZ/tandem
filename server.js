@@ -15,6 +15,7 @@ moment().format();
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
 var knex = Knex(knexConfig[env])
+var session = require('express-session')
 
 if (env == 'development') {
   var dotenv = require('dotenv')
@@ -30,6 +31,13 @@ app.use(require('cookie-parser')())
 app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
+
+// app.use(session({
+// 	secret: 'Ahahahaha!! Mumble, mumble..',
+// 	saveUninitialized: true,
+// 	resave: true,
+// 	store: store
+// }))
 
 
 function search(origin, destination){
@@ -80,8 +88,14 @@ app.get('/currentListings', function(req, res){
 //============Create a Listing================
 //
 app.get('/createListing', function (req, res) {
-	res.render('createListing', {layout: '_layout'})
+	if (!req.session.userId){
+		res.redirect('/signin')
+	}
+	else {
+		res.render('createListing', {layout: '_layout'})
+	}
 })
+
 //heidi is working here
 app.post('/createListing', function (req, res) {
   var listing = req.body
@@ -242,14 +256,28 @@ app.post ('/login', function(req,res) {
   knex('users').where({email: req.body.email})
   .then (function(data){
     var hashedLogin = data[0].hashedPassword
-    if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
-      res.redirect('/')
+    if  (req.body.email === '' ) {
+      res.redirect('/signin')
+    }
+    else if (bcrypt.compareSync(req.body.password, hashedLogin)){
+		req.session.userId = data[0].userID
+      	console.log('success! sign in happened by tandem user #' + req.session.userId +'!')
+		res.redirect('/')
+    }
+    else {
+      console.log('incorrect password')
+      res.redirect('/signIn')
     }
   })
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
   })
+})
+
+app.get('/logout', function(req, res){
+	req.session.destroy()
+	res.redirect('/signin')
 })
 
 // //============== OAuth =====================
