@@ -480,6 +480,18 @@ body {
   border: 4px solid #DCDCDC;
   overflow: hidden; }
 
+.comment-list {
+  list-style-type: none; }
+
+#commentBorder {
+  background: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  width: 380px; }
+
+.single-listing-bold {
+  font-family: Gotham_medium, sans-serif; }
+
 /* Create Listings 
 ========================================================================== */
 .create-listings-container h3, .create-listings-container h4, .create-listings-container h5 {
@@ -520,7 +532,8 @@ section #newRides {
 /* how it works
 ========================================================================== */
 .how-it-works h1 {
-  text-align: center; }
+  text-align: center;
+  font-family: Gotham_medium, sans-serif; }
 
 .how-it-works-item {
   text-align: center; }
