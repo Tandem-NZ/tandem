@@ -1,79 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="3">
+            tests="8">
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-<<<<<<< HEAD
-    tests="3" time="29.76" timestamp="Wed, 01 Jun 2016 06:27:25 GMT">
+    tests="8" time="61.13" timestamp="Wed, 01 Jun 2016 08:36:21 GMT">
   
-    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="10.17" assertions="3">
-=======
-    tests="8" time="47.42" timestamp="Wed, 01 Jun 2016 06:03:46 GMT">
-  
-    <testcase name="Welcome page" time="4.535" assertions="2">
->>>>>>> a1986ec901c05e4926916ceab90c0c9cceb1341c
-
-    
-
-    
-<<<<<<< HEAD
-=======
-    </testcase>
-  
-    <testcase name="Front page search" time="10.57" assertions="2">
+    <testcase name="Welcome page" time="6.316" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Search page, only destination searched" time="5.047" assertions="2">
+    <testcase name="Front page search" time="11.05" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="No search query error" time="2.481" assertions="2">
+    <testcase name="Search page, only destination searched" time="7.329" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Origin and destination search &gt; to singleListing page" time="6.466" assertions="2">
+    <testcase name="No search query error" time="2.437" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="8.511" assertions="2">
-
-    
->>>>>>> a1986ec901c05e4926916ceab90c0c9cceb1341c
-
-    
-    </testcase>
-  
-<<<<<<< HEAD
-    <testcase name="Search bar on currentListings" time="15.52" assertions="2">
-=======
-    <testcase name="Search bar on currentListings" time="5.618" assertions="2">
->>>>>>> a1986ec901c05e4926916ceab90c0c9cceb1341c
+    <testcase name="Origin and destination search &gt; to singleListing page" time="12.00" assertions="2">
 
     
 
     
     </testcase>
   
-<<<<<<< HEAD
-    <testcase name="Create a listing button" time="4.075" assertions="2">
-=======
-    <testcase name="Create a listing button" time="4.198" assertions="2">
->>>>>>> a1986ec901c05e4926916ceab90c0c9cceb1341c
+    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="8.905" assertions="3">
+
+    
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Search bar on currentListings" time="8.825" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Create a listing button" time="4.271" assertions="2">
 
     
 
