@@ -76,13 +76,13 @@ $("body").on("click", "#requestRide", function(e){
 
   $("body").on("click", ".rideConfirm", function(e){
     e.preventDefault()
-    var listingID = e.target.class
+    var listingID = $('#listingID').val()
     var description = $('#description').val()
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        $('body').html(liftEnjoy({name: "lizzie"}))
+        $('body').html(liftEnjoy())
       })
   })
 
