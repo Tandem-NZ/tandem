@@ -12,6 +12,10 @@
   font-family: Gotham_thin;
   src: url(../fonts/GOTHAM-LIGHT.TTF); }
 
+@font-face {
+  font-family: Rene_Bieder;
+  src: url(../fonts/Rene-Bieder.otf); }
+
 /* Colors
    ========================================================================== */
 /* blue */
@@ -97,7 +101,7 @@ nav {
 
 header #logo {
   float: left;
-  font-family: Gotham_black, sans-serif;
+  font-family: Rene_Bieder, sans-serif;
   font-size: 2em;
   color: #fff; }
 
@@ -390,6 +394,18 @@ body {
   background: #f1f1f1;
   padding: 3%;
   border-bottom: 1px solid #bdbdbd; }
+  .listing h5 {
+    font-size: 1.2em; }
+    .listing h5 .bold-text {
+      font-family: Gotham_medium, sans-serif; }
+  .listing .profile-page {
+    font-family: Gotham_medium, sans-serif; }
+  .listing .listing-profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #DCDCDC;
+    overflow: hidden; }
   .listing button {
     background: #23355b;
     border: none;
@@ -420,13 +436,13 @@ body {
   margin-bottom: 20px; }
 
 .profile-image {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid #565a5c; }
+  border: 4px solid #DCDCDC;
+  overflow: hidden; }
 
-/* Create Listings and profile Listings
+/* Create Listings 
 ========================================================================== */
 .create-listings-container h3, .create-listings-container h4, .create-listings-container h5 {
   margin-bottom: 0;
@@ -452,3 +468,6 @@ body {
 
 .create-listings-container #create-listing-textbox {
   width: 300px; }
+
+section #newRides {
+  padding-top: 0px !important; }
