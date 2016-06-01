@@ -8,7 +8,6 @@ var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
 var cookie =require('cookie-parser')
 var port = process.env.PORT || 3000
-var dotenv = require('dotenv')
 var toTitleCase = require('to-title-case')
 var moment = require('moment')
 moment().format();
@@ -16,6 +15,11 @@ moment().format();
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
 var knex = Knex(knexConfig[env])
+
+if (env == 'development') {
+  var dotenv = require('dotenv')
+  dotenv.load()
+}
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
@@ -26,7 +30,7 @@ app.use(require('cookie-parser')())
 app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
-dotenv.load()
+
 
 function search(origin, destination){
 	var searchObject = {origin: origin}
@@ -294,6 +298,6 @@ passport.deserializeUser(function(obj, callback) {
 
 //============== Auth Ends ============================
 
-app.listen(3000, function () {
+app.listen(port, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
