@@ -26,11 +26,12 @@
     "requestRide" type="button">Request a Ride</button>
     <div id="appendedComments">
       <div>
-        <ul>
-          <li style="list-style: none">{{#each comments}}</li>
-          <li>Listing ID: {{this.listingID}}: Comment: {{this.comment}}</li>
-          <li style="list-style: none">{{/each}}</li>
-        </ul>
+       <ul>
+         {{#each comments}}
+         <li  style="list-style: none">Name: {{this.name}}</li>
+         <li style="list-style: none">Comment: {{this.comment}}</li>
+        {{/each}}
+      </ul>
       </div>
     </div>
   </div>

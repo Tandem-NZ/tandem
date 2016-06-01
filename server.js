@@ -77,6 +77,7 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
   res.render('createListing', {layout: '_layout'})
 })
+
 app.post('/createListing', function (req, res) {
   var listing = req.body
   var testingUserID = 13
@@ -88,7 +89,8 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    res.render('listingConfirm', {layout: '_layout'})
+    // console.log('listing: ', listing, 'typeof: ', typeof listing)
+    res.render('listingConfirm', {data: listing, layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
@@ -109,10 +111,23 @@ app.get('/singleListing', function(req, res) {
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
+    // console.log('data: (inside singleListing route)', data)
     res.json(data, pretifyDates(data))
   })
 })
 
+app.post('/listings/:id/comment', function(req, res){
+  var comment = req.body.comment
+  var listingID = req.params.id
+  knex('comments')
+    .insert({comment: comment, listingID: listingID })
+    .then(function(){
+      return displayListingUserCommentData(listingID)
+    })
+    .then(function(data){
+      res.send(data)
+    })
+})
 
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
@@ -122,7 +137,6 @@ app.post('/moreCurrentListings', function(req, res) {
     res.json("data", pretifyDates(listings))
   })
 })
-
 
 // ====================================================
 // ====================================================
@@ -154,30 +168,6 @@ app.post('/createListing', function (req, res) {
   .catch(function (error) {
     console.log("error", error)
   })
-})
-
-
-app.get('/singleListing', function(req, res) {
-  var listingID = req.query.listingID
-  displayListingUserCommentData(listingID)
-  .then(function(data) {
-    // console.log('data from db: ', data)
-    data[0].listingID = listingID
-    res.json(data)
-  })
-})
-
-app.post('/listings/:id/comment', function(req, res){
-  var comment = req.body.comment
-  var listingID = req.params.id
-  knex('comments')
-    .insert({comment: comment, listingID: listingID })
-    .then(function(){
-      return knex.select('*').from('comments').where('listingID', listingID)
-    })
-    .then(function(data){
-      res.send(data)
-    })
 })
 
 //===================Ride Confirmation====================
