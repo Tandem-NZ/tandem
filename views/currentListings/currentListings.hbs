@@ -28,7 +28,7 @@
     <form class="search u-full-width" id="locations" name="searchForm"
     onsubmit="return validateForm()">
     <input class="inputFullWidth" id="origin" name="origin"
-    placeholder="origin" type="text"> <i class="fa fa-long-arrow-right arrow-nav-bar" aria-hidden="true"></i> <input class="inputFullWidth"
+    placeholder="origin" type="text"><input class="inputFullWidth"
     id="destination" name="destination" placeholder="destination"
     type="text"> <button id="searchButton" name=
     "searchButton">Find</button>
@@ -36,21 +36,45 @@
   </form>
 </div>
 <div class="container u-cf">
-  <section id="newRides">
-    <div class="container">
+ <section id="newRides">
+   <!--  <div class="container"> -->
       {{#each listing}}
-      <div class="listing">
-        <h5>departure date: {{this.departureDate}}</h5>
-        <h5>departure time: {{this.departureTime}}</h5>
-          <h4>{{this.origin}} - {{this.destination}}</h4>
-          <p>{{this.name}}</p><img alt="profile pic" height='200'
-          src='{{this.urlImage}}'> <button class=
-          "listing-button"><a class="seeMore" href="#" id=
+      <div class="listing row">
+      <div class="three columns">
+            <img class="listing-profile-pic" alt="profile pic" height='200'
+            src='{{this.urlImage}}'> 
+            <p class="profile-page">{{this.name}}</p>
+          </div>
+        <div class="nine columns">
+        <h3>{{this.origin}} <i class="fa fa-long-arrow-right arrow-nav-bar" aria-hidden="true"></i> {{this.destination}}</h3>
+        <h5><span class="bold-text">Departure date: </span>{{this.departureDate}}</h5>
+        <h5><span class="bold-text">Departure time: </span>{{this.departureTime}}</h5>
+        <button class="listing-button"><a class="seeMore" href="#" id=
           "{{this.listingID}}">See more</a></button>
-        </div>{{/each}}
-      </div>
+          </div>
+        </div>
+        {{/each}}
+      <!-- </div> -->
     </section>
     <script src="/javascript/formValidation.js">
     </script>
   </div>
-</div>
+</div> 
+
+
+
+
+<!-- <div class="row">
+    <div class="six columns">
+      <label for="exampleEmailInput">Your email</label>
+      <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
+    </div>
+    <div class="six columns">
+      <label for="exampleRecipientInput">Reason for contacting</label>
+      <select class="u-full-width" id="exampleRecipientInput">
+        <option value="Option 1">Questions</option>
+        <option value="Option 2">Admiration</option>
+        <option value="Option 3">Can I get your number?</option>
+      </select>
+    </div>
+  </div> -->
