@@ -15,10 +15,7 @@ body {
 
 /* Main Landing
 ========================================================================== */
-#arrow-main-page {
-	color: $reverse;
-	font-size: 1.2em;
-}
+
 
 .main-landing {
 	h1, h5, h6 {
@@ -193,6 +190,43 @@ button {
 		border-radius: 50%;
 		overflow: hidden;
 		border: 4px solid $placeholder-color;
+}
+
+/* Create Listings and profile Listings
+========================================================================== */
+
+.create-listings-container {
+	h3, h4, h5{
+		margin-bottom: 0;
+		font-family: $medium;
+	}
+	h3 {
+		margin-bottom: 10px;
+	}
+	h5 {
+		margin-bottom: 5px;
+	}
+	p {
+		margin-bottom: 5px;
+	}
+
+	#create-submit {
+	background: $primary-color;
+	border: none;
+	margin-top: 10px;
+	color: $reverse;
+	}
+	.container {
+		padding: 3%;
+	}
+
+	#create-listing-textbox {
+		width: 300px;
+	}
+}
+
+.profile-listings-container {
+	
 }
 
 
