@@ -78,7 +78,7 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
 	res.render('createListing', {layout: '_layout'})
 })
-
+//heidi is working here
 app.post('/createListing', function (req, res) {
   var listing = req.body
   var testingUserID = 13
@@ -90,13 +90,19 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    // console.log('listing: ', listing, 'typeof: ', typeof listing)
-    res.render('listingConfirm', {data: listing, layout: '_layout'})
+    res.render('listingConfirm', {data: pretifyListingDate(listing), layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
   })
 })
+
+function pretifyListingDate (listing) {
+    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
+    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
+    return listing
+}
+
 
 app.post('/main', function(req, res) {
 	var originFromMain = req.body.origin
@@ -166,6 +172,17 @@ app.post('/createListing', function (req, res) {
   })
   .catch(function (error) {
     console.log("error", error)
+  })
+})
+
+
+
+app.post('/moreCurrentListings', function(req, res) {
+  var origin = toTitleCase(req.body.origin)
+  var destination = toTitleCase(req.body.destination)
+  search(origin, destination)
+  .then(function(listings) {
+    res.json("data", pretifyDates(listings))
   })
 })
 
