@@ -122,6 +122,7 @@ module.exports = {
     .click('#updateProfile')
     .pause(1000)
     .assert.containsText('h1', 'Your profile has been updated...')
+    .end();
   }
 
 };
