@@ -242,13 +242,13 @@ app.post('/signup', function (req, res) {
 
 app.post ('/login', function(req,res) {
   knex('users').where({email: req.body.email})
-  .then (function(users){
-    var hashedLogin = users[0].hashedPassword
+  .then (function(data){
+    var hashedLogin = data[0].hashedPassword
     if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
-			// req.session.userId = users[0].id
       res.redirect('/')
     }
   })
+	
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
