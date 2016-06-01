@@ -23,7 +23,7 @@ $(document).ready(function(){
       var message = "Ooops...please enter a start point"
         document.getElementById("alert").innerHTML = message;
         return false;
-      }else{
+      } else {
           request
             .post('/moreCurrentListings')
             .send({ origin: origin, destination: destination })
@@ -34,7 +34,6 @@ $(document).ready(function(){
       }
   })
 
-
   $(".seeMore").click(function(e){
     e.preventDefault()
     var listingID = e.target.id
@@ -42,7 +41,8 @@ $(document).ready(function(){
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments:          listingUserAndCommentArray })  )
+      // console.log('listingUserAndCommentArray: ', listingUserAndCommentArray)
+      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
     })
   })
 
@@ -54,6 +54,7 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
+        // console.log('data (in commentSubmit): ', data)
         $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })

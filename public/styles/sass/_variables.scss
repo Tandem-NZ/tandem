@@ -12,8 +12,8 @@ $body: Gotham_thin, sans-serif;
 /* Colors
    ========================================================================== */
 
-// $primary-color: #23355b; //navy blue
-$primary-color: rgba(35,53,91,0.7);
+$primary-color: #23355b; //navy blue
+$primary-color-transparent: rgba(35,53,91,0.7);
 $secondary-color: #2a406d;
 $third-color: #314a80;
 
@@ -34,7 +34,7 @@ $primary-radius: 4px;
 .inputFullWidth, 
 #facebookButton{
 	width: 350px;
-	margin: 10px;
+	margin: 20px 5px;
 }
 
 #facebookButton {
@@ -73,6 +73,32 @@ $primary-radius: 4px;
 	color: $reverse;
 }
 
+form#locations.search {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+.search-bar {
+	// background: red;
+}
+
+/* footers
+   ========================================================================== */
+
+@mixin main-footer() {
+  color: $reverse;
+	font-size: 10px;
+	text-align: center;
+
+	clear: both;
+  vertical-align: middle;
+  line-height: normal;
+  margin: 0;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+
 /* utilities
    ========================================================================== */
 .center-content {
@@ -86,3 +112,12 @@ $primary-radius: 4px;
 .destination {
 	color: green;
 }
+
+#testing {
+	background: red;
+}
+
+#testing-two {
+	background: green;
+}
+
