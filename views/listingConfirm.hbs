@@ -1,4 +1,3 @@
-
 <header>
   <div id="logo">
     <a href="/">tandem.</a>
@@ -29,14 +28,20 @@
     <form class="search u-full-width" id="locations" name="searchForm"
     onsubmit="return validateForm()">
       <input class="inputFullWidth" id="origin" name="origin" placeholder=
-      "origin" type="text"><input class=
-      "inputFullWidth" id="destination" name="destination" placeholder=
-      "destination" type="text"> <button id="searchButton" name=
-      "searchButton">Find</button>
+      "origin" type="text"><input class="inputFullWidth" id="destination"
+      name="destination" placeholder="destination" type="text"> <button id=
+      "searchButton" name="searchButton">Find</button>
       <p id="alert"></p>
     </form>
   </div>
-  <div class="container u-cf"> <!-- wrapper -->
+  <div class="container u-cf">
+    <!-- wrapper -->
     <h1>Listing Confirmed!</h1>
-  </div> <!-- end wrapper -->
+    <ul>
+      <li>{{data.origin}} {{data.destination}}</li>
+      <li>departure date: {{data.departureDate}}</li>
+      <li>departure time: {{data.departureTime}}</li>
+      <li>description: {{data.description}}</li>
+    </ul><button><a href="/">Return to homepage</a></button>
+  </div><!-- end wrapper -->
 </div>
