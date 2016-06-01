@@ -139,7 +139,7 @@ module.exports = {
     .end();
   },
 
-  'Create a listing' : function(browser) {
+  'Create a listing > listing confirm page' : function(browser) {
     browser.url('http://localhost:3000/createListing')
     .waitForElementVisible('body', 1000)
     .setValue('#createListingOrigin', 'Gisborne')
