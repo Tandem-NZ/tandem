@@ -84,8 +84,10 @@ app.get('/createListing', function (req, res) {
 })
 //heidi is working here
 app.post('/createListing', function (req, res) {
+	// check out req.session.userId ,
+	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
-  var testingUserID = 13
+  var testingUserID = 2
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
@@ -239,9 +241,10 @@ app.post('/signup', function (req, res) {
 
 app.post ('/login', function(req,res) {
   knex('users').where({email: req.body.email})
-  .then (function(data){
-    var hashedLogin = data[0].hashedPassword
+  .then (function(users){
+    var hashedLogin = users[0].hashedPassword
     if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
+			// req.session.userId = users[0].id
       res.redirect('/')
     }
   })
