@@ -4,10 +4,12 @@
 @font-face { font-family: Gotham_black; src: url(../fonts/GOTHAM-BLACK.TTF);}
 @font-face { font-family: Gotham_medium; src: url(../fonts/GOTHAM-MEDIUM.TTF);}
 @font-face { font-family: Gotham_thin; src: url(../fonts/GOTHAM-LIGHT.TTF);}
+@font-face { font-family: Rene_Bieder; src: url(../fonts/Rene-Bieder.otf);}
 
 $bold: Gotham_black, sans-serif;
 $medium: Gotham_medium, sans-serif;
 $body: Gotham_thin, sans-serif;
+$logo: Rene_Bieder, sans-serif;
 
 /* Colors
    ========================================================================== */
@@ -27,6 +29,8 @@ $third-color: #314a80;
 // $third-color: #314a80;
 
 $background-color: #f1f1f1; //light-grey 
+
+$background-color2: #DCDCDC; //light-grey 
 
 $placeholder-color: #565a5c; //grey
 

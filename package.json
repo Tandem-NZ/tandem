@@ -4,8 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "postinstall": "npm run build",
     "start": "node server.js",
     "start-dev": "nodemon server.js",
+    "build": "browserify -t hbsfy ./client/index.js -o ./public/javascript/bundle.js -dv",
     "watch": "watchify -t hbsfy ./client/index.js -o ./public/javascript/bundle.js -dv",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "node tests/unit/* | tap-spec",
@@ -24,6 +26,7 @@
   "dependencies": {
     "bcrypt-node": "^0.1.0",
     "body-parser": "^1.15.1",
+    "browserify": "^13.0.1",
     "cookie-parser": "^1.4.2",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
