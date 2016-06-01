@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="1">
+            tests="3">
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-    tests="1" time="9.065" timestamp="Tue, 31 May 2016 23:58:06 GMT">
+    tests="3" time="28.91" timestamp="Wed, 01 Jun 2016 03:04:36 GMT">
   
-    <testcase name="Front page search" time="9.065" assertions="1">
+    <testcase name="Welcome page" time="7.297" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="Front page search" time="14.95" assertions="2">
+
+    
+
+    
+    </testcase>
+  
+    <testcase name="No search query error" time="6.665" assertions="2">
+
+    
 
     
     </testcase>
