@@ -85,7 +85,7 @@ app.get('/createListing', function (req, res) {
 //heidi is working here
 app.post('/createListing', function (req, res) {
   var listing = req.body
-  var testingUserID = 13
+  var testingUserID = 2
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
@@ -151,7 +151,7 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile==========================
 
 app.get('/profile', function(req, res){
-	var testUserID = 13
+	var testUserID = 2
 	knex('users'). where({userID: testUserID})
 	.then(function(data){
 		res.render('profile', {layout: '_layout'})
@@ -160,7 +160,7 @@ app.get('/profile', function(req, res){
 
 app.post('/profile', function (req, res) {
 	var profile = req.body
-	knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+	knex('users').where({userID: 2}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
