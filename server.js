@@ -168,8 +168,6 @@ app.post('/profile', function (req, res) {
 	})
 })
 
-
-
 app.post('/createListing', function (req, res) {
   knex('listings').insert(req.body)
   .then(function (data) {

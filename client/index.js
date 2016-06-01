@@ -10,6 +10,7 @@ var listingComment = require('../views/listingComment.hbs')
 var liftConfirm = require('../views/liftConfirm.hbs')
 var liftEnjoy = require('../views/liftEnjoy.hbs')
 var profile = require('../views/profile.hbs')
+var createListing = require('../views/createListing.hbs')
 
 $(document).ready(function(){
 
@@ -41,7 +42,6 @@ $(document).ready(function(){
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      // console.log('listingUserAndCommentArray: ', listingUserAndCommentArray)
       $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
     })
   })
@@ -67,18 +67,15 @@ $("body").on("click", "#requestRide", function(e){
 		 .send({listingID: listingID})
 		 .end(function(err, res) {
 		  	var data = res.body[0]
-				console.log("data: ", data)
 		   	$('body').html(liftConfirm({ data: data })
 				)
 			})
 })
 
   $("body").on("click", "#liftEnjoyButton", function(e){
-		console.log("fired!")
     e.preventDefault()
 		var listingID = $('#listing').attr('data-listingID')
     var description = $('#description').val()
-		console.log("listingID", listingID)
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })

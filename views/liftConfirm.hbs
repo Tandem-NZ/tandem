@@ -1,15 +1,64 @@
+<header>
+  <div id="logo">
+    <a href="/">tandem.</a>
+  </div>
+  <nav class="primary-nav">
+    <ul>
+      <li class="active">
+        <a href="/howItWorks">How it works</a>
+      </li>
+      <li class="active">
+        <a href="/createListing">Create a Listing</a>
+      </li>
+      <li>
+        <a href="/profile">Update your profile</a>
+      </li>
+      <li>
+        <a href="/signin">Sign in</a>
+      </li>
+      <li>
+        <a href="/signup" id="signup-btn-nav">Sign up</a>
+      </li>
+    </ul><!-- phone nav button -->
+    <button class="nav-button">toggle menu</button>
+  </nav>
+</header><!-- end of header -->
+<div class="create-listings-container u-full-width">
+  <div class="search-bar center-content">
+    <form class="search u-full-width" id="locations" name="searchForm"
+    onsubmit="return validateForm()">
+      <input class="inputFullWidth" id="origin" name="origin" placeholder=
+      "origin" type="text"><input class=
+      "inputFullWidth" id="destination" name="destination" placeholder=
+      "destination" type="text"> <button id="searchButton" name=
+      "searchButton">Find</button>
+      <p id="alert"></p>
+    </form>
+</div>
 <div id="liftInfo">
-<ul>
-	<li>Origin: {{data.origin}}</li>
-	<li>Destination: {{data.destination}}</li>
-	<li>Drivers Name: {{data.name}}</li>
-	<li>Drivers email {{data.email}}</li>
-	<li>Date of Departure:{{data.departureDate}}</li>
-	<li>Time of Departure:{{data.departureTime}}</li>
-	<input type='hidden' id={{data.listingID}} >
-</ul>
+  <div class="container u-cf">
+      <!-- wrapper -->
+      <h3>You've made a ride request..</h3>
+      <br>
+      <h5></h5>
 
-<p>Message to driver (optional): </p>
-<input type="text" id="description" name="description">
-</div><br>
+  <div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
+      <div class="row">
+        <div class="twelve columns" style='text-align:left'>
+        </div>
+
+        <div class="nine columns" >
+          <h4>{{data.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{data.destination}}</span></h4>
+          <p><span class="bold-text">Drivers Name:</span> {{data.name}}</p>
+          <p><span class="bold-text">Drivers email:</span> {{data.email}}</p>
+          <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
+          <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
+          <input type='hidden' id={{data.listingID}} >
+        </div>
+      </div>
+  <br>
+  <p>Message to driver (optional): </p>
+  <input type="text" id="description" name="description">
+  <br>
 <button id="liftEnjoyButton" class="rideConfirm">Confirm Your Ride</button>
+</div>
