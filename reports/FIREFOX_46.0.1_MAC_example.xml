@@ -1,64 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="8">
+            tests="1">
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-    tests="8" time="48.41" timestamp="Wed, 01 Jun 2016 06:42:45 GMT">
+    tests="1" time="5.705" timestamp="Wed, 01 Jun 2016 07:02:03 GMT">
   
-    <testcase name="Welcome page" time="4.679" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Front page search" time="10.53" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Search page, only destination searched" time="5.627" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="No search query error" time="2.428" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Origin and destination search &gt; to singleListing page" time="6.699" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="6.812" assertions="3">
-
-    
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Search bar on currentListings" time="5.499" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Create a listing button" time="6.128" assertions="2">
+    <testcase name="How it works button" time="5.705" assertions="2">
 
     
 

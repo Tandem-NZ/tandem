@@ -85,5 +85,14 @@ module.exports = {
     .end();
   },
 
+  'How it works button' : function(browser) {
+    browser.url('http://localhost:3000/')
+    .waitForElementVisible('body', 1000)
+    .click('a[href="/howItWorks"]')
+    .pause(1000)
+    .assert.urlEquals('http://localhost:3000/howItWorks')
+    .end();
+  },
+
 
 };
