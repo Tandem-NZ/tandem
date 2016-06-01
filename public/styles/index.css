@@ -407,6 +407,11 @@ body {
     bottom: 0px;
     width: 100%; }
 
+#sign-up-heading {
+  font-family: Gotham_medium, sans-serif;
+  color: #fff;
+  margin-bottom: 15px; }
+
 /* Current Listings
 ========================================================================== */
 .current-listings-container {
@@ -511,3 +516,43 @@ section #newRides {
   font-size: 1.5em;
   font-family: Gotham_medium, sans-serif;
   color: #fff; }
+
+/* how it works
+========================================================================== */
+.how-it-works h1 {
+  text-align: center; }
+
+.how-it-works-item {
+  text-align: center; }
+  .how-it-works-item h5 {
+    font-family: Gotham_thin, sans-serif;
+    text-decoration: underline; }
+
+#how-it-works-search-icon, #how-it-works-travel-icon, #how-it-works-location-icon {
+  font-size: 6em;
+  margin-bottom: 20px;
+  color: #23355b; }
+
+/* enjoy ride
+========================================================================== */
+.enjoy-your-ride {
+  margin-top: 50px;
+  width: 550px;
+  padding: 20px;
+  background: rgba(35, 53, 91, 0.7);
+  border-radius: 4px;
+  color: #fff; }
+  .enjoy-your-ride h5 {
+    font-family: Gotham_medium, sans-serif; }
+  .enjoy-your-ride #returnHome {
+    background: #314a80;
+    border: none;
+    color: #fff; }
+
+.lift-enjoy-page {
+  background: url(../images/bg007.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%; }
