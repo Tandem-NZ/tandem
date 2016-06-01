@@ -82,7 +82,7 @@ app.get('/currentListings', function(req, res){
 app.get('/createListing', function (req, res) {
 	res.render('createListing', {layout: '_layout'})
 })
-
+//heidi is working here
 app.post('/createListing', function (req, res) {
   var listing = req.body
   var testingUserID = 13
@@ -94,13 +94,19 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    // console.log('listing: ', listing, 'typeof: ', typeof listing)
-    res.render('listingConfirm', {data: listing, layout: '_layout'})
+    res.render('listingConfirm', {data: pretifyListingDate(listing), layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
   })
 })
+
+function pretifyListingDate (listing) {
+    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
+    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
+    return listing
+}
+
 
 app.post('/main', function(req, res) {
 	var originFromMain = req.body.origin
@@ -116,7 +122,6 @@ app.get('/singleListing', function(req, res) {
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
-    // console.log('data: (inside singleListing route)', data)
     res.json(data, pretifyDates(data))
   })
 })
@@ -173,6 +178,17 @@ app.post('/createListing', function (req, res) {
   })
 })
 
+
+
+app.post('/moreCurrentListings', function(req, res) {
+  var origin = toTitleCase(req.body.origin)
+  var destination = toTitleCase(req.body.destination)
+  search(origin, destination)
+  .then(function(listings) {
+    res.json("data", pretifyDates(listings))
+  })
+})
+
 //===================Ride Confirmation====================
 
 app.post('/liftConfirm', function (req, res){
@@ -198,15 +214,6 @@ app.post('/liftEnjoy', function(req, res) {
 	})
 })
 
-// app.post('/liftEnjoy', function(req, res) {
-//   var description = req.body.description
-//   var listingID = req.body.listingID
-//   knex('ride_requests').insert({listingID: listingID, description: description})
-//   knex('listings').where({listingID: listingID}).update({ride_requested: true})
-//   .then (function(data){
-//     res.json(data)
-//   })
-// })
 
 //===================Authorisation Code===================
 
@@ -294,5 +301,3 @@ passport.deserializeUser(function(obj, callback) {
 app.listen(port, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
-
-module.exports = app;
