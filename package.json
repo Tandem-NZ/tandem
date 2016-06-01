@@ -44,8 +44,11 @@
     "to-title-case": "^1.0.0"
   },
   "devDependencies": {
+    "cheerio": "^0.20.0",
     "forever": "^0.15.2",
     "nightwatch": "^0.9.1",
+    "supertest": "^1.2.0",
+    "tape": "^4.5.1",
     "watchify": "^3.7.0"
   }
 }
