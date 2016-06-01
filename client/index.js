@@ -13,8 +13,6 @@ var profile = require('../views/profile.hbs')
 
 $(document).ready(function(){
 
-
-
   $("#searchButton").click(function(e) {
     e.preventDefault()
     var rawOrigin = $("#origin").val()
@@ -39,7 +37,6 @@ $(document).ready(function(){
 
   $(".seeMore").click(function(e){
     e.preventDefault()
-    // console.log("guess who was clicked")
     var listingID = e.target.id
     request
     .get('/singleListing?listingID=' + listingID )
@@ -62,37 +59,24 @@ $(document).ready(function(){
       })
   })
 
-
 $("body").on("click", "#requestRide", function(e){
 	e.preventDefault()
-	console.log('hitting request a ride listener')
 	var listingID = $('#listing').attr('data-listingID')
-	console.log('This data.listingID', listingID)
 	request
 		 .post('/liftConfirm')
-		 .send({listingID: listingID}) 
+		 .send({listingID: listingID})
 		 .end(function(err, res) {
-			 console.log(res.body)
 		  	var data = res.body
-		   	$('body').html(liftConfirm({
-						origin: data.origin,
-						destination: data.destination,
-						date: data.departureDate,
-						time: data.departureTime,
-						listingID: data.listingID
-					})
-					// console.log('This data.listingID', data.listingID)
-
+				console.log('this is data2', data)
+		   	$('body').html(liftConfirm({data:data})
 				)
 			})
 })
-
 
   $("body").on("click", ".rideConfirm", function(e){
     e.preventDefault()
     var listingID = e.target.class
     var description = $('#description').val()
-    console.log("e.target.class: ", listingID)
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
@@ -102,55 +86,3 @@ $("body").on("click", "#requestRide", function(e){
   })
 
 }) // close doc ready
-
-
-// 1. pure serverside rendering - nice and simple
-  // take out ajax
-  // res.render hbs
-
-// 2. initial render serverside
-  // POST Listing/id/comment
-    // respond with all comments associetd with listing id
-    // respond with specific comment
-    //  sperately trigger a GET listing/id/comments
-  // client side render listing with its comments
-
-// 3. pure client-side
-
-
-// its working but is it using form action (html5 forms)?
-// what's happening with the ajax?
-
-// server
-// respond with the comment we just inserted
-
-
-// $('#requestRide').click(function(e) {
-//   console.log('Hi! Im request ride')
-//   e.preventDefault()
-//   request
-//   .get('/liftConfirm')
-//   .send({origin: origin})
-//   .end(function(err, res) {
-//     var data = res.body
-//     $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
-//       date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
-//     })
-// })
-
-
-// $("body").on("click", "#requestRide", function(e){
-//   // console.log("FIRED!")
-//   e.preventDefault()
-//   console.log("e", e)
-//   var listingID = e.target.id
-//   // console.log("listingID: ", listingID)
-//   request
-//   .get('/liftConfirm')
-//   .send({listingID: listingID })
-//   .end(function(err, res) {
-//     // console.log("res.body: ", res.body)
-//     var data = res.body
-//     $('body').html(liftConfirm({origin: data.origin, destination: data.destination, date: data.departureDate, time: data.departureTime, listingID: data.listingID}))
-//     })
-// })
