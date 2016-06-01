@@ -1,12 +1,16 @@
-@media only screen and (min-width: 24em) {
+@media only screen and (min-width: 400px) {
 
 /* Buttons on primary nav
 ========================================================================== */
-	.primary-nav {
-		a {
-			text-align: center;
-		}
-		a#signup-btn-nav{
+.main-landing {
+	margin-top: 55px;
+}
+
+.primary-nav {
+	a {
+		text-align: center;
+	}
+	a#signup-btn-nav{
 		border: 1px solid $reverse;
 		border-radius: 25px;
 		line-height: 0px;
@@ -16,57 +20,65 @@
 		-moz-transition: background-color 0.5s ease;
 		-o-transition: background-color 0.5s ease;
 		transition: background-color 0.5s ease;
-		}
-		a#signup-btn-nav:hover{
+	}
+	a#signup-btn-nav:hover{
 		text-decoration: none;
 		font-family: $body;
 		background: $third-color;
 		// border: 1px solid rgba(255,255,255, 0.5);
-		}
+	}
+}
+
+header, nav, main {
+	width: 100%;
+	margin: auto;
+}
+
+header {
+
+	#logo {
+		margin-left: 3%;
 	}
 
-	header, nav, main {
-		width: 100%;
-		margin: auto;
+	#logo a {
+		line-height: 75px;
+	}
+}
+
+nav {
+
+	ul {
+		float: right;
+		width: auto;
+		margin-right: 3%;
+	}
+	ul li {
+		float: left;
+		list-style-type: none;
+		line-height: 75px;
+		margin-left: 35px;
 	}
 
-	header {
+	ul li a {
+		display: block;
+		color: $menu-text-color;
+		text-decoration: none;
+		font-family: $body;
+		cursor: pointer;
 
-		#logo {
-			margin-left: 3%;
-		}
-
-		#logo a {
-			line-height: 75px;
-		}
 	}
-	
-	nav {
-
-		ul {
-			float: right;
-			width: auto;
-			margin-right: 3%;
-		}
-		ul li {
-			float: left;
-			list-style-type: none;
-			line-height: 75px;
-			margin-left: 35px;
-		}
-		
-		ul li a {
-			display: block;
-			color: $menu-text-color;
-			text-decoration: none;
-			font-family: $body;
-			cursor: pointer;
-			
-		}
-		ul li a:hover {
-			font-family: $medium;
-		}
+	ul li a:hover {
+		font-family: $medium;
+	}
 
 
 	} // end of navigation
 } //end of desktop view
+
+// remote default margin
+ul {
+	margin-bottom: 0px;
+	li {
+		margin: 0px;
+}
+}

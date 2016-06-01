@@ -1,15 +1,18 @@
 <h1>Find a passenger to travel with</h1>
 <h2>Create a Listing below</h2>
-
 <div>
-<form action="/createListing" method="post">
-  <input type='text' placeholder="origin" name='origin' autofocus>Origin</input><br>
-  <input type='text' placeholder="destination" name='destination'>Destination</input><br>
+  <form action="/createListing" method="post">
+    <input autofocus="" name='origin' placeholder="origin" type=
+    'text'>Origin<br>
+    <input name='destination' placeholder="destination" type=
+    'text'>Destination<br>
     When are you leaving?<br>
-
-Date: <input type="date" placeholder="departure date" name='departureDate'></input><br>
-Time:  <input type="time" placeholder="departure time" name='departureTime'></input><br>
-Description: <input type='description' placeholder="description" name='description'></input><br>
-  <input type='submit' value='submit'></input><br>
-</form>
+    Date: <input name='departureDate' placeholder="departure date" type=
+    "date"><br>
+    Time: <input name='departureTime' placeholder="departure time" type=
+    "time"><br>
+    Description: <input name='description' placeholder="description" type=
+    'description'><br>
+    <input type='submit' value='submit'><br>
+  </form>
 </div>

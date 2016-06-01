@@ -1,20 +1,43 @@
-<div class="sign-in center-content container u-cf">
-	<div class="signInContainer">
-
-		<h5>Sign in with email</h5>
-		<form action='/login' method='POST'>
-			<input class="inputFullWidth" type='text' placeholder="email" name='email' autofocus></input>
-			<br>
-			<input class="inputFullWidth" type='password' placeholder="password" name='password'></input>
-			<br>
-			<input class="inputFullWidth sign-up-button" type='submit' value='sign in'></input>
-		</form>
-
-		<h5>Sign in with facebook</h5>
-		<div id="facebookButton">
-			<a href="/auth/facebook"><p><i class="fa fa-facebook" aria-hidden="true"></i> continue with Facebook</p></a>
+<div class="login-background">
+	<header>
+		<div id="logo">
+			<a href="/">tandem.</a>
 		</div>
-		<div id="no-account-footer"><p>Don't have an account yet? <a href='#'>Sign Up</a></p></div>
+		<nav class="primary-nav">
+			<ul>
+				<li class="active"><a href="/howItWorks">How it works</a></li>
+				<li class="active"><a href="/createListing">Create a Listing</a></li>
+				<li><a href="/profile">Update your profile</a></li>
+				<li><a href="/signin">Sign in</a></li>
+				<li><a id="signup-btn-nav" href="/signup">Sign up</a></li>
+			</ul>
+			<!-- phone nav button -->
+			<button class="nav-button">toggle menu</button>
+		</nav>
+	</header> <!-- end of header -->
 
+	<div class="sign-in container center-content u-cf">
+		<div class="signInContainer">
+
+			<h5>Sign in with email</h5>
+			<form action='/login' method='POST'>
+				<input class="inputFullWidth" type='text' placeholder="email" name='email' autofocus></input>
+				<br>
+				<input class="inputFullWidth" type='password' placeholder="password" name='password'></input>
+				<br>
+				<input class="inputFullWidth sign-up-button" type='submit' value='sign in'></input>
+			</form>
+
+			<h5>Sign in with facebook</h5>
+			<div id="facebookButton">
+				<a href="/auth/facebook"><p><i class="fa fa-facebook" aria-hidden="true"></i> continue with Facebook</p></a>
+			</div>
+			<div id="no-account-footer"><p>Don't have an account yet? <a href='#'>Sign Up</a></p></div>
+		</div>
 	</div>
+
+	<footer id=footer>
+	 <p>Copyright © 2016 Tandem, Kotare EDA.</p>
+	</footer> <!-- end of footer -->
+
 </div>
