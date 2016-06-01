@@ -81,7 +81,12 @@ app.get('/currentListings', function(req, res){
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
 	.then(function(listings){
-		res.render('./currentListings/currentListings', {layout: '_layout' , listing: pretifyDates(listings)})
+		if (!req.session.userId){
+			res.redirect('/signin')
+		}
+		else {
+			res.render('./currentListings/currentListings', {layout: '_layout' , listing: pretifyDates(listings)})			
+		}
 	})
 })
 
@@ -165,11 +170,15 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile==========================
 
 app.get('/profile', function(req, res){
-	var testUserID = 2
-	knex('users'). where({userID: testUserID})
-	.then(function(data){
-		res.render('profile', {layout: '_layout'})
-	})
+	if (!req.session.userId){
+		res.redirect('/signin')
+	}
+	else {
+		knex('users'). where({userID: req.session.userID})
+		.then(function(data){
+			res.render('profile', {layout: '_layout'})
+		})
+	}
 })
 
 app.post('/profile', function (req, res) {
