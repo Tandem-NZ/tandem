@@ -72,7 +72,8 @@ module.exports = {
     .setValue('#destination', 'Hamilton')
     .click('#searchButton')
     .pause(1000)
-    .assert.containsText('h4', 'Kaeo - Hamilton')
+    .assert.containsText('h3', 'Kaeo ')
+    .assert.containsText('h3', ' Hamilton')
     .end();
   },
 
@@ -85,5 +86,31 @@ module.exports = {
     .end();
   },
 
+  'How it works button' : function(browser) {
+    browser.url('http://localhost:3000/')
+    .waitForElementVisible('body', 1000)
+    .click('a[href="/howItWorks"]')
+    .pause(1000)
+    .assert.urlEquals('http://localhost:3000/howItWorks')
+    .end();
+  },
+
+  'Update your profile button' : function(browser) {
+    browser.url('http://localhost:3000/')
+    .waitForElementVisible('body', 1000)
+    .click('a[href="/profile"]')
+    .pause(1000)
+    .assert.urlEquals('http://localhost:3000/profile')
+    .end();
+  },
+
+  // 'See more' : function(browser) { //this test is not passing in firefox for some reason, but it works in chrome!
+  //   browser.url('http://localhost:3000/currentListings?origin=Cromwell&destination=Nightcaps')
+  //   .waitForElementVisible('a[class="seeMore"]', 10000)
+  //   .pause(10000)
+  //   .click('a[class="seeMore"]')
+  //   .pause(10000)
+  //   .assert.visible('button')
+  // }
 
 };
