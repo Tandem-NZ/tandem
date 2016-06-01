@@ -205,7 +205,8 @@ app.post('/liftConfirm', function (req, res){
 app.post('/liftEnjoy', function(req, res) {
 	var description = req.body.description
 	var listingID = req.body.listingID
-	knex('ride_requests').insert({listingID,  description})
+	console.log("listingID: ",listingID)
+	knex('ride_requests').insert({listingID:listingID, description:description})
 	.then (function()  {
 		knex('listings').where({listingID: listingID}).update({ride_requested: true})
 	})
