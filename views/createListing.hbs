@@ -40,17 +40,17 @@
     <h5>Create a Listing below</h5>
     <div>
       <form action="/createListing" method="post">
-        <input autofocus="" name='origin' placeholder="origin" type=
+        <input id="createlistingOrigin" autofocus="" name='origin' placeholder="origin" type=
         'text'>
-        <input name='destination' placeholder="destination" type=
+        <input id="createListingDestination" name='destination' placeholder="destination" type=
         'text'>
         <p>When are you leaving?</p>
-        Date: <input name='departureDate' placeholder="departure date" type=
+        Date: <input id="createListingDepartureDate" name='departureDate' placeholder="departure date" type=
         "date"><br>
-        Time: <input name='departureTime' placeholder="departure time" type=
+        Time: <input id="createListingDepartureTime" name='departureTime' placeholder="departure time" type=
         "time"><br>
         Description: <br>
-        <textarea name='description' cols="40" id="create-listing-textbox" rows="8" placeholder="description"></textarea>
+        <textarea id="createListingDescription" name='description' cols="40" id="create-listing-textbox" rows="8" placeholder="description"></textarea>
         <div>
           <input id="create-submit" type='submit' value='submit'><br>
         </div>
