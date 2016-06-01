@@ -22,15 +22,3 @@ test('posting on homepage redirects to currentListings + origin', function(t) {
     t.end()
   })
 })
-
-test('if no origin or destination is provided by user, error message appears', function(t) {
-  var noSearchQuery = { origin: "", destination: "" }
-  request(app)
-  .post('/main')
-  .send(noSearchQuery)
-  .end(function(err, res) {
-    $ = cheerio.load(res.text)
-    t.equal($('p').text(), "Ooops...please enter a start point", "error text appended to page" )
-    t.end()
-  })
-})
