@@ -112,8 +112,20 @@ module.exports = {
   //   .pause(10000)
   //   .assert.visible('button')
   // },
+  //
+  // 'Update profile submit button' : function(browser) {
+  //   browser.url('http://localhost:3000/profile')
+  //   .waitForElementVisible('body', 1000)
+  //   .setValue('#profile-licence', 5)
+  //   .setValue('#profile-age', 26)
+  //   .setValue('#gender', 'F')
+  //   .click('#updateProfile')
+  //   .pause(1000)
+  //   .assert.containsText('h1', 'Your profile has been updated...')
+  //   .end();
+  // },
 
-  'Update profile submit button' : function(browser) {
+  'Profile confirm, return to homepage button' : function(browser) {
     browser.url('http://localhost:3000/profile')
     .waitForElementVisible('body', 1000)
     .setValue('#profile-licence', 5)
@@ -122,7 +134,8 @@ module.exports = {
     .click('#updateProfile')
     .pause(1000)
     .assert.containsText('h1', 'Your profile has been updated...')
-    .end();
+    .click('a[href="/"]')
+    .assert.urlEquals('http://localhost:3000/')
   }
 
 };
