@@ -60,7 +60,8 @@ module.exports = {
     .pause(1000)
     .click('#findButton')
     .pause(1000)
-    .assert.containsText('h4', 'Taumarunui - Te Kuiti')
+    .assert.containsText('h3', 'Taumarunui')
+    .assert.containsText('h3', ' Te Kuiti')
     .end();
   },
 
