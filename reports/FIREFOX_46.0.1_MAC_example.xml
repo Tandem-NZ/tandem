@@ -5,58 +5,58 @@
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-    tests="8" time="55.60" timestamp="Wed, 01 Jun 2016 05:55:17 GMT">
+    tests="8" time="47.42" timestamp="Wed, 01 Jun 2016 06:03:46 GMT">
   
-    <testcase name="Welcome page" time="7.551" assertions="2">
+    <testcase name="Welcome page" time="4.535" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Front page search" time="12.54" assertions="2">
+    <testcase name="Front page search" time="10.57" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Search page, only destination searched" time="6.271" assertions="2">
+    <testcase name="Search page, only destination searched" time="5.047" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="No search query error" time="2.445" assertions="2">
+    <testcase name="No search query error" time="2.481" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Origin and destination search &gt; to singleListing page" time="7.746" assertions="2">
+    <testcase name="Origin and destination search &gt; to singleListing page" time="6.466" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="7.753" assertions="2">
+    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="8.511" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Search bar on currentListings" time="5.976" assertions="2">
+    <testcase name="Search bar on currentListings" time="5.618" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Create a listing button" time="5.317" assertions="2">
+    <testcase name="Create a listing button" time="4.198" assertions="2">
 
     
 
