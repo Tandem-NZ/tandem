@@ -12,6 +12,10 @@
   font-family: Gotham_thin;
   src: url(../fonts/GOTHAM-LIGHT.TTF); }
 
+@font-face {
+  font-family: Rene_Bieder;
+  src: url(../fonts/Rene-Bieder.otf); }
+
 /* Colors
    ========================================================================== */
 /* blue */
@@ -97,7 +101,7 @@ nav {
 
 header #logo {
   float: left;
-  font-family: Gotham_black, sans-serif;
+  font-family: Rene_Bieder, sans-serif;
   font-size: 2em;
   color: #fff; }
 
