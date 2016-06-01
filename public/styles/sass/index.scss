@@ -1,39 +1,51 @@
 @import "variables";
 @import "mobile";
-@import "desktop";
 @import "mobilemenu";
+@import "desktop";
 
 
 body {
 	font-family: $body;
-	background: $primary-color;
+	background: $background-color;
 	color: $body-text-color;
 }
 
 
 
+
 /* Main Landing
-   ========================================================================== */
+========================================================================== */
+#arrow-main-page {
+	color: $reverse;
+	font-size: 1.2em;
+}
+
 .main-landing {
 	h1, h5, h6 {
 		color: $reverse;
 	}
 	h1 {
 		font-family: $bold;
+		margin-bottom: 0px;
 	}
 	h5 {
 		font-family: $medium;
 	}
 
 }
-body {
-	background: $secondary-color;
-	// background: url(../images/bg004.jpg) no-repeat center center fixed; 
- //  -webkit-background-size: cover;
- //  -moz-background-size: cover;
- //  -o-background-size: cover;
- //  background-size: cover;
- //  height: 100%;
+.full-image-backgroud {
+	// background: $secondary-color;
+	background: url(../images/bg004.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+
+	#footer {
+	@include main-footer();
+	}
+
 }
 
 // .full-image-backgroud {
@@ -45,9 +57,26 @@ body {
 //   height: 100%;
 // }
 
+
+
 /* Sign in
-   ========================================================================== */
+========================================================================== */
+.login-background {
+	background: url(../images/bg003.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+
+#footer {
+		@include main-footer();
+	}
+}
+
 .sign-in {
+	margin-top: 55px;
+	width: 100%;
 	h5, p {
 		color: $reverse;
 		margin-bottom: 5px;
@@ -58,66 +87,113 @@ body {
 	a {
 		text-decoration: none;
 	}
+
+}
+.signInContainer {
+	background: rgba(0, 0, 0, 0.5);
+	// background: rgba(255, 255, 255, 0.2);
+	border-radius: $primary-radius;
+	padding: 20px;
+	margin: 0 auto;
+	display: inline-block;
 }
 
 /* Sign up
-   ========================================================================== */
+========================================================================== */
+.sign-up-background {
+	background: url(../images/bg001.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
 
-.sign-in {
-	h5, p {
-		color: $reverse;
-		margin-bottom: 5px;
+	.sign-up {
+		margin-top: 55px;
+		h5, p {
+			color: $reverse;
+			margin-bottom: 5px;
+		}
 	}
-}
+	#footer {
+		@include main-footer()
+	}
+}	
 
 /* Current Listings
-   ========================================================================== */
+========================================================================== */
 .current-listings-container {
 	background: $background-color;
-	// height: 100%;
+	height: 100%;
+	form {
+		background: $secondary-color;
+	}
 }
 
 
 #newRides {
-	// background: red;
 	padding: 4%;
 
 	h4, h5, h6, p {
-		margin-bottom: 0;
+	margin-bottom: 0;
 	}
 	h4 {
 		font-family: $medium;
 		color: #23355b;
-	}
-}
-.search-bar {
-	// background: green;
+		}
 }
 
 .listing {
 	background: $background-color;
 	padding: 3%;
-	// margin-bottom: 20px;
-	// border-radius: $primary-radius;
 	border-bottom: 1px solid #bdbdbd;
 
-	button {
-		background: $primary-color;
-		border: none;
-		margin-top: 10px;
-	}
+button {
+	background: $primary-color;
+	border: none;
+	margin-top: 10px;
+}
 	a {
-		text-decoration: none;
-		color: $reverse;
+	text-decoration: none;
+	color: $reverse;
 	}
+}
+.listing:last-child {
+	border-bottom: none;
 }
 
 /* Single listings
-   ========================================================================== */
+========================================================================== */
 .single-listing-container {
+
+	h3 {
+		font-family: $medium;
+	}
+
 	h5 {
 		margin-top: 20px;
 		font-family: $medium;
+		margin-bottom: 10px;
+	}
+	.commentContainer {
+		margin-top: 20px;	
+			#commentReply {
+				width: 90%;
+			}
+	}
+
+	.singleListHeading {
+		margin-bottom: 20px;
 	}
 }
+
+.profile-image {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		overflow: hidden;
+		border: 4px solid $placeholder-color;
+}
+
+
 
