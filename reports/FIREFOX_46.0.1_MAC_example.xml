@@ -5,32 +5,115 @@
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
+<<<<<<< HEAD
+<<<<<<< HEAD
+    tests="8" time="48.41" timestamp="Wed, 01 Jun 2016 06:42:45 GMT">
+  
+    <testcase name="Welcome page" time="4.679" assertions="2">
+=======
+    tests="8" time="61.13" timestamp="Wed, 01 Jun 2016 08:36:21 GMT">
+  
+    <testcase name="Welcome page" time="6.316" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+=======
     tests="4" time="20.48" timestamp="Wed, 01 Jun 2016 08:54:26 GMT">
   
     <testcase name="Search bar on currentListings" time="6.999" assertions="3">
+>>>>>>> 9b6aca6c6b4b76f64ad76a1ee1769469a983f5bf
 
     
+
+    
+<<<<<<< HEAD
+    </testcase>
+  
+<<<<<<< HEAD
+    <testcase name="Front page search" time="10.53" assertions="2">
+=======
+    <testcase name="Front page search" time="11.05" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
 
     
 
     
     </testcase>
   
+<<<<<<< HEAD
+    <testcase name="Search page, only destination searched" time="5.627" assertions="2">
+=======
+    <testcase name="Search page, only destination searched" time="7.329" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+
+    
+
+    
+    </testcase>
+  
+<<<<<<< HEAD
+    <testcase name="No search query error" time="2.428" assertions="2">
+=======
+    <testcase name="No search query error" time="2.437" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+
+    
+
+    
+    </testcase>
+  
+<<<<<<< HEAD
+    <testcase name="Origin and destination search &gt; to singleListing page" time="6.699" assertions="2">
+=======
+    <testcase name="Origin and destination search &gt; to singleListing page" time="12.00" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+
+    
+=======
+>>>>>>> 9b6aca6c6b4b76f64ad76a1ee1769469a983f5bf
+
+    
+    </testcase>
+  
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="6.812" assertions="3">
+=======
+    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="8.905" assertions="3">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+
+    
+=======
     <testcase name="Create a listing button" time="4.541" assertions="2">
+>>>>>>> 9b6aca6c6b4b76f64ad76a1ee1769469a983f5bf
 
     
 
     
     </testcase>
   
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <testcase name="Search bar on currentListings" time="5.499" assertions="2">
+=======
+    <testcase name="Search bar on currentListings" time="8.825" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+=======
     <testcase name="How it works button" time="4.602" assertions="2">
+>>>>>>> 9b6aca6c6b4b76f64ad76a1ee1769469a983f5bf
 
     
 
     
     </testcase>
   
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <testcase name="Create a listing button" time="6.128" assertions="2">
+=======
+    <testcase name="Create a listing button" time="4.271" assertions="2">
+>>>>>>> 4174131339ac916a6abf2944557bc358687030ab
+=======
     <testcase name="Update your profile button" time="4.340" assertions="2">
+>>>>>>> 9b6aca6c6b4b76f64ad76a1ee1769469a983f5bf
 
     
 

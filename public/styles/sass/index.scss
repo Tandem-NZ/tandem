@@ -165,7 +165,7 @@ body {
 	border-bottom: 1px solid #bdbdbd;
 
 button {
-	background: $primary-color;
+	background: $third-color;
 	border: none;
 	margin-top: 10px;
 }
@@ -230,7 +230,7 @@ button {
 	}
 
 	#create-submit {
-	background: $primary-color;
+	background: $third-color;
 	border: none;
 	margin-top: 10px;
 	color: $reverse;
@@ -254,4 +254,10 @@ section {
 	}
 }
 
-
+/* Create Listings 
+========================================================================== */
+ #alert {
+	font-size: 1.5em;
+	font-family: $medium;
+	color: $reverse;
+ }
