@@ -1,48 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="10">
+            tests="4">
 
   <testsuite name="example"
     errors="0" failures="0" hostname="" id="" package="example" skipped="0"
-    tests="10" time="60.28" timestamp="Wed, 01 Jun 2016 08:28:47 GMT">
+    tests="4" time="20.48" timestamp="Wed, 01 Jun 2016 08:54:26 GMT">
   
-    <testcase name="Welcome page" time="5.563" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Front page search" time="12.00" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Search page, only destination searched" time="5.600" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="No search query error" time="2.437" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Origin and destination search &gt; to singleListing page" time="6.390" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Origin and destination search &gt; to singleListing page with correct results" time="6.747" assertions="3">
+    <testcase name="Search bar on currentListings" time="6.999" assertions="3">
 
     
 
@@ -51,28 +16,21 @@
     
     </testcase>
   
-    <testcase name="Search bar on currentListings" time="7.657" assertions="2">
+    <testcase name="Create a listing button" time="4.541" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="Create a listing button" time="4.182" assertions="2">
+    <testcase name="How it works button" time="4.602" assertions="2">
 
     
 
     
     </testcase>
   
-    <testcase name="How it works button" time="4.622" assertions="2">
-
-    
-
-    
-    </testcase>
-  
-    <testcase name="Update your profile button" time="5.085" assertions="2">
+    <testcase name="Update your profile button" time="4.340" assertions="2">
 
     
 
