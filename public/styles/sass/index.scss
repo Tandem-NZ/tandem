@@ -15,10 +15,7 @@ body {
 
 /* Main Landing
 ========================================================================== */
-#arrow-main-page {
-	color: $reverse;
-	font-size: 1.2em;
-}
+
 
 .main-landing {
 	h1, h5, h6 {
@@ -144,6 +141,25 @@ body {
 }
 
 .listing {
+	h5 {
+		font-size: 1.2em;
+		.bold-text {
+			font-family: $medium;
+		}
+	}
+
+.profile-page {
+			font-family: $medium;
+		}
+
+.listing-profile-pic {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid $background-color2;
+	overflow: hidden;
+}
+
 	background: $background-color;
 	padding: 3%;
 	border-bottom: 1px solid #bdbdbd;
@@ -188,12 +204,54 @@ button {
 }
 
 .profile-image {
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		overflow: hidden;
-		border: 4px solid $placeholder-color;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid $background-color2;
+	overflow: hidden;
 }
 
+/* Create Listings 
+========================================================================== */
+
+.create-listings-container {
+	h3, h4, h5{
+		margin-bottom: 0;
+		font-family: $medium;
+	}
+	h3 {
+		margin-bottom: 10px;
+	}
+	h5 {
+		margin-bottom: 5px;
+	}
+	p {
+		margin-bottom: 5px;
+	}
+
+	#create-submit {
+	background: $primary-color;
+	border: none;
+	margin-top: 10px;
+	color: $reverse;
+	}
+	.container {
+		padding: 3%;
+	}
+
+	#create-listing-textbox {
+		width: 300px;
+	}
+}
+
+.profile-listings-container {
+	
+}
+
+section {
+		#newRides{
+		padding-top: 0px !important;
+	}
+}
 
 
