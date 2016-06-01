@@ -1,43 +1,66 @@
-<form class=search id="locations" name="updatedProfile" onsubmit="return updatedProfile()">
-  <input class="inputFullWidth" type="text" name="origin" id="origin" placeholder="origin">
-  <input class="inputFullWidth" type="text" name="destination" id="destination" placeholder="destination">
-  <button name="searchButton" id="searchButton">Find</button>
-  <p id="alert"></p>
-</form>
+<header>
+  <div id="logo">
+    <a href="/">tandem.</a>
+  </div>
+  <nav class="primary-nav">
+    <ul>
+      <li class="active">
+        <a href="/howItWorks">How it works</a>
+      </li>
+      <li class="active">
+        <a href="/createListing">Create a Listing</a>
+      </li>
+      <li>
+        <a href="/profile">Update your profile</a>
+      </li>
+      <li>
+        <a href="/signin">Sign in</a>
+      </li>
+      <li>
+        <a href="/signup" id="signup-btn-nav">Sign up</a>
+      </li>
+    </ul>
+    <!-- phone nav button  -->
+    <button class="nav-button">toggle menu</button>
 
-<h1>Update your profile</h1>
+</nav>
+</header>
+<div class="create-listings-container u-full-width">
+  <div class="search-bar center-content">
+    <form class="search u-full-width" id="locations" name="searchForm"
+    onsubmit="return validateForm()">
+      <input class="inputFullWidth" id="origin" name="origin" placeholder=
+      "origin" type="text"><input class=
+      "inputFullWidth" id="destination" name="destination" placeholder=
+      "destination" type="text"> <button id="searchButton" name=
+      "searchButton">Find</button>
+      <p id="alert"></p>
+    </form>
+  </div>
+  <div class="container u-cf"> <!-- wrapper -->
 
-
-<div class="container">
-<h3>Your details</h3>
-  {{#each listing}}
-    <div class="listing">
-      <h3>Hi {{this.name}} (name)</p>
+<h3>Update your profile</h3>
+<h5>... your details</h5>
+  <div class="container">
+  </div>
+  <div>
+      <form action="/profile" method="post">
+          How long have you had your drivers licence? : <input autofocus="" placeholder="enter years" name='driverLicenceDuration'></input>
+          <br>
+          <p>Please enter your age:
+          <input autofocus="" placeholder="enter years" name='age'></input>
+          </p>
+          <p>Enter your gender :
+          <input autofocus="" type="gender" placeholder="gender" name='gender'></input>
+          </p>
+          <p>Tell us a little about yourself:</p>
+          <textarea name='aboutMe' cols="40" id="create-listing-textbox" rows="8" placeholder="tell us about yourself"></textarea>
+          <div>
+          </p>
+          <input type='submit' value='submit' id='updateProfile'></input><br>
+      </form>
     </div>
-  {{/each}}
 </div>
-<div>
-
-  <form action="/profile" method="post">
-      <p>How long have you had your drivers licence :
-     <input type="driverLicenceDuration" placeholder="enter years" name='driverLicenceDuration'></input></p>
-
-     <p>Please enter your age:
-     <input type="age" placeholder="enter age" name='age'></input>
-     </p>
-
-     <p>Enter your gender :
-     <input type="gender" placeholder="gender" name='gender'></input>
-     </p>
-
-     <p>Tell us a little about yourself:
-     <input type='aboutMe' placeholder="about me" name='aboutMe'></input>
-     </p>
-
-      <input type='submit' value='submit' id='updateProfile'></input><br>
-  </form>
 </div>
 
-
-
-<script src="/javascript/bundle.js"></script>
+<script src="/javascript/bundle.js"></script> -->

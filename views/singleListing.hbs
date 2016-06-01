@@ -2,6 +2,7 @@
   <div class="eight columns">
   <div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
       <h3 class="singleListHeading">{{data.name}}'s listing</h3>
+       <div class="profile-image"><img height='200' src='{{data.urlImage}}'></div>
       <h4>{{data.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{data.destination}}</span></h4>
       <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
       <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
@@ -11,7 +12,6 @@
       <p>I've held my driver's licence for {{data.driverLicenceDuration}} years</p>
       <h5>Description</h5>
       <p>{{data.description}}</p>
-      <div class="profile-image"><img height='200' src='{{data.urlImage}}'></div>
     </div>
   </div>
 

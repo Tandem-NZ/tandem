@@ -4,20 +4,33 @@
 @font-face { font-family: Gotham_black; src: url(../fonts/GOTHAM-BLACK.TTF);}
 @font-face { font-family: Gotham_medium; src: url(../fonts/GOTHAM-MEDIUM.TTF);}
 @font-face { font-family: Gotham_thin; src: url(../fonts/GOTHAM-LIGHT.TTF);}
+@font-face { font-family: Rene_Bieder; src: url(../fonts/Rene-Bieder.otf);}
 
 $bold: Gotham_black, sans-serif;
 $medium: Gotham_medium, sans-serif;
 $body: Gotham_thin, sans-serif;
+$logo: Rene_Bieder, sans-serif;
 
 /* Colors
    ========================================================================== */
+
+	/* blue */
 
 $primary-color: #23355b; //navy blue
 $primary-color-transparent: rgba(35,53,91,0.7);
 $secondary-color: #2a406d;
 $third-color: #314a80;
 
+	/* teal */
+	
+// $primary-color: #359895; 
+// $primary-color-transparent: #3fb0ac;
+// $secondary-color: #359895;
+// $third-color: #314a80;
+
 $background-color: #f1f1f1; //light-grey 
+
+$background-color2: #DCDCDC; //light-grey 
 
 $placeholder-color: #565a5c; //grey
 
@@ -25,6 +38,12 @@ $menu-text-color: #fff; //white
 
 $reverse: #fff;
 $body-text-color: #141823;
+
+
+
+
+
+
 
 /* INPUTS AND BUTTONS
    ========================================================================== */
@@ -78,8 +97,12 @@ form#locations.search {
 	padding-bottom: 0px;
 }
 .search-bar {
-	// background: red;
+	background: $primary-color;
 }
+
+
+
+
 
 /* footers
    ========================================================================== */
@@ -97,6 +120,8 @@ form#locations.search {
   bottom: 0px;
   width: 100%;
 }
+
+
 
 
 /* utilities
