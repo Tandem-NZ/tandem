@@ -141,12 +141,31 @@ body {
 }
 
 .listing {
+	h5 {
+		font-size: 1.2em;
+		.bold-text {
+			font-family: $medium;
+		}
+	}
+
+.profile-page {
+			font-family: $medium;
+		}
+
+.listing-profile-pic {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid $background-color2;
+	overflow: hidden;
+}
+
 	background: $background-color;
 	padding: 3%;
 	border-bottom: 1px solid #bdbdbd;
 
 button {
-	background: $primary-color;
+	background: $third-color;
 	border: none;
 	margin-top: 10px;
 }
@@ -185,14 +204,14 @@ button {
 }
 
 .profile-image {
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		overflow: hidden;
-		border: 4px solid $placeholder-color;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid $background-color2;
+	overflow: hidden;
 }
 
-/* Create Listings and profile Listings
+/* Create Listings 
 ========================================================================== */
 
 .create-listings-container {
@@ -211,7 +230,7 @@ button {
 	}
 
 	#create-submit {
-	background: $primary-color;
+	background: $third-color;
 	border: none;
 	margin-top: 10px;
 	color: $reverse;
@@ -229,5 +248,16 @@ button {
 	
 }
 
+section {
+		#newRides{
+		padding-top: 0px !important;
+	}
+}
 
-
+/* Create Listings 
+========================================================================== */
+ #alert {
+	font-size: 1.5em;
+	font-family: $medium;
+	color: $reverse;
+ }

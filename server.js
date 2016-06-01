@@ -153,7 +153,7 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile==========================
 
 app.get('/profile', function(req, res){
-	var testUserID = 13
+	var testUserID = 2
 	knex('users'). where({userID: testUserID})
 	.then(function(data){
 		res.render('profile', {layout: '_layout'})
@@ -162,7 +162,7 @@ app.get('/profile', function(req, res){
 
 app.post('/profile', function (req, res) {
 	var profile = req.body
-	knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+	knex('users').where({userID: 2}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
@@ -193,11 +193,11 @@ app.post('/moreCurrentListings', function(req, res) {
 
 //===================Ride Confirmation====================
 
+
 app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
-	return displayListingUserCommentData (listingID)
-	.then (function(data) {
-		var rideInfo = data
+		return displayListingUserCommentData(listingID)
+		.then(function(rideInfo) {
 		 res.json(pretifyDates(rideInfo))
 	})
 })
@@ -207,7 +207,8 @@ app.post('/liftConfirm', function (req, res){
 app.post('/liftEnjoy', function(req, res) {
 	var description = req.body.description
 	var listingID = req.body.listingID
-	knex('ride_requests').insert({listingID,  description})
+	console.log("listingID: ",listingID)
+	knex('ride_requests').insert({listingID:listingID, description:description})
 	.then (function()  {
 		knex('listings').where({listingID: listingID}).update({ride_requested: true})
 	})
@@ -304,3 +305,5 @@ passport.deserializeUser(function(obj, callback) {
 app.listen(port, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
+
+module.exports = app;

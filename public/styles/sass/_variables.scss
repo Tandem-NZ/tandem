@@ -4,10 +4,12 @@
 @font-face { font-family: Gotham_black; src: url(../fonts/GOTHAM-BLACK.TTF);}
 @font-face { font-family: Gotham_medium; src: url(../fonts/GOTHAM-MEDIUM.TTF);}
 @font-face { font-family: Gotham_thin; src: url(../fonts/GOTHAM-LIGHT.TTF);}
+@font-face { font-family: Rene_Bieder; src: url(../fonts/Rene-Bieder.otf);}
 
 $bold: Gotham_black, sans-serif;
 $medium: Gotham_medium, sans-serif;
 $body: Gotham_thin, sans-serif;
+$logo: Rene_Bieder, sans-serif;
 
 /* Colors
    ========================================================================== */
@@ -27,6 +29,8 @@ $third-color: #314a80;
 // $third-color: #314a80;
 
 $background-color: #f1f1f1; //light-grey 
+
+$background-color2: #DCDCDC; //light-grey 
 
 $placeholder-color: #565a5c; //grey
 
@@ -73,6 +77,7 @@ $primary-radius: 4px;
 
 .inputFullWidth.sign-up-button:hover {
 	background: #4e69a2;
+	color: $reverse;
 }
 
 
@@ -96,9 +101,43 @@ form#locations.search {
 	background: $primary-color;
 }
 
+.profile-input {
+	display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  box-sizing: border-box; 
 
+	font-family: $body;
 
+}
 
+#searchButton, #commentSubmit {
+	background: $third-color;
+	color: $reverse;
+	border: none;
+}
+
+input#updateProfile {
+	background: $third-color;
+	color: $reverse;
+	border: none;
+}
+#requestRide {
+	background: $secondary-color;
+	color: $reverse;
+	border: none;
+
+}	
 
 /* footers
    ========================================================================== */

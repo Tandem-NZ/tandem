@@ -1,30 +1,50 @@
-<div class="single-listing-container row">
-  <div class="eight columns">
-  <div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
-      <h3 class="singleListHeading">{{data.name}}'s listing</h3>
-      <h4>{{data.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{data.destination}}</span></h4>
-      <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
-      <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
-      <p><span class="bold-text">Driver:</span> {{data.name}}</p>
-      <p><span class="bold-text">Gender:</span> {{data.gender}}</p>
-      <p><span class="bold-text">Age:</span> {{data.age}}</p>
-      <p>I've held my driver's licence for {{data.driverLicenceDuration}} years</p>
-      <h5>Description</h5>
-      <p>{{data.description}}</p>
-      <div class="profile-image"><img height='200' src='{{data.urlImage}}'></div>
-    </div>
-  </div>
+<div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
+    <h3 class="singleListHeading">{{data.name}}'s listing</h3>
+        <div class="row">
+          <div class="three columns" style='text-align:left'>
+             <div class="profile-image"><img height='200' src='{{data.urlImage}}'></div>
+          </div>
 
-  <div class="commentContainer">
-    <textarea cols="40" id="commentReply" rows="8" ></textarea>
+            <div class="nine columns" >
+              <h4>{{data.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{data.destination}}</span></h4>
+              <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
+              <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
+              <p><span class="bold-text">Driver:</span> {{data.name}}</p>
+              <p><span class="bold-text">Gender:</span> {{data.gender}}</p>
+              <p><span class="bold-text">Age:</span> {{data.age}}</p>
+              <p>I've held my driver's licence for <strong>{{data.driverLicenceDuration}} years</strong></p>
+            </div>
+        </div>
+  </div>
+<!-- end of photo and details -->
+<div class="row">
+  <div class="ten columns" style='text-align:left'>
+    <h5>Description</h5>
+    <p>{{data.description}}</p>
+  </div>
+</div>
+<br>
+<!-- end of description  -->
+  <div class="row">
+    <div class="six columns">
+      <div class="commentContainer">
+      <textarea cols="40" id="commentReply" rows="10" ></textarea>
+      </div>
+    </div>
+
+  <div class="six columns">
     <button  id="commentSubmit">Comment</button>
+  </div>
+</div>
     <div id="appendedComments">
       <div>
-       <ul>
+       <ul style = "list-style-type: none">
         {{#each comments}}
+        <div id="commentBorder">
          <li>Comment: {{this.comment}}</li>
          <li style="list-style: none">Name: {{this.name}}</li>
          <li style="list-style: none">Comment: {{this.comment}}</li>
+       </div>
         {{/each}}
       </ul>
       </div>
