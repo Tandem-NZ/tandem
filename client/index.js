@@ -54,7 +54,6 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
-        // console.log('data (in commentSubmit): ', data)
         $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })
@@ -68,7 +67,6 @@ $("body").on("click", "#requestRide", function(e){
 		 .send({listingID: listingID})
 		 .end(function(err, res) {
 		  	var data = res.body
-				console.log('this is data2', data)
 		   	$('body').html(liftConfirm({data:data})
 				)
 			})
