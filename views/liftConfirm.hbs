@@ -1,15 +1,15 @@
 <div id="liftInfo">
-Origin:
-{{origin}}
-Destination:
-{{destination}}
-Date of Departure:
-{{date}}
-Time of Departure:
-{{time}}
-Listing ID:
-{{listingID}}
-Message to driver:
-<input type="text" id="description" name="description">Type message here</input>
+	{{#each data}}
+<ul>
+	<li>Origin: {{this.origin}}</li>
+	<li>Destination: {{this.destination}}</li>
+	<li>Drivers Name: {{this.name}}</li>
+	<li>Drivers email {{this.email}}</li>
+	<li>Date of Departure:{{this.departureDate}}</li>
+	<li>Time of Departure:{{this.departureTime}}</li>
+</ul>
+{{/each}}
+<p>Message to driver (optional): </p>
+<input type="text" id="description" name="description">
 </div><br>
-<button id="{{listingID}}" class="rideConfirm">Confirm Your Ride</button>
+<button id="requestRide" class="rideConfirm">Confirm Your Ride</button>

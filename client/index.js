@@ -36,7 +36,6 @@ $(document).ready(function(){
 
   $(".seeMore").click(function(e){
     e.preventDefault()
-    console.log("guess who was clicked")
     var listingID = e.target.id
     request
     .get('/singleListing?listingID=' + listingID )
@@ -49,7 +48,7 @@ $(document).ready(function(){
 
   $("body").on("click", "#commentSubmit", function(e){
     var comment = $('#commentReply').val()
-    var listingID = $(this).attr('data-listingID')
+    var listingID = $('#listing').attr('data-listingID')
     request
       .post('/listings/' + listingID + '/comment')
       .send({ comment: comment, listingID: listingID })
@@ -61,28 +60,29 @@ $(document).ready(function(){
       })
   })
 
-  $('#requestRide').click(function(e) {
-    console.log('Hi! Im request ride')
-    e.preventDefault()
-    request
-    .get('/liftConfirm')
-    .send({origin: origin})
-    .end(function(err, res) {
-      var data = res.body
-      $('body').html(liftConfirm({origin: res.body.origin, destination: res.body.destination,
-        date: res.body.departureDate, time: res.body.departureTime, listingID: res.body.listingID}))
-      })
-  })
+$("body").on("click", "#requestRide", function(e){
+	e.preventDefault()
+	var listingID = $('#listing').attr('data-listingID')
+	request
+		 .post('/liftConfirm')
+		 .send({listingID: listingID})
+		 .end(function(err, res) {
+		  	var data = res.body
+				console.log('this is data2', data)
+		   	$('body').html(liftConfirm({data:data})
+				)
+			})
+})
 
-  $('.rideConfirm').click(function(e) {
+  $("body").on("click", ".rideConfirm", function(e){
     e.preventDefault()
-    var listingID = e.target.id
+    var listingID = e.target.class
     var description = $('#description').val()
     request
       .post('/liftEnjoy')
       .send({listingID: listingID, description: description })
       .end(function (err, res) {
-        $('body').html(liftEnjoy())
+        $('body').html(liftEnjoy({name: "lizzie"}))
       })
   })
 
