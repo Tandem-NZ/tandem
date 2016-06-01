@@ -117,6 +117,12 @@ body {
 	}
 }	
 
+#sign-up-heading {
+	font-family: $medium;
+	color: $reverse;
+	margin-bottom: 15px;
+}
+
 /* Current Listings
 ========================================================================== */
 .current-listings-container {
@@ -261,3 +267,59 @@ section {
 	font-family: $medium;
 	color: $reverse;
  }
+
+ /* how it works
+========================================================================== */
+
+.how-it-works {
+	h1 {
+		text-align: center;
+	}
+}
+
+.how-it-works-item {
+	text-align: center;
+		h5 {
+			font-family: $body;
+			text-decoration: underline;
+		}
+
+}
+
+#how-it-works-search-icon, #how-it-works-travel-icon, #how-it-works-location-icon {
+	font-size: 6em;
+	margin-bottom: 20px;
+	color: $primary-color;
+}
+
+ /* enjoy ride
+========================================================================== */
+
+.enjoy-your-ride {
+
+	margin-top: 50px;
+	h5 {
+		font-family: $medium;
+	}
+	width: 550px;
+	padding: 20px;
+	background: $primary-color-transparent;
+	border-radius: $primary-radius;
+	color: $reverse;
+
+	#returnHome {
+		background: $third-color;
+		border: none;
+		color: $reverse;
+	}
+}
+
+.lift-enjoy-page{
+	background: url(../images/bg007.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100%;
+
+}	
