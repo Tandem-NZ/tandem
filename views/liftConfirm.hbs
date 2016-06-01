@@ -7,9 +7,11 @@
 	<li>Drivers email {{this.email}}</li>
 	<li>Date of Departure:{{this.departureDate}}</li>
 	<li>Time of Departure:{{this.departureTime}}</li>
+
+	<hidden id="listingID">{{this.listingID}}</hidden>
 </ul>
 {{/each}}
 <p>Message to driver (optional): </p>
 <input type="text" id="description" name="description">
 </div><br>
-<button id="requestRide" class="rideConfirm">Confirm Your Ride</button>
+<button id="liftEnjoyButton" class="rideConfirm">Confirm Your Ride</button>
