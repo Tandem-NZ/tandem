@@ -30,25 +30,27 @@
       <div class="commentContainer">
       <textarea cols="40" id="commentReply" rows="10" ></textarea>
       </div>
+       <div class="single-listing-buttons">
+      <button  id="commentSubmit">Comment</button>
+      <button id= "requestRide" name="requestRide" >Request a Ride</button>
+    </div>
     </div>
 
   <div class="six columns">
-    <button  id="commentSubmit">Comment</button>
   </div>
 </div>
     <div id="appendedComments">
       <div>
-       <ul style = "list-style-type: none">
+       <ul id="comment-list">
         {{#each comments}}
         <div id="commentBorder">
          <li>Comment: {{this.comment}}</li>
-         <li style="list-style: none">Name: {{this.name}}</li>
-         <li style="list-style: none">Comment: {{this.comment}}</li>
+         <li style="list-style: none"><span class="single-listing-bold">Name: </span> {{this.name}}</li>
+         <li style="list-style: none"><span class="single-listing-bold">Comment: </span>{{this.comment}}</li>
        </div>
         {{/each}}
       </ul>
       </div>
     </div>
   </div>
-	<button id= "requestRide" name="requestRide" >Request a Ride</button>
 </div> <!-- end single list container -->
