@@ -28,17 +28,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(require('cookie-parser')())
-app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
+app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-// app.use(session({
-// 	secret: 'Ahahahaha!! Mumble, mumble..',
-// 	saveUninitialized: true,
-// 	resave: true,
-// 	store: store
-// }))
-
 
 function search(origin, destination){
 	var searchObject = {origin: origin}
@@ -69,7 +61,8 @@ function pretifyDates(array) {
 }
 
 app.get('/', function(req, res){
-	res.render('main', { layout: '_layout' })
+	console.log(req.session.userId)
+	res.render('main', { userID: req.session.userID, layout: '_layout' })
 })
 
 app.get('/howItWorks', function(req,res){
@@ -93,7 +86,7 @@ app.get('/currentListings', function(req, res){
 //============Create a Listing================
 //
 app.get('/createListing', function (req, res) {
-	if (!req.session.userId){
+	if (!req.session.userId) {
 		res.redirect('/signin')
 	}
 	else {
@@ -176,7 +169,7 @@ app.get('/profile', function(req, res){
 	else {
 		knex('users'). where({userID: req.session.userID})
 		.then(function(data){
-			res.render('profile', {layout: '_layout'})
+			res.render('profile', {userID: req.session.userID, layout: '_layout'})
 		})
 	}
 })
