@@ -118,7 +118,6 @@ app.get('/singleListing', function(req, res) {
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
-    // console.log('data: (inside singleListing route)', data)
     res.json(data, pretifyDates(data))
   })
 })
@@ -211,15 +210,6 @@ app.post('/liftEnjoy', function(req, res) {
 	})
 })
 
-// app.post('/liftEnjoy', function(req, res) {
-//   var description = req.body.description
-//   var listingID = req.body.listingID
-//   knex('ride_requests').insert({listingID: listingID, description: description})
-//   knex('listings').where({listingID: listingID}).update({ride_requested: true})
-//   .then (function(data){
-//     res.json(data)
-//   })
-// })
 
 //===================Authorisation Code===================
 
@@ -307,5 +297,3 @@ passport.deserializeUser(function(obj, callback) {
 app.listen(3000, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
-
-module.exports = app;
