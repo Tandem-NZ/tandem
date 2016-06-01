@@ -14,7 +14,7 @@ Postgres database :
 
 You'll also need:
 - `.env` with :
-  - facebook ids
+  - facebook clientID & facebook clientSecret
   -
 
 - JDK for running [nightwatch](http://nightwatchjs.org/guide): http://www.oracle.com/technetwork/java/javase/downloads/index.html
