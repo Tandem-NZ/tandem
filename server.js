@@ -8,7 +8,6 @@ var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
 var cookie =require('cookie-parser')
 var port = process.env.PORT || 3000
-var dotenv = require('dotenv')
 var toTitleCase = require('to-title-case')
 var moment = require('moment')
 moment().format();
@@ -16,6 +15,11 @@ moment().format();
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
 var knex = Knex(knexConfig[env])
+
+if (env == 'development') {
+  var dotenv = require('dotenv')
+  dotenv.load()
+}
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
@@ -26,7 +30,7 @@ app.use(require('cookie-parser')())
 app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
-dotenv.load()
+
 
 function search(origin, destination){
 	var searchObject = {origin: origin}
@@ -81,7 +85,7 @@ app.get('/createListing', function (req, res) {
 //heidi is working here
 app.post('/createListing', function (req, res) {
   var listing = req.body
-  var testingUserID = 13
+  var testingUserID = 2
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
@@ -140,14 +144,14 @@ app.post('/moreCurrentListings', function(req, res) {
 	var destination = toTitleCase(req.body.destination)
 	search(origin, destination)
 	.then(function(listings) {
-		res.json("data", pretifyDates(listings))
+		res.json(pretifyDates(listings))
 	})
 })
 
 // ===============Create a profile==========================
 
 app.get('/profile', function(req, res){
-	var testUserID = 13
+	var testUserID = 2
 	knex('users'). where({userID: testUserID})
 	.then(function(data){
 		res.render('profile', {layout: '_layout'})
@@ -156,7 +160,7 @@ app.get('/profile', function(req, res){
 
 app.post('/profile', function (req, res) {
 	var profile = req.body
-	knex('users').where({userID: 10}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+	knex('users').where({userID: 2}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
@@ -201,7 +205,8 @@ app.post('/liftConfirm', function (req, res){
 app.post('/liftEnjoy', function(req, res) {
 	var description = req.body.description
 	var listingID = req.body.listingID
-	knex('ride_requests').insert({listingID,  description})
+	console.log("listingID: ",listingID)
+	knex('ride_requests').insert({listingID:listingID, description:description})
 	.then (function()  {
 		knex('listings').where({listingID: listingID}).update({ride_requested: true})
 	})
@@ -294,6 +299,8 @@ passport.deserializeUser(function(obj, callback) {
 
 //============== Auth Ends ============================
 
-app.listen(3000, function () {
+app.listen(port, function () {
 	console.log('catching a lift on ' + port  + ' !!')
 })
+
+module.exports = app;
