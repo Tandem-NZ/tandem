@@ -35,13 +35,26 @@
     </form>
   </div>
   <div class="container u-cf">
-    <!-- wrapper -->
-    <h1>Listing Confirmed!</h1>
-    <ul>
-      <li>From :{{data.origin}} to {{data.destination}}</li>
-      <li>departure date: {{data.departureDate}}</li>
-      <li>departure time: {{data.departureTime}}</li>
-      <li>description: {{data.description}}</li>
-    </ul><button><a href="/">Return to homepage</a></button>
-  </div><!-- end wrapper -->
-</div>
+
+    <h3>Listing confirmed!</h3>
+    <br>
+    <h5></h5>
+
+    <div class="singleListing" id="listing" data-listingId="{{data.listingID}}">
+    <div class="row">
+      <div class="twelve columns" style='text-align:left'>
+      </div>
+
+      <div class="nine columns" >
+        <h4>{{data.origin}} <i aria-hidden="true" class="fa fa-long-arrow-right"></i> <span class="destination">{{data.destination}}</span></h4>
+        <p><span class="bold-text">Date:</span> {{data.departureDate}}</p>
+        <p><span class="bold-text">Time:</span> {{data.departureTime}}</p>
+        <p><span class="bold-text">Description:</span> {{data.description}}</p>
+        <input type='hidden' id={{data.listingID}}
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <button id="listing-confirm-button"><a href="/">Return to homepage</a></button>
+    </div>
