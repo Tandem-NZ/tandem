@@ -97,6 +97,25 @@ input#updateProfile {
   color: #fff;
   border: none; }
 
+.ride-listing {
+  background: #2a406d;
+  color: #fff;
+  border: none; }
+
+#liftEnjoyButton {
+  background: #2a406d;
+  color: #fff;
+  border: none; }
+
+#listing-confirm-button {
+  background: #2a406d;
+  color: #fff;
+  border: none;
+  margin-top: 10px; }
+  #listing-confirm-button a {
+    text-decoration: none;
+    color: #fff; }
+
 /* footers
    ========================================================================== */
 /* utilities
