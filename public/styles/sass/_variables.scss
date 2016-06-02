@@ -139,6 +139,29 @@ input#updateProfile {
 
 }	
 
+.ride-listing {
+	background: $secondary-color;
+	color: $reverse;
+	border: none;
+}
+#liftEnjoyButton {
+	background: $secondary-color;
+	color: $reverse;
+	border: none;
+}
+
+#listing-confirm-button {
+	background: $secondary-color;
+	color: $reverse;
+	border: none;
+	margin-top: 10px;
+	a {
+	text-decoration: none;
+	color: $reverse;
+	}
+	
+}
+
 /* footers
    ========================================================================== */
 
