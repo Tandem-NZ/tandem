@@ -69,6 +69,7 @@ app.get('/howItWorks', function(req,res){
 })
 
 app.get('/currentListings', function(req, res){
+  console.log('currentListings get route')
 	var origin = toTitleCase(req.query.origin)
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
@@ -120,10 +121,12 @@ app.post('/main', function(req, res) {
 })
 
 app.get('/singleListing', function(req, res) {
+  console.log('hitting singleListing route (from see more button?)')
   var listingID = req.query.listingID
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
+    console.log('data: ', data)
     res.json(data, pretifyDates(data))
   })
 })
@@ -246,7 +249,7 @@ app.post ('/login', function(req,res) {
       res.redirect('/')
     }
   })
-	
+
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
