@@ -121,12 +121,12 @@ app.post('/main', function(req, res) {
 })
 
 app.get('/singleListing', function(req, res) {
-  console.log('hitting singleListing route (from see more button?)')
+  // console.log('hitting singleListing route (from see more button?)')
   var listingID = req.query.listingID
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
-    console.log('data: ', data)
+    data = pretifyDates(data)
     res.json(data)
   })
   .catch(function(error){res.status(418); console.log(error)})
