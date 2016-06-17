@@ -37,7 +37,6 @@ function search(origin, destination){
 	if(destination){
 		searchObject.destination = destination
 	}
-
 	return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
@@ -52,12 +51,18 @@ function displayListingUserCommentData (listingID){
 	select('*')
 }
 
-function pretifyDates(array) {
+function prettifyDates(array) {
 	return array.map(function(listing){
 		listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
 		listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
 		return listing
 	})
+}
+
+function prettifyListingDate (listing) {
+    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
+    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
+    return listing
 }
 
 app.get('/', function(req, res){
@@ -74,7 +79,7 @@ app.get('/currentListings', function(req, res){
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
 	.then(function(listings){
-		res.render('./currentListings/currentListings', {layout: '_layout' , listing: pretifyDates(listings)})
+		res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
 	})
 })
 
@@ -97,19 +102,12 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    res.render('listingConfirm', {data: pretifyListingDate(listing), layout: '_layout'})
+    res.render('listingConfirm', {data: prettifyListingDate(listing), layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
   })
 })
-
-function pretifyListingDate (listing) {
-    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
-    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
-    return listing
-}
-
 
 app.post('/main', function(req, res) {
 	var originFromMain = req.body.origin
@@ -121,18 +119,15 @@ app.post('/main', function(req, res) {
 })
 
 app.get('/singleListing', function(req, res) {
-  // console.log('hitting singleListing route (from see more button?)')
   var listingID = req.query.listingID
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
-    data = pretifyDates(data)
+    data = prettifyDates(data)
     res.json(data)
   })
   .catch(function(error){res.status(418); console.log(error)})
 })
-
-// pretifyDates(data)
 
 app.post('/listings/:id/comment', function(req, res){
   var comment = req.body.comment
@@ -152,7 +147,7 @@ app.post('/moreCurrentListings', function(req, res) {
 	var destination = toTitleCase(req.body.destination)
 	search(origin, destination)
 	.then(function(listings) {
-		res.json(pretifyDates(listings))
+		res.json(prettifyDates(listings))
 	})
 })
 
@@ -191,7 +186,7 @@ app.post('/moreCurrentListings', function(req, res) {
   var destination = toTitleCase(req.body.destination)
   search(origin, destination)
   .then(function(listings) {
-    res.json("data", pretifyDates(listings))
+    res.json("data", prettifyDates(listings))
   })
 })
 
@@ -202,7 +197,7 @@ app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
 		return displayListingUserCommentData(listingID)
 		.then(function(rideInfo) {
-		 res.json(pretifyDates(rideInfo))
+		 res.json(prettifyDates(rideInfo))
 	})
 })
 
