@@ -129,6 +129,7 @@ app.get('/singleListing', function(req, res) {
     console.log('data: ', data)
     res.json(data, pretifyDates(data))
   })
+  .catch(function(error){console.log(error)})
 })
 
 app.post('/listings/:id/comment', function(req, res){
