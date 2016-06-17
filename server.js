@@ -127,12 +127,10 @@ app.get('/singleListing', function(req, res) {
   .then(function(data) {
     data[0].listingID = listingID
     console.log('data: ', data)
-    res.json(data)
+    res.json(pretifyDates(data))
   })
   .catch(function(error){res.status(418); console.log(error)})
 })
-
-// pretifyDates(data)
 
 app.post('/listings/:id/comment', function(req, res){
   var comment = req.body.comment
