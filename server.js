@@ -100,19 +100,18 @@ app.get('/createListing', function (req, res) {
 	}
 })
 
-//heidi is working here
 app.post('/createListing', function (req, res) {
 	// check out req.session.userID ,
 	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
-  var testingUserID = 12
+  // var testingUserID = 12
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
     departureDate: listing.departureDate,
     departureTime: listing.departureTime,
     description: listing.description,
-    userID: testingUserID})
+    userID: req.session.userID})
   .then(function (data) {
     res.render('listingConfirm', {data: prettifyListingDate(listing), layout: '_layout'})
   })
@@ -250,11 +249,11 @@ app.post('/signup', function (req, res) {
     .then(function(data){
       knex('users').where({email: req.body.email})
       // console.log('req.body.email: (signup route)', req.body.email)
-    })
-    .then(function(data){
-      console.log('data from db query (signup route)', data)
-      req.session.userID = data[0].userID
-      res.redirect('/')
+      .then(function(data){
+        console.log('data from db query (signup route)', data)
+        req.session.userID = data[0].userID
+        res.redirect('/')
+      })
     })
     .catch(function(error){
       console.log("error:", error)
