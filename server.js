@@ -66,7 +66,7 @@ function prettifyListingDate (listing) {
 }
 
 app.get('/', function(req, res){
-	console.log(req.session.userID)
+	console.log('req.session.userID in / route: ', req.session.userID)
 	res.render('main', { userID: req.session.userID, layout: '_layout' })
 })
 
@@ -248,6 +248,12 @@ app.post('/signup', function (req, res) {
     var hash = bcrypt.hashSync( req.body.password )
     knex('users').insert({ email: req.body.email, hashedPassword: hash })
     .then(function(data){
+      knex('users').where({email: req.body.email})
+      // console.log('req.body.email: (signup route)', req.body.email)
+    })
+    .then(function(data){
+      console.log('data from db query (signup route)', data)
+      req.session.userID = data[0].userID
       res.redirect('/')
     })
     .catch(function(error){
