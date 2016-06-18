@@ -52,6 +52,7 @@ $(document).ready(function(){
 
   $("body").on("click", "#commentSubmit", function(e){
     var comment = $('#commentReply').val()
+    console.log('this is "e": ', e)
     var listingID = $('#listing').attr('data-listingID')
     request
       .post('/listings/' + listingID + '/comment')

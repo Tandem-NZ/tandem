@@ -143,10 +143,18 @@ app.get('/singleListing', function(req, res) {
 
 
 app.post('/listings/:id/comment', function(req, res){
-  var comment = req.body.comment
-  var listingID = req.params.id
-  knex('comments')
-    .insert({listingID: listingID, commenterID: req.session.userID, comment: comment })
+  if (!req.session.userID) {
+    res.redirect('/signin')
+  }
+  else {
+    var comment = req.body.comment
+    var listingID = req.params.id
+    knex('comments')
+      .insert({
+        listingID: listingID,
+        commenterID: req.session.userID,
+        comment: comment
+       })
     .then(function(){
       return displayListingUserCommentData(listingID)
     })
@@ -158,6 +166,7 @@ app.post('/listings/:id/comment', function(req, res){
       //   console.log('data: (in comment route 2nd then)', data)
       // })
     })
+  }
 })
 
 app.post('/moreCurrentListings', function(req, res) {
