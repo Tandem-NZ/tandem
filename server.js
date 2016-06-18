@@ -93,7 +93,7 @@ app.post('/createListing', function (req, res) {
 	// check out req.session.userId ,
 	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
-  var testingUserID = 2
+  var testingUserID = 12
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
