@@ -42,8 +42,11 @@ $(document).ready(function(){
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      console.log('listingUserAndCommentArray: ', listingUserAndCommentArray, 'typeof: ', typeof listingUserAndCommentArray)
-      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
+      var listingView = singleListing({
+        data: listingUserAndCommentArray[0][0],
+        comments: listingUserAndCommentArray[1]
+      })
+      $('#newRides').html( listingView )
     })
   })
 

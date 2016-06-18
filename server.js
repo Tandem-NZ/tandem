@@ -143,14 +143,9 @@ app.get('/singleListing', function(req, res) {
       console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
       res.json(listingUserData)
     })
-  // .then(function(data) {
-    // data[0].listingID = listingID
-    // data = prettifyListingDate(data)
-  // })
   .catch(function(error){res.status(418); console.log(error)})
 })
-// console.log('data:', data)
-// console.log('commentUserData: ', commentUserData)
+
 
 app.post('/listings/:id/comment', function(req, res){
   var comment = req.body.comment
