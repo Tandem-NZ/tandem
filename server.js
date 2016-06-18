@@ -85,18 +85,13 @@ app.get('/howItWorks', function(req,res){
 })
 
 app.get('/currentListings', function(req, res){
-  console.log('currentListings get route')
+  // console.log('currentListings get route')
 	var origin = toTitleCase(req.query.origin)
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
 	.then(function(listings){
-		if (!req.session.userID){
-			res.redirect('/signin')
-		}
-		else {
-      res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
-		}
-	})
+    res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
+  })
 })
 
 //============Create a Listing================
