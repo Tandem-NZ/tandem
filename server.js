@@ -244,7 +244,7 @@ app.get('/signin', function (req, res) {
 })
 
 app.post('/signup', function (req, res) {
-  var hash = bcrypt.hashSync( req.body.password)
+  var hash = bcrypt.hashSync( req.body.password )
   knex('users').insert({ email: req.body.email, hashedPassword: hash })
   .then(function(data){
     res.redirect('/')
@@ -272,14 +272,13 @@ app.post ('/login', function(req,res) {
       res.redirect('/signIn')
     }
   })
-
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
   })
 })
 
-app.get('/logout', function(req, res){
+app.get('/signOut', function(req, res){
 	req.session.destroy()
 	res.redirect('/signin')
 })
