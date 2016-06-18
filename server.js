@@ -138,6 +138,20 @@ app.post('/main', function(req, res) {
 	})
 })
 
+app.post('/profile', function (req, res) {
+	var profile = req.body
+	knex('users').where({userID: req.session.userID}).update({
+    name: profile.name,
+    age: profile.age,
+    gender: profile.gender,
+    driverLicenceDuration: profile.driverLicenceDuration,
+    aboutMe: profile.aboutMe
+  })
+	.then (function(data){
+		res.render('profileConfirm', {layout: '_layout'})
+	})
+})
+
 app.post('/moreCurrentListings', function(req, res) {
 	var origin = toTitleCase(req.body.origin)
 	var destination = toTitleCase(req.body.destination)
@@ -186,14 +200,6 @@ app.post('/listings/:id/comment', function(req, res){
       res.send(data)
     })
   }
-})
-
-app.post('/profile', function (req, res) {
-	var profile = req.body
-	knex('users').where({userID: req.session.userID}).update({name: profile.name, age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
-	.then (function(data){
-		res.render('profileConfirm', {layout: '_layout'})
-	})
 })
 
 //===================Ride Confirmation====================
