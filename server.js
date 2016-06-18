@@ -244,15 +244,20 @@ app.get('/signin', function (req, res) {
 })
 
 app.post('/signup', function (req, res) {
-  var hash = bcrypt.hashSync( req.body.password )
-  knex('users').insert({ email: req.body.email, hashedPassword: hash })
-  .then(function(data){
-    res.redirect('/')
-  })
-  .catch(function(error){
-    console.log("error:", error)
-    res.send('Error, please refresh the page and try again')
-  })
+  if  (req.body.email === '' || req.body.password === '' ) {
+    res.redirect('/signin')
+  }
+  else {
+    var hash = bcrypt.hashSync( req.body.password )
+    knex('users').insert({ email: req.body.email, hashedPassword: hash })
+    .then(function(data){
+      res.redirect('/')
+    })
+    .catch(function(error){
+      console.log("error:", error)
+      res.send('Error, please refresh the page and try again')
+    })
+  }
 })
 
 app.post ('/login', function(req,res) {
