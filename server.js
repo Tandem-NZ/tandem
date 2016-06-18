@@ -170,7 +170,8 @@ app.post('/moreCurrentListings', function(req, res) {
 	var destination = toTitleCase(req.body.destination)
 	search(origin, destination)
 	.then(function(listings) {
-		res.json(prettifyDates(listings))
+    var prettifiedListings = prettifyDates(listings)
+		res.json(prettifiedListings)
 	})
 })
 
