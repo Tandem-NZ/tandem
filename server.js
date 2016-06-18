@@ -161,10 +161,6 @@ app.post('/listings/:id/comment', function(req, res){
     .then(function(data){
       console.log('data: (in comment route)', data)
       res.send(data)
-      // knex('users').join('comments', 'comments.commenterID', '=', 'users.userID').where({userID: data[0].commenterID})
-      // .then(function(data){
-      //   console.log('data: (in comment route 2nd then)', data)
-      // })
     })
   }
 })
@@ -198,15 +194,6 @@ app.post('/profile', function (req, res) {
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
-})
-
-app.post('/moreCurrentListings', function(req, res) {
-  var origin = toTitleCase(req.body.origin)
-  var destination = toTitleCase(req.body.destination)
-  search(origin, destination)
-  .then(function(listings) {
-    res.json("data", prettifyDates(listings))
-  })
 })
 
 //===================Ride Confirmation====================
