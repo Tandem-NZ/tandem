@@ -75,6 +75,8 @@ function prettifyListingDate (listing) {
     return listing
 }
 
+//=========== GET ROUTES ==================
+
 app.get('/', function(req, res){
 	console.log('req.session.userID in / route: ', req.session.userID)
 	res.render('main', { userID: req.session.userID, layout: '_layout' })
@@ -94,8 +96,6 @@ app.get('/currentListings', function(req, res){
   })
 })
 
-//============Create a Listing================
-//
 app.get('/createListing', function (req, res) {
 	if (!req.session.userID) {
 		res.redirect('/signin')
@@ -103,6 +103,49 @@ app.get('/createListing', function (req, res) {
 	else {
 		res.render('createListing', {layout: '_layout'})
 	}
+})
+
+app.get('/singleListing', function(req, res) {
+  var listingID = req.query.listingID
+  Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
+    .then(function(listingUserData) {
+      console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
+      res.json(listingUserData)
+    })
+  .catch(function(error){res.status(418); console.log(error)})
+})
+
+app.get('/profile', function(req, res){
+	if (!req.session.userID){
+		res.redirect('/signin')
+	}
+	else {
+		knex('users').where({userID: req.session.userID})
+		.then(function(data){
+			res.render('profile', {userID: req.session.userID, layout: '_layout'})
+		})
+	}
+})
+
+//=========== POST ROUTES =================
+
+app.post('/main', function(req, res) {
+	var originFromMain = req.body.origin
+	var destinationFromMain = req.body.destination
+	search(originFromMain, destinationFromMain)
+	.then(function(data) {
+		res.redirect('/currentListings?origin=' + originFromMain + '&destination='  + destinationFromMain)
+	})
+})
+
+app.post('/moreCurrentListings', function(req, res) {
+	var origin = toTitleCase(req.body.origin)
+	var destination = toTitleCase(req.body.destination)
+	search(origin, destination)
+	.then(function(listings) {
+    var prettifiedListings = prettifyDates(listings)
+		res.json(prettifiedListings)
+	})
 })
 
 app.post('/createListing', function (req, res) {
@@ -121,26 +164,6 @@ app.post('/createListing', function (req, res) {
     console.log("error", error)
   })
 })
-
-app.post('/main', function(req, res) {
-	var originFromMain = req.body.origin
-	var destinationFromMain = req.body.destination
-	search(originFromMain, destinationFromMain)
-	.then(function(data) {
-		res.redirect('/currentListings?origin=' + originFromMain + '&destination='  + destinationFromMain)
-	})
-})
-
-app.get('/singleListing', function(req, res) {
-  var listingID = req.query.listingID
-  Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
-    .then(function(listingUserData) {
-      console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
-      res.json(listingUserData)
-    })
-  .catch(function(error){res.status(418); console.log(error)})
-})
-
 
 app.post('/listings/:id/comment', function(req, res){
   if (!req.session.userID) {
@@ -163,30 +186,6 @@ app.post('/listings/:id/comment', function(req, res){
       res.send(data)
     })
   }
-})
-
-app.post('/moreCurrentListings', function(req, res) {
-	var origin = toTitleCase(req.body.origin)
-	var destination = toTitleCase(req.body.destination)
-	search(origin, destination)
-	.then(function(listings) {
-    var prettifiedListings = prettifyDates(listings)
-		res.json(prettifiedListings)
-	})
-})
-
-// ===============Create a profile==========================
-
-app.get('/profile', function(req, res){
-	if (!req.session.userID){
-		res.redirect('/signin')
-	}
-	else {
-		knex('users').where({userID: req.session.userID})
-		.then(function(data){
-			res.render('profile', {userID: req.session.userID, layout: '_layout'})
-		})
-	}
 })
 
 app.post('/profile', function (req, res) {
@@ -233,6 +232,11 @@ app.get('/signin', function (req, res) {
   res.render('login', {layout: '_layout'})
 })
 
+app.get('/signOut', function(req, res){
+	req.session.destroy()
+	res.redirect('/signin')
+})
+
 app.post('/signup', function (req, res) {
   if  (req.body.email === '' || req.body.password === '' ) {
     res.redirect('/signin')
@@ -244,7 +248,7 @@ app.post('/signup', function (req, res) {
       knex('users').where({email: req.body.email})
       // console.log('req.body.email: (signup route)', req.body.email)
       .then(function(data){
-        console.log('data from db query (signup route)', data)
+        // console.log('data from db query (signup route)', data)
         req.session.userID = data[0].userID
         res.redirect('/profile')
       })
@@ -279,12 +283,7 @@ app.post ('/login', function(req,res) {
   })
 })
 
-app.get('/signOut', function(req, res){
-	req.session.destroy()
-	res.redirect('/signin')
-})
-
-// //============== OAuth =====================
+//============== OAuth =====================
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 
@@ -301,26 +300,24 @@ passport.use(new FacebookStrategy ({
 	callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
 function (accessToken, refreshToken, profile, callback) {
-	knex('users').select('*').where({
-		facebookID: profile.id
-	}).then(function (resp) {
+	knex('users').select('*').where({ facebookID: profile.id })
+  .then(function (resp) {
 		if (resp.length === 0) {
 			var user = {
 				facebookID: profile.id,
 				name: profile.displayName
 			}
-
-			// //============== set user in session ===================
-			//Set user in session
+//============== set user in session ===================
 			knex('users').insert(user).then(function (resp) {
 				callback(null, user)
 			})
-		} else {
+		}
+    else {
 			callback(null, resp[0])
 		}
 	})
-}
-))
+})
+)
 
 passport.serializeUser(function(user, callback) {
 	callback(null, user)
