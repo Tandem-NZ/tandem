@@ -179,7 +179,7 @@ app.get('/profile', function(req, res){
 
 app.post('/profile', function (req, res) {
 	var profile = req.body
-	knex('users').where({userID: 2}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+	knex('users').where({userID: req.session.userID}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
@@ -195,8 +195,6 @@ app.post('/createListing', function (req, res) {
   })
 })
 
-
-
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
   var destination = toTitleCase(req.body.destination)
@@ -207,7 +205,6 @@ app.post('/moreCurrentListings', function(req, res) {
 })
 
 //===================Ride Confirmation====================
-
 
 app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
