@@ -66,7 +66,7 @@ function prettifyListingDate (listing) {
 }
 
 app.get('/', function(req, res){
-	console.log(req.session.userId)
+	console.log(req.session.userID)
 	res.render('main', { userID: req.session.userID, layout: '_layout' })
 })
 
@@ -80,7 +80,7 @@ app.get('/currentListings', function(req, res){
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
 	.then(function(listings){
-		if (!req.session.userId){
+		if (!req.session.userID){
 			res.redirect('/signin')
 		}
 		else {
@@ -92,7 +92,7 @@ app.get('/currentListings', function(req, res){
 //============Create a Listing================
 //
 app.get('/createListing', function (req, res) {
-	if (!req.session.userId) {
+	if (!req.session.userID) {
 		res.redirect('/signin')
 	}
 	else {
@@ -102,7 +102,7 @@ app.get('/createListing', function (req, res) {
 
 //heidi is working here
 app.post('/createListing', function (req, res) {
-	// check out req.session.userId ,
+	// check out req.session.userID ,
 	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
   var testingUserID = 12
@@ -166,11 +166,11 @@ app.post('/moreCurrentListings', function(req, res) {
 // ===============Create a profile==========================
 
 app.get('/profile', function(req, res){
-	if (!req.session.userId){
+	if (!req.session.userID){
 		res.redirect('/signin')
 	}
 	else {
-		knex('users'). where({userID: req.session.userID})
+		knex('users').where({userID: req.session.userID})
 		.then(function(data){
 			res.render('profile', {userID: req.session.userID, layout: '_layout'})
 		})
@@ -268,8 +268,8 @@ app.post ('/login', function(req,res) {
       res.redirect('/signin')
     }
     else if (bcrypt.compareSync(req.body.password, hashedLogin)){
-		req.session.userId = data[0].userID
-      	console.log('success! sign in happened by tandem user #' + req.session.userId +'!')
+		req.session.userID = data[0].userID
+      	console.log('success! sign in happened by tandem user #' + req.session.userID +'!')
 		res.redirect('/')
     }
     else {
