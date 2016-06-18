@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-node')
 var Knex = require('knex')
 var passport = require('passport')
 var FacebookStrategy = require('passport-facebook').Strategy
-var cookie =require('cookie-parser')
+var cookie = require('cookie-parser')
 var port = process.env.PORT || 3000
 var toTitleCase = require('to-title-case')
 var moment = require('moment')
@@ -37,7 +37,6 @@ function search(origin, destination){
 	if(destination){
 		searchObject.destination = destination
 	}
-
 	return knex('listings').where(searchObject).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
@@ -52,12 +51,18 @@ function displayListingUserCommentData (listingID){
 	select('*')
 }
 
-function pretifyDates(array) {
+function prettifyDates(array) {
 	return array.map(function(listing){
 		listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
 		listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
 		return listing
 	})
+}
+
+function prettifyListingDate (listing) {
+    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
+    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
+    return listing
 }
 
 app.get('/', function(req, res){
@@ -70,6 +75,7 @@ app.get('/howItWorks', function(req,res){
 })
 
 app.get('/currentListings', function(req, res){
+  console.log('currentListings get route')
 	var origin = toTitleCase(req.query.origin)
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
@@ -78,7 +84,7 @@ app.get('/currentListings', function(req, res){
 			res.redirect('/signin')
 		}
 		else {
-			res.render('./currentListings/currentListings', {layout: '_layout' , listing: pretifyDates(listings)})			
+      res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
 		}
 	})
 })
@@ -99,7 +105,7 @@ app.post('/createListing', function (req, res) {
 	// check out req.session.userId ,
 	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
-  var testingUserID = 2
+  var testingUserID = 12
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
@@ -108,19 +114,12 @@ app.post('/createListing', function (req, res) {
     description: listing.description,
     userID: testingUserID})
   .then(function (data) {
-    res.render('listingConfirm', {data: pretifyListingDate(listing), layout: '_layout'})
+    res.render('listingConfirm', {data: prettifyListingDate(listing), layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
   })
 })
-
-function pretifyListingDate (listing) {
-    listing.departureTime = moment(listing.departureTime, 'hhmm').format("HH:mm a")
-    listing.departureDate = moment(listing.departureDate).format('dddd, Do MMMM YYYY')
-    return listing
-}
-
 
 app.post('/main', function(req, res) {
 	var originFromMain = req.body.origin
@@ -136,8 +135,10 @@ app.get('/singleListing', function(req, res) {
   displayListingUserCommentData(listingID)
   .then(function(data) {
     data[0].listingID = listingID
-    res.json(data, pretifyDates(data))
+    data = prettifyDates(data)
+    res.json(data)
   })
+  .catch(function(error){res.status(418); console.log(error)})
 })
 
 app.post('/listings/:id/comment', function(req, res){
@@ -158,7 +159,7 @@ app.post('/moreCurrentListings', function(req, res) {
 	var destination = toTitleCase(req.body.destination)
 	search(origin, destination)
 	.then(function(listings) {
-		res.json(pretifyDates(listings))
+		res.json(prettifyDates(listings))
 	})
 })
 
@@ -201,7 +202,7 @@ app.post('/moreCurrentListings', function(req, res) {
   var destination = toTitleCase(req.body.destination)
   search(origin, destination)
   .then(function(listings) {
-    res.json("data", pretifyDates(listings))
+    res.json("data", prettifyDates(listings))
   })
 })
 
@@ -212,7 +213,7 @@ app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
 		return displayListingUserCommentData(listingID)
 		.then(function(rideInfo) {
-		 res.json(pretifyDates(rideInfo))
+		 res.json(prettifyDates(rideInfo))
 	})
 })
 
@@ -271,7 +272,7 @@ app.post ('/login', function(req,res) {
       res.redirect('/signIn')
     }
   })
-	
+
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
