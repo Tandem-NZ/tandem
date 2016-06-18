@@ -54,6 +54,7 @@ $(document).ready(function(){
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
+        console.log('data: ', data)
         $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })

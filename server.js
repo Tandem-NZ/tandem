@@ -44,10 +44,20 @@ function singleListing(listingID){ // check if needed
 	return knex('listings').where({listingID: listingID}).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
-function displayListingUserCommentData (listingID){
+function returnListingUserData (listingID){
+  return knex('listings').where({'listings.listingID': listingID}).
+  rightOuterJoin('users', 'users.userID', '=', 'listings.userID' )
+}
+
+function returnCommentData(listingID){
+	return knex('comments').where({'comments.listingID': listingID}).
+  join('users', 'users.userID', '=', 'comments.commenterID')
+}
+
+function displayListingUserCommentData(listingID){
 	return knex('listings').where({'listings.listingID': listingID}).
 	leftOuterJoin('comments', 'comments.listingID', '=', 'listings.listingID').
-	rightOuterJoin('users', 'users.userID', '=', 'listings.userID').
+	rightOuterJoin('users', 'users.userID', '=', 'listings.userID' )
 	select('*')
 }
 
@@ -128,10 +138,15 @@ app.post('/main', function(req, res) {
 
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
-  displayListingUserCommentData(listingID)
+  Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
+    .then(function(listingUserData, commentUserData) {
+      console.log('listingUserData: ', listingUserData)
+      console.log('commentUserData: ', commentUserData)
+    })
   .then(function(data) {
-    data[0].listingID = listingID
+    // data[0].listingID = listingID
     data = prettifyDates(data)
+    // console.log('data:', data)
     res.json(data)
   })
   .catch(function(error){res.status(418); console.log(error)})
@@ -141,12 +156,17 @@ app.post('/listings/:id/comment', function(req, res){
   var comment = req.body.comment
   var listingID = req.params.id
   knex('comments')
-    .insert({comment: comment, listingID: listingID })
+    .insert({listingID: listingID, commenterID: req.session.userID, comment: comment })
     .then(function(){
       return displayListingUserCommentData(listingID)
     })
     .then(function(data){
+      console.log('data: (in comment route)', data)
       res.send(data)
+      // knex('users').join('comments', 'comments.commenterID', '=', 'users.userID').where({userID: data[0].commenterID})
+      // .then(function(data){
+      //   console.log('data: (in comment route 2nd then)', data)
+      // })
     })
 })
 
