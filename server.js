@@ -101,10 +101,7 @@ app.get('/createListing', function (req, res) {
 })
 
 app.post('/createListing', function (req, res) {
-	// check out req.session.userID ,
-	// if it's present then use it, otherwise redirect this persion to login?
   var listing = req.body
-  // var testingUserID = 12
   knex('listings').insert({
     origin: listing.origin,
     destination: listing.destination,
@@ -178,7 +175,7 @@ app.get('/profile', function(req, res){
 
 app.post('/profile', function (req, res) {
 	var profile = req.body
-	knex('users').where({userID: req.session.userID}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
+	knex('users').where({userID: req.session.userID}).update({name: profile.name, age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
 	.then (function(data){
 		res.render('profileConfirm', {layout: '_layout'})
 	})
@@ -252,7 +249,7 @@ app.post('/signup', function (req, res) {
       .then(function(data){
         console.log('data from db query (signup route)', data)
         req.session.userID = data[0].userID
-        res.redirect('/')
+        res.redirect('/profile')
       })
     })
     .catch(function(error){
