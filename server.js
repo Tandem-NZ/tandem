@@ -139,18 +139,18 @@ app.post('/main', function(req, res) {
 app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
   Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
-    .then(function(listingUserData, commentUserData) {
-      console.log('listingUserData: ', listingUserData)
-      console.log('commentUserData: ', commentUserData)
+    .then(function(listingUserData) {
+      console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
+      res.json(listingUserData)
     })
-  .then(function(data) {
+  // .then(function(data) {
     // data[0].listingID = listingID
-    data = prettifyDates(data)
-    // console.log('data:', data)
-    res.json(data)
-  })
+    // data = prettifyListingDate(data)
+  // })
   .catch(function(error){res.status(418); console.log(error)})
 })
+// console.log('data:', data)
+// console.log('commentUserData: ', commentUserData)
 
 app.post('/listings/:id/comment', function(req, res){
   var comment = req.body.comment
