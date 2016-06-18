@@ -200,16 +200,6 @@ app.post('/profile', function (req, res) {
 	})
 })
 
-app.post('/createListing', function (req, res) {
-  knex('listings').insert(req.body)
-  .then(function (data) {
-    res.render('listingConfirm', {layout: '_layout'})
-  })
-  .catch(function (error) {
-    console.log("error", error)
-  })
-})
-
 app.post('/moreCurrentListings', function(req, res) {
   var origin = toTitleCase(req.body.origin)
   var destination = toTitleCase(req.body.destination)
