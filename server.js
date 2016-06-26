@@ -109,7 +109,7 @@ app.get('/singleListing', function(req, res) {
   var listingID = req.query.listingID
   Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
     .then(function(listingUserData) {
-      console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
+      // console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
       res.json(listingUserData)
     })
   .catch(function(error){res.status(418); console.log(error)})
@@ -196,7 +196,7 @@ app.post('/listings/:id/comment', function(req, res){
       return displayListingUserCommentData(listingID)
     })
     .then(function(data){
-      console.log('data: (in comment route)', data)
+      // console.log('data: (in comment route)', data)
       res.send(data)
     })
   }
