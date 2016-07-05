@@ -15,6 +15,7 @@ moment().format();
 var knexConfig = require('./knexfile')
 var env = process.env.NODE_ENV || 'development'
 var knex = Knex(knexConfig[env])
+var session = require('express-session')
 
 if (env == 'development') {
   var dotenv = require('dotenv')
@@ -27,10 +28,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static("public"))
 app.use(require('cookie-parser')())
-app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: true }))
+app.use(require('express-session')({ secret: 'abandoned  birds', resave: true, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 function search(origin, destination){
 	var searchObject = {origin: origin}
@@ -44,10 +44,20 @@ function singleListing(listingID){ // check if needed
 	return knex('listings').where({listingID: listingID}).innerJoin('users', 'listings.userID', '=', 'users.userID')
 }
 
-function displayListingUserCommentData (listingID){
+function returnListingUserData (listingID){
+  return knex('listings').where({'listings.listingID': listingID}).
+  rightOuterJoin('users', 'users.userID', '=', 'listings.userID' )
+}
+
+function returnCommentData(listingID){
+	return knex('comments').where({'comments.listingID': listingID}).
+  join('users', 'users.userID', '=', 'comments.commenterID')
+}
+
+function displayListingUserCommentData(listingID){
 	return knex('listings').where({'listings.listingID': listingID}).
 	leftOuterJoin('comments', 'comments.listingID', '=', 'listings.listingID').
-	rightOuterJoin('users', 'users.userID', '=', 'listings.userID').
+	rightOuterJoin('users', 'users.userID', '=', 'listings.userID' )
 	select('*')
 }
 
@@ -65,8 +75,11 @@ function prettifyListingDate (listing) {
     return listing
 }
 
+//=========== GET ROUTES ==================
+
 app.get('/', function(req, res){
-	res.render('main', { layout: '_layout' })
+	console.log('req.session.userID in / route: ', req.session.userID)
+	res.render('main', { userID: req.session.userID, layout: '_layout' })
 })
 
 app.get('/howItWorks', function(req,res){
@@ -74,40 +87,47 @@ app.get('/howItWorks', function(req,res){
 })
 
 app.get('/currentListings', function(req, res){
-  console.log('currentListings get route')
+  // console.log('currentListings get route')
 	var origin = toTitleCase(req.query.origin)
 	var destination = toTitleCase(req.query.destination)
 	search(origin, destination)
 	.then(function(listings){
-		res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
-	})
+    res.render('./currentListings/currentListings', {layout: '_layout' , listing: prettifyDates(listings)})
+  })
 })
 
-//============Create a Listing================
-//
 app.get('/createListing', function (req, res) {
-	res.render('createListing', {layout: '_layout'})
+	if (!req.session.userID) {
+		res.redirect('/signin')
+	}
+	else {
+		res.render('createListing', {layout: '_layout'})
+	}
 })
-//heidi is working here
-app.post('/createListing', function (req, res) {
-	// check out req.session.userId ,
-	// if it's present then use it, otherwise redirect this persion to login?
-  var listing = req.body
-  var testingUserID = 12
-  knex('listings').insert({
-    origin: listing.origin,
-    destination: listing.destination,
-    departureDate: listing.departureDate,
-    departureTime: listing.departureTime,
-    description: listing.description,
-    userID: testingUserID})
-  .then(function (data) {
-    res.render('listingConfirm', {data: prettifyListingDate(listing), layout: '_layout'})
-  })
-  .catch(function (error) {
-    console.log("error", error)
-  })
+
+app.get('/singleListing', function(req, res) {
+  var listingID = req.query.listingID
+  Promise.all([returnListingUserData(listingID), returnCommentData(listingID)])
+    .then(function(listingUserData) {
+      // console.log('listingUserData: ', listingUserData, 'typeof: ', typeof listingUserData)
+      res.json(listingUserData)
+    })
+  .catch(function(error){res.status(418); console.log(error)})
 })
+
+app.get('/profile', function(req, res){
+	if (!req.session.userID){
+		res.redirect('/signin')
+	}
+	else {
+		knex('users').where({userID: req.session.userID})
+		.then(function(data){
+			res.render('profile', {userID: req.session.userID, layout: '_layout'})
+		})
+	}
+})
+
+//=========== POST ROUTES =================
 
 app.post('/main', function(req, res) {
 	var originFromMain = req.body.origin
@@ -118,28 +138,18 @@ app.post('/main', function(req, res) {
 	})
 })
 
-app.get('/singleListing', function(req, res) {
-  var listingID = req.query.listingID
-  displayListingUserCommentData(listingID)
-  .then(function(data) {
-    data[0].listingID = listingID
-    data = prettifyDates(data)
-    res.json(data)
+app.post('/profile', function (req, res) {
+	var profile = req.body
+	knex('users').where({userID: req.session.userID}).update({
+    name: profile.name,
+    age: profile.age,
+    gender: profile.gender,
+    driverLicenceDuration: profile.driverLicenceDuration,
+    aboutMe: profile.aboutMe
   })
-  .catch(function(error){res.status(418); console.log(error)})
-})
-
-app.post('/listings/:id/comment', function(req, res){
-  var comment = req.body.comment
-  var listingID = req.params.id
-  knex('comments')
-    .insert({comment: comment, listingID: listingID })
-    .then(function(){
-      return displayListingUserCommentData(listingID)
-    })
-    .then(function(data){
-      res.send(data)
-    })
+	.then (function(data){
+		res.render('profileConfirm', {layout: '_layout'})
+	})
 })
 
 app.post('/moreCurrentListings', function(req, res) {
@@ -147,51 +157,52 @@ app.post('/moreCurrentListings', function(req, res) {
 	var destination = toTitleCase(req.body.destination)
 	search(origin, destination)
 	.then(function(listings) {
-		res.json(prettifyDates(listings))
-	})
-})
-
-// ===============Create a profile==========================
-
-app.get('/profile', function(req, res){
-	var testUserID = 2
-	knex('users'). where({userID: testUserID})
-	.then(function(data){
-		res.render('profile', {layout: '_layout'})
-	})
-})
-
-app.post('/profile', function (req, res) {
-	var profile = req.body
-	knex('users').where({userID: 2}).update({age: profile.age, gender: profile.gender, driverLicenceDuration: profile.driverLicenceDuration, aboutMe: profile.aboutMe})
-	.then (function(data){
-		res.render('profileConfirm', {layout: '_layout'})
+    var prettifiedListings = prettifyDates(listings)
+		res.json(prettifiedListings)
 	})
 })
 
 app.post('/createListing', function (req, res) {
-  knex('listings').insert(req.body)
+  var listing = req.body
+  knex('listings').insert({
+    origin: listing.origin,
+    destination: listing.destination,
+    departureDate: listing.departureDate,
+    departureTime: listing.departureTime,
+    description: listing.description,
+    userID: req.session.userID})
   .then(function (data) {
-    res.render('listingConfirm', {layout: '_layout'})
+    res.render('listingConfirm', {data: prettifyListingDate(listing), layout: '_layout'})
   })
   .catch(function (error) {
     console.log("error", error)
   })
 })
 
-
-
-app.post('/moreCurrentListings', function(req, res) {
-  var origin = toTitleCase(req.body.origin)
-  var destination = toTitleCase(req.body.destination)
-  search(origin, destination)
-  .then(function(listings) {
-    res.json("data", prettifyDates(listings))
-  })
+app.post('/listings/:id/comment', function(req, res){
+  if (!req.session.userID) {
+    res.redirect('/signin')
+  }
+  else {
+    var comment = req.body.comment
+    var listingID = req.params.id
+    knex('comments')
+      .insert({
+        listingID: listingID,
+        commenterID: req.session.userID,
+        comment: comment
+       })
+    .then(function(){
+      return displayListingUserCommentData(listingID)
+    })
+    .then(function(data){
+      // console.log('data: (in comment route)', data)
+      res.send(data)
+    })
+  }
 })
 
 //===================Ride Confirmation====================
-
 
 app.post('/liftConfirm', function (req, res){
 	var listingID = req.body.listingID
@@ -227,34 +238,58 @@ app.get('/signin', function (req, res) {
   res.render('login', {layout: '_layout'})
 })
 
+app.get('/signOut', function(req, res){
+	req.session.destroy()
+	res.redirect('/signin')
+})
+
 app.post('/signup', function (req, res) {
-  var hash = bcrypt.hashSync( req.body.password)
-  knex('users').insert({ email: req.body.email, hashedPassword: hash })
-  .then(function(data){
-    res.redirect('/')
-  })
-  .catch(function(error){
-    console.log("error:", error)
-    res.send('Error, please refresh the page and try again')
-  })
+  if  (req.body.email === '' || req.body.password === '' ) {
+    res.redirect('/signin')
+  }
+  else {
+    var hash = bcrypt.hashSync( req.body.password )
+    knex('users').insert({ email: req.body.email, hashedPassword: hash })
+    .then(function(data){
+      knex('users').where({email: req.body.email})
+      // console.log('req.body.email: (signup route)', req.body.email)
+      .then(function(data){
+        // console.log('data from db query (signup route)', data)
+        req.session.userID = data[0].userID
+        res.redirect('/profile')
+      })
+    })
+    .catch(function(error){
+      console.log("error:", error)
+      res.send('Error, please refresh the page and try again')
+    })
+  }
 })
 
 app.post ('/login', function(req,res) {
   knex('users').where({email: req.body.email})
   .then (function(data){
     var hashedLogin = data[0].hashedPassword
-    if  (bcrypt.compareSync(req.body.password, hashedLogin)) {
-      res.redirect('/')
+    if  (req.body.email === '' ) {
+      res.redirect('/signin')
+    }
+    else if (bcrypt.compareSync(req.body.password, hashedLogin)){
+		req.session.userID = data[0].userID
+      	console.log('success! sign in happened by tandem user #' + req.session.userID +'!')
+		res.redirect('/')
+    }
+    else {
+      console.log('incorrect password')
+      res.redirect('/signIn')
     }
   })
-
   .catch (function (error) {
     console.log("error:", error)
     res.sendStatus(403)
   })
 })
 
-// //============== OAuth =====================
+//============== OAuth =====================
 
 app.get('/auth/facebook', passport.authenticate('facebook'))
 
@@ -271,26 +306,24 @@ passport.use(new FacebookStrategy ({
 	callbackURL: "http://localhost:3000/auth/facebook/callback"
 },
 function (accessToken, refreshToken, profile, callback) {
-	knex('users').select('*').where({
-		facebookID: profile.id
-	}).then(function (resp) {
+	knex('users').select('*').where({ facebookID: profile.id })
+  .then(function (resp) {
 		if (resp.length === 0) {
 			var user = {
 				facebookID: profile.id,
 				name: profile.displayName
 			}
-
-			// //============== set user in session ===================
-			//Set user in session
+//============== set user in session ===================
 			knex('users').insert(user).then(function (resp) {
 				callback(null, user)
 			})
-		} else {
+		}
+    else {
 			callback(null, resp[0])
 		}
 	})
-}
-))
+})
+)
 
 passport.serializeUser(function(user, callback) {
 	callback(null, user)

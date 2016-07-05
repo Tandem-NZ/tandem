@@ -42,18 +42,24 @@ $(document).ready(function(){
     .get('/singleListing?listingID=' + listingID )
     .end(function(err, res){
       var listingUserAndCommentArray = res.body
-      $('#newRides').html(singleListing({ data : listingUserAndCommentArray[0], comments: listingUserAndCommentArray })  )
+      var listingView = singleListing({
+        data: listingUserAndCommentArray[0][0],
+        comments: listingUserAndCommentArray[1]
+      })
+      $('#newRides').html( listingView )
     })
   })
 
   $("body").on("click", "#commentSubmit", function(e){
     var comment = $('#commentReply').val()
+    console.log('this is "e": ', e)
     var listingID = $('#listing').attr('data-listingID')
     request
       .post('/listings/' + listingID + '/comment')
       .send({ comment: comment, listingID: listingID })
       .end(function(err, res){
         var data = res.body
+        console.log('data: ', data)
         $('#appendedComments').html(listingComment({data: data}))
         $('#commentReply').val('')
       })

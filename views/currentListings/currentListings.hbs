@@ -4,58 +4,44 @@
   </div>
   <nav class="primary-nav">
     <ul>
-      <li class="active">
-        <a href="/howItWorks">How it works</a>
-      </li>
-      <li class="active">
-        <a href="/createListing">Create a Listing</a>
-      </li>
-      <li>
-        <a href="/profile">Update your profile</a>
-      </li>
-      <li>
-        <a href="/signin">Sign in</a>
-      </li>
-      <li>
-        <a href="/signup" id="signup-btn-nav">Sign up</a>
-      </li>
+      <li class="active"><a href="/howItWorks">How it works</a></li>
+      <li class="active"><a href="/createListing">Create a Listing</a></li>
+      <li><a href="/profile">Update your profile</a></li>
+      <li><a href="/signin">Sign in</a></li>
+      <li><a href="/signup" id="signup-btn-nav">Sign up</a></li>
     </ul><!-- phone nav button -->
     <button class="nav-button">toggle menu</button>
   </nav>
 </header><!-- end of header -->
 <div class="current-listings-container u-full-width">
 <div class="search-bar center-content">
-    <form class="search u-full-width" id="locations" name="searchForm"
-    onsubmit="return validateForm()">
-    <input class="inputFullWidth" id="origin" name="origin"
-    placeholder="origin" type="text"><input class="inputFullWidth"
-    id="destination" name="destination" placeholder="destination"
-    type="text"> <button id="searchButton" name=
-    "searchButton">Find</button>
+  <form class="search u-full-width" id="locations" name="searchForm" onsubmit="return validateForm()">
+    <input class="inputFullWidth" id="origin" name="origin" placeholder="origin" type="text">
+    <input class="inputFullWidth" id="destination" name="destination" placeholder="destination" type="text">
+    <button id="searchButton" name="searchButton">Find</button>
     <p id="alert"></p>
   </form>
 </div>
 <div class="container u-cf">
  <section id="newRides">
    <!--  <div class="container"> -->
-      {{#each listing}}
-      <div class="listing row">
+    {{#each listing}}
+    <div class="listing row">
       <div class="three columns">
             <img class="listing-profile-pic" alt="profile pic" height='200'
             src='{{this.urlImage}}'>
             <p class="profile-page">{{this.name}}</p>
-          </div>
-        <div class="nine columns">
+      </div>
+      <div class="nine columns">
         <h3>{{this.origin}} <i class="fa fa-long-arrow-right arrow-nav-bar" aria-hidden="true"></i> <span class="destination">{{this.destination}}</span></h3>
         <h5><span class="bold-text">Departure date: </span>{{this.departureDate}}</h5>
         <h5><span class="bold-text">Departure time: </span>{{this.departureTime}}</h5>
-        <button class="listing-button"><a class="seeMore" href="#" id=
-          "{{this.listingID}}">See more</a></button>
-          </div>
-        </div>
-        {{/each}}
+        <button class="listing-button"><a class="seeMore" href="#" id="{{this.listingID}}">See more</a></button>
+      </div>
+    </div>
+    {{/each}}
       <!-- </div> -->
-    </section>
+  </section>
     <script src="/javascript/formValidation.js">
     </script>
   </div>
